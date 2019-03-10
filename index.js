@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 const { PORT, MONGO_URI } = require('./config/keys');
 
 mongoose.Promise = global.Promise;
