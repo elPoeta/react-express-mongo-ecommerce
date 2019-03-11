@@ -4,8 +4,9 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const auth = require("./routes/api/auth");
+const category = require("./routes/api/category");
 
-const privateCategory = require('./routes/private/category');
+const privateCategory = require("./routes/private/category");
 
 const { PORT, MONGO_URI } = require("./config/keys");
 
@@ -24,10 +25,11 @@ app.use(bodyParser.json({ type: "*/*" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/api/auth", auth);
+app.use("/api/category", category);
 
-app.use('/admin/category', privateCategory);
+app.use("/admin/category", privateCategory);
 
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   res.status(500).send("Internal server error");
 });
 

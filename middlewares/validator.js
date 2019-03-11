@@ -75,8 +75,6 @@ module.exports = {
         .min(10)
         .max(255),
       isAvailable: Joi.boolean()
-    }),
-
-  },
-
+    })
+  }
 };
