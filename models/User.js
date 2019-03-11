@@ -38,9 +38,7 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-const User = new mongoose.model("user", userSchema);
-
-userSchema.pre("save", async function(next) {
+userSchema.pre("save", async function (next) {
   try {
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(this.password, salt);
@@ -51,30 +49,31 @@ userSchema.pre("save", async function(next) {
   }
 });
 
-userSchema.methods.isValidPassword = async function(newPassword) {
+userSchema.methods.isValidPassword = async function (newPassword) {
   try {
     return await bcrypt.compare(newPassword, this.password);
-  } catch (error) {
-    throw new Error(error);
+  } catch (err) {
+    throw new Error(err);
   }
 };
 
-userSchema.methods.generateAuthToken = function() {
+userSchema.methods.generateAuthToken = function () {
   try {
-    const token = jwt.sign(
+    return jwt.sign(
       {
         _id: this._id,
         name: this.name,
         isAdmin: this.isAdmin,
-        role: this.role
+        role: this.role,
+        iat: new Date().getTime(),
+        exp: new Date().setDate(new Date().getDate() + 1)
       },
       JWT_SECRET
     );
-    return token;
+
   } catch (err) {
-    console.log(err);
-    return err;
+    throw new Error(err);
   }
 };
-
+const User = new mongoose.model("user", userSchema);
 exports.User = User;
