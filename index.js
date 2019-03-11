@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 
 const auth = require("./routes/api/auth");
 
+const privateCategory = require('./routes/private/category');
+
 const { PORT, MONGO_URI } = require("./config/keys");
 
 mongoose.Promise = global.Promise;
@@ -22,6 +24,8 @@ app.use(bodyParser.json({ type: "*/*" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/api/auth", auth);
+
+app.use('/admin/category', privateCategory);
 
 app.listen(PORT, err => {
   if (err) console.error("Error to connect server ", err);

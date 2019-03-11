@@ -16,8 +16,24 @@ module.exports = {
       next();
     };
   },
+  validateParamId: schema => {
+    return (req, res, next) => {
+      const { error, value } = Joi.validate(req.params.id.toString(), schema);
+      console.log(value)
+      if (error) {
+        return res.status(400).json(error.details[0].message);
+      }
+
+      if (!req.value) {
+        req.value = {};
+      }
+      req.value["params"] = value;
+      next();
+    };
+  },
 
   schemas: {
+    id: Joi.objectId().required(),
     register: Joi.object().keys({
       name: Joi.string()
         .min(1)
@@ -49,7 +65,6 @@ module.exports = {
         .max(255)
         .required()
     }),
-
     category: Joi.object().keys({
       name: Joi.string()
         .min(3)
@@ -61,5 +76,6 @@ module.exports = {
       isAvailable: Joi.boolean()
     }),
 
-  }
+  },
+
 };
