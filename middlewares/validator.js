@@ -19,7 +19,7 @@ module.exports = {
   validateParamId: schema => {
     return (req, res, next) => {
       const { error, value } = Joi.validate(req.params.id.toString(), schema);
-      console.log(value)
+
       if (error) {
         return res.status(400).json(error.details[0].message);
       }
@@ -66,6 +66,7 @@ module.exports = {
         .required()
     }),
     category: Joi.object().keys({
+      _id: Joi.objectId(),
       name: Joi.string()
         .min(3)
         .max(50)
