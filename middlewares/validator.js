@@ -18,7 +18,7 @@ module.exports = {
   },
 
   schemas: {
-    signin: Joi.object().keys({
+    register: Joi.object().keys({
       name: Joi.string()
         .min(1)
         .max(50)
@@ -48,7 +48,18 @@ module.exports = {
         .min(8)
         .max(255)
         .required()
-    })
+    }),
+
+    category: Joi.object().keys({
+      name: Joi.string()
+        .min(3)
+        .max(50)
+        .required(),
+      description: Joi.string()
+        .min(10)
+        .max(255),
+      isAvailable: Joi.boolean()
+    }),
 
   }
 };
