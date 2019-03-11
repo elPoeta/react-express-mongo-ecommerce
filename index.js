@@ -27,6 +27,10 @@ app.use("/api/auth", auth);
 
 app.use('/admin/category', privateCategory);
 
+app.use(function (err, req, res, next) {
+  res.status(500).send("Internal server error");
+});
+
 app.listen(PORT, err => {
   if (err) console.error("Error to connect server ", err);
   console.log(`Server connected on port ${PORT}`);

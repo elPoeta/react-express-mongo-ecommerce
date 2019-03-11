@@ -1,8 +1,9 @@
 const { Category } = require('../models/Category');
+const asyncMiddleware = require('../middlewares/async');
 const ObjectId = require("mongoose").Types.ObjectId;
 
 module.exports = {
-    createOrUpdateCategory: async (req, res) => {
+    createOrUpdateCategory: asyncMiddleware(async (req, res) => {
         let errors = {};
 
         const { name, description, isAvailable } = req.body;
@@ -13,39 +14,42 @@ module.exports = {
         if (description) categoryFields.description = description;
         if (isAvailable !== undefined) categoryFields.isAvailable = isAvailable;
 
-        try {
-            const category = await Category.findById(_id);
+        const category = await Category.findById(_id);
 
+        if (category) {
+
+            const updateCategory = await Category
+                .findByIdAndUpdate(
+                    { _id },
+                    { $set: categoryFields },
+                    { new: true }
+                );
+
+            return res.json(updateCategory);
+        } else {
+
+            const category = await Category.findById(_id);
             if (category) {
 
-                const updateCategory = await Category
-                    .findByIdAndUpdate(
-                        { _id },
-                        { $set: categoryFields },
-                        { new: true }
-                    );
-
-                return res.json(updateCategory);
-            } else {
-
-                const category = await Category.findById(_id);
-                if (category) {
-
-                    errors.id = 'That id already exists';
-                    return res.status(400).json(errors);
-                }
-
-                const newCategory = await new Category(categoryFields).save();
-
-                res.json(newCategory);
+                errors.id = 'That id already exists';
+                return res.status(400).json(errors);
             }
-        } catch (error) {
-            console.log('error')
-            res.status(404).json(error);
+
+            const newCategory = await new Category(categoryFields).save();
+
+            res.json(newCategory);
         }
 
-    },
-    deleteCategory: async (req, res) => {
-        res.status(200).json({ msj: 'delete', id: req.params.id });
-    },
+
+    }),
+    deleteCategory: asyncMiddleware(async (req, res) => {
+        const _id = req.value.params;
+        //const userId = req.user._id
+
+        const category = await Category.findByIdAndRemove(_id);
+        if (!category) return res.status(400).send({ errors: "Category not found" });
+        res.status(200).json({ success: true });
+
+
+    }),
 }
