@@ -1,39 +1,15 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const mongoose = require("mongoose");
-
-const auth = require("./routes/api/auth");
-const category = require("./routes/api/category");
-
-const privateCategory = require("./routes/private/category");
-
-const { PORT, MONGO_URI } = require("./config/keys");
-
-mongoose.Promise = global.Promise;
-
-mongoose
-  .connect(MONGO_URI)
-  .then(() => console.log("MongoDB Connected..."))
-  .catch(err => console.log("Error to connect database :: ", err));
-
+const { PORT } = require("./config/keys");
 const app = express();
 
-app.use(cors());
-
-app.use(bodyParser.json({ type: "*/*" }));
-app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use("/api/auth", auth);
-app.use("/api/category", category);
-
-app.use("/admin/category", privateCategory);
-
-app.use(function(err, req, res, next) {
-  res.status(500).send("Internal server error");
-});
+require("./startUp/db")();
+require("./startUp/parser")(app);
+require("./startUp/routes")(app);
 
 app.listen(PORT, err => {
-  if (err) console.error("Error to connect server ", err);
+  if (err) {
+    console.error("Error to connect server ", err);
+    process.exit(1);
+  }
   console.log(`Server connected on port ${PORT}`);
 });
