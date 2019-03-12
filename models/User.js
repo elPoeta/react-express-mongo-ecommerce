@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const Joi = require("joi");
 const { JWT_SECRET } = require("../config/keys");
 
 const userSchema = new mongoose.Schema({
@@ -32,7 +33,7 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-userSchema.pre("save", async function(next) {
+userSchema.pre("save", async function (next) {
   try {
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(this.password, salt);
@@ -43,7 +44,7 @@ userSchema.pre("save", async function(next) {
   }
 });
 
-userSchema.methods.isValidPassword = async function(newPassword) {
+userSchema.methods.isValidPassword = async function (newPassword) {
   try {
     return await bcrypt.compare(newPassword, this.password);
   } catch (err) {
@@ -51,7 +52,7 @@ userSchema.methods.isValidPassword = async function(newPassword) {
   }
 };
 
-userSchema.methods.generateAuthToken = function() {
+userSchema.methods.generateAuthToken = function () {
   try {
     return jwt.sign(
       {
@@ -68,4 +69,33 @@ userSchema.methods.generateAuthToken = function() {
   }
 };
 const User = new mongoose.model("user", userSchema);
+const validateUser = {
+  register: Joi.object().keys({
+    email: Joi.string()
+      .min(5)
+      .max(255)
+      .required()
+      .email(),
+    password: Joi.string()
+      .min(8)
+      .max(255)
+      .required(),
+    confirmPassword: Joi.string()
+      .min(8)
+      .max(255)
+      .required()
+  }),
+  login: Joi.object().keys({
+    email: Joi.string()
+      .min(5)
+      .max(255)
+      .required()
+      .email(),
+    password: Joi.string()
+      .min(8)
+      .max(255)
+      .required()
+  })
+}
+exports.validateUser = validateUser;
 exports.User = User;

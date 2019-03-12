@@ -1,0 +1,60 @@
+const { Customer } = require('../models/Customer');
+const asyncMiddleware = require('../middlewares/async');
+const ObjectId = require("mongoose").Types.ObjectId;
+
+module.exports = {
+    createOrUpdateCustomer: asyncMiddleware(async (req, res) => {
+        let errors = {};
+        const user = req.user._id;
+        const { name, phone } = req.body;
+        let customerFields = {};
+
+        customerFields.user = user;
+        if (name) customerFields.name = name;
+        if (phone) customerFields.phone = phone;
+
+        const customer = await Customer.findOne({ user });
+
+        if (customer) {
+            const updateCustomer = await Customer.findOneAndUpdate(
+                { user },
+                { $set: customerFields },
+                { new: true }
+            );
+            return res.json(updateCustomer);
+        }
+
+        const newCustomer = await new Customer(customerFields).save();
+
+        res.json(newCustomer);
+
+    }),
+    addCustomerAddress: asyncMiddleware(async (req, res) => {
+        const errors = {};
+        const { street, location, number } = req.body;
+        const newAddress = {
+            street,
+            location,
+            number
+        };
+
+        const customer = await Customer.findOne({ user: req.user._id });
+        if (!customer) {
+            errors.notFound = 'User not found';
+            res.status(400).json(errors);
+        }
+        customer.address = [...customer.address, newAddress];
+        const updateCustomer = await customer.save();
+        res.json(updateCustomer);
+
+    }),
+    getCustomers: asyncMiddleware(async (req, res) => {
+
+    }),
+    getCustomerById: asyncMiddleware(async (req, res) => {
+
+    }),
+    deleteCustomer: asyncMiddleware(async (req, res) => {
+
+    })
+}

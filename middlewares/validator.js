@@ -31,46 +31,7 @@ module.exports = {
       next();
     };
   },
-
   schemas: {
-    id: Joi.objectId().required(),
-    register: Joi.object().keys({
-      email: Joi.string()
-        .min(5)
-        .max(255)
-        .required()
-        .email(),
-      password: Joi.string()
-        .min(8)
-        .max(255)
-        .required(),
-      confirmPassword: Joi.string()
-        .min(8)
-        .max(255)
-        .required()
-    }),
-
-    login: Joi.object().keys({
-      email: Joi.string()
-        .min(5)
-        .max(255)
-        .required()
-        .email(),
-      password: Joi.string()
-        .min(8)
-        .max(255)
-        .required()
-    }),
-    category: Joi.object().keys({
-      _id: Joi.objectId(),
-      name: Joi.string()
-        .min(3)
-        .max(50)
-        .required(),
-      description: Joi.string()
-        .min(10)
-        .max(255),
-      isAvailable: Joi.boolean()
-    })
+    id: Joi.objectId().required()
   }
 };

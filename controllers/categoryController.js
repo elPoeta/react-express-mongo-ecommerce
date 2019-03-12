@@ -3,7 +3,7 @@ const asyncMiddleware = require("../middlewares/async");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 module.exports = {
-  getAllCategories: asyncMiddleware(async (req, res) => {
+  getCategories: asyncMiddleware(async (req, res) => {
     const categories = await Category.find();
     if (!categories)
       return res.status(400).json({ errors: "Categories Not Found" });
@@ -17,7 +17,6 @@ module.exports = {
     res.status(200).json(category);
   }),
   createOrUpdateCategory: asyncMiddleware(async (req, res) => {
-    let errors = {};
 
     const { name, description, isAvailable } = req.body;
     const _id = req.body._id || undefined;
@@ -25,7 +24,7 @@ module.exports = {
 
     if (name) categoryFields.name = name;
     if (description) categoryFields.description = description;
-    if (isAvailable !== undefined) categoryFields.isAvailable = isAvailable;
+    categoryFields.isAvailable = (isAvailable !== undefined) ? isAvailable : true;
 
     const category = await Category.findById(_id);
 
@@ -37,17 +36,11 @@ module.exports = {
       );
 
       return res.json(updateCategory);
-    } else {
-      const category = await Category.findById(_id);
-      if (category) {
-        errors.id = "That id already exists";
-        return res.status(400).json(errors);
-      }
-
-      const newCategory = await new Category(categoryFields).save();
-
-      res.json(newCategory);
     }
+    const newCategory = await new Category(categoryFields).save();
+
+    res.json(newCategory);
+
   }),
   deleteCategory: asyncMiddleware(async (req, res) => {
     const _id = req.value.params;

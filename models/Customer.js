@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const Joi = require('joi');
 
-const customerSchema = new mongoose.Schema({
+const customerSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "user"
@@ -10,10 +12,6 @@ const customerSchema = new mongoose.Schema({
     minlength: 1,
     maxlength: 50,
     required: true
-  },
-  isGold: {
-    type: Boolean,
-    default: false
   },
   phone: {
     type: String,
@@ -32,6 +30,7 @@ const customerSchema = new mongoose.Schema({
         },
         number: {
           type: Number,
+          min: 0,
           required: true
         },
         location: {
@@ -42,10 +41,35 @@ const customerSchema = new mongoose.Schema({
         }
       }
     ],
-    required: true
   }
 });
-
+const validateCustomer = {
+  customer: Joi.object().keys({
+    _id: Joi.objectId(),
+    name: Joi.string()
+      .min(1)
+      .max(50)
+      .required(),
+    phone: Joi.string()
+      .min(5)
+      .max(50)
+      .required()
+  }),
+  address: Joi.object().keys({
+    _id: Joi.objectId(),
+    street: Joi.string()
+      .min(5)
+      .max(255)
+      .required(),
+    location: Joi.string()
+      .min(5)
+      .max(255)
+      .required(),
+    number: Joi.number().min(0).required(),
+  })
+}
 const Customer = new mongoose.model("customer", customerSchema);
 
+exports.validateCustomer = validateCustomer;
 exports.Customer = Customer;
+
