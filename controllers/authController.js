@@ -1,9 +1,9 @@
 const { User } = require("../models/User");
-const asyncMiddleware = require('../middlewares/async');
+const asyncMiddleware = require("../middlewares/async");
 
 module.exports = {
   register: asyncMiddleware(async (req, res) => {
-    const { name, email, password, confirmPassword } = req.body;
+    const { email, password, confirmPassword } = req.body;
     if (password !== confirmPassword) {
       return res.status(400).send("Password and confirm password not equals");
     }
@@ -14,7 +14,6 @@ module.exports = {
     }
 
     const newUser = new User({
-      name,
       email,
       password
     });
@@ -23,23 +22,27 @@ module.exports = {
 
     const token = `Bearer ${user.generateAuthToken()}`;
 
-    res.header('authorization', token).status(200).send(token);
-
-
+    res
+      .header("authorization", token)
+      .status(200)
+      .send(token);
   }),
   login: asyncMiddleware(async (req, res) => {
-    const { email, password } = req.body
+    const { email, password } = req.body;
 
     let user = await User.findOne({ email });
     if (!user) return res.status(400).send("Invalid email or password.");
 
     const isValidPassword = await user.isValidPassword(password);
-    if (!isValidPassword) return res.status(400).send('Invalid email or password.');
+    if (!isValidPassword)
+      return res.status(400).send("Invalid email or password.");
 
     const token = `Bearer ${user.generateAuthToken()}`;
 
-    res.header('authorization', token).status(200).send(token);
-
+    res
+      .header("authorization", token)
+      .status(200)
+      .send(token);
   }),
   secret: async (req, res) => {
     res.status(200).json({ message: "secret page!!" });

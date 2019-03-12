@@ -4,12 +4,6 @@ const bcrypt = require("bcryptjs");
 const { JWT_SECRET } = require("../config/keys");
 
 const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    minlength: 1,
-    maxlength: 50,
-    required: true
-  },
   email: {
     type: String,
     minlength: 5,
@@ -38,7 +32,7 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function(next) {
   try {
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(this.password, salt);
@@ -49,7 +43,7 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-userSchema.methods.isValidPassword = async function (newPassword) {
+userSchema.methods.isValidPassword = async function(newPassword) {
   try {
     return await bcrypt.compare(newPassword, this.password);
   } catch (err) {
@@ -57,12 +51,11 @@ userSchema.methods.isValidPassword = async function (newPassword) {
   }
 };
 
-userSchema.methods.generateAuthToken = function () {
+userSchema.methods.generateAuthToken = function() {
   try {
     return jwt.sign(
       {
         _id: this._id,
-        name: this.name,
         isAdmin: this.isAdmin,
         role: this.role,
         iat: new Date().getTime(),
@@ -70,7 +63,6 @@ userSchema.methods.generateAuthToken = function () {
       },
       JWT_SECRET
     );
-
   } catch (err) {
     throw new Error(err);
   }

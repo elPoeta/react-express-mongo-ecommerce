@@ -35,10 +35,6 @@ module.exports = {
   schemas: {
     id: Joi.objectId().required(),
     register: Joi.object().keys({
-      name: Joi.string()
-        .min(1)
-        .max(50)
-        .required(),
       email: Joi.string()
         .min(5)
         .max(255)
