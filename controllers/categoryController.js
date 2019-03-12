@@ -43,12 +43,13 @@ module.exports = {
 
   }),
   deleteCategory: asyncMiddleware(async (req, res) => {
+    const errors = {};
     const _id = req.value.params;
-    //const userId = req.user._id
-
     const category = await Category.findByIdAndRemove(_id);
-    if (!category)
-      return res.status(400).send({ errors: "Category not found" });
+    if (!category) {
+    errors.notFound = 'Category not found'
+      return res.status(400).json(errors)
+    }
     res.status(200).json({ success: true });
   })
 };

@@ -51,10 +51,24 @@ module.exports = {
     getCustomers: asyncMiddleware(async (req, res) => {
 
     }),
-    getCustomerById: asyncMiddleware(async (req, res) => {
-
+    getCustomer: asyncMiddleware(async (req, res) => {
+        const errors = {};
+        const customer = await Customer.findOne({ user: req.user._id });
+        if (!customer) {
+            errors.notFound = 'User not found';
+            res.status(400).json(errors);
+        }
+        res.status(200).json(customer);
     }),
     deleteCustomer: asyncMiddleware(async (req, res) => {
+        const errors = {};
+        const _id = req.value.params;
+        const customer = await Customer.findByIdAndRemove(_id);
+        if (!customer) {
+            errors.notFound = 'Customer not found'
+            return res.status(400).json(errors)
+        }
 
+        res.status(200).json({ success: true });
     })
 }

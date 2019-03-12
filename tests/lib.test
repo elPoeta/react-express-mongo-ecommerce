@@ -1,0 +1,27 @@
+/* describe('my tobe test', () => {
+    it('should be a pass', () => {
+        expect(1).toBe(1);
+
+    })
+})
+describe('my throw test', () => {
+    it('should be a throw', () => {
+
+        expect(() => { throw new Error('error') }).toThrow();
+    })
+})
+
+describe('my object test', () => {
+    it('should be a match object', () => {
+
+        expect({ id: 1, user: "elpoeta" }).toMatchObject({ user: 'elpoeta' })
+    })
+})
+
+describe('my string test', () => {
+    it('should be a caontain string', () => {
+
+        expect("welcome elpoeta").toContain('elpoeta')
+        expect("welcome elpoeta").toMatch(/elpoeta/)
+    })
+}) */
