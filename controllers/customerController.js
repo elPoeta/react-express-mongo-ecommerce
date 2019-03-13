@@ -1,6 +1,5 @@
 const { Customer } = require('../models/Customer');
 const asyncMiddleware = require('../middlewares/async');
-const ObjectId = require("mongoose").Types.ObjectId;
 
 module.exports = {
     createOrUpdateCustomer: asyncMiddleware(async (req, res) => {

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { categorySchema } = require("./Category");
+const Joi = require('joi');
 
 const productSchema = new mongoose.Schema({
   name: {
@@ -46,6 +47,26 @@ const productSchema = new mongoose.Schema({
   }
 });
 
+const validateProduct = {
+  product: Joi.object().keys({
+    _id: Joi.objectId(),
+    name: Joi.string()
+      .min(2)
+      .max(80)
+      .required(),
+    category: Joi.objectId().required(),
+    price: Joi.number().min(0).required(),
+    stock: Joi.number().min(0).required(),
+    discount: Joi.number().min(0).max(100).required(),
+    image: Joi.string().required(),
+    description: Joi.string()
+      .min(10)
+      .max(255),
+    isAvailable: Joi.boolean(),
+
+  }),
+}
 const Product = new mongoose.model("product", productSchema);
 
 exports.Product = Product;
+exports.validateProduct = validateProduct;
