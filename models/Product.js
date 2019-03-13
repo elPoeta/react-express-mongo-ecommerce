@@ -54,10 +54,10 @@ const validateProduct = {
       .min(2)
       .max(80)
       .required(),
-    category: Joi.objectId().required(),
+    categoryId: Joi.objectId().required(),
     price: Joi.number().min(0).required(),
     stock: Joi.number().min(0).required(),
-    discount: Joi.number().min(0).max(100).required(),
+    discount: Joi.number().min(0).max(100),
     image: Joi.string().required(),
     description: Joi.string()
       .min(10)
