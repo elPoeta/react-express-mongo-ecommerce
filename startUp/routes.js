@@ -4,7 +4,7 @@ const category = require("../routes/api/category");
 const customer = require("../routes/api/customer");
 const privateCategory = require("../routes/private/category");
 const privateProduct = require("../routes/private/product");
-const product = require("../routes/private/product");
+const product = require("../routes/api/product");
 
 module.exports = app => {
   app.use("/api/auth", auth);

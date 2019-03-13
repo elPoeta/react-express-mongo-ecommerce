@@ -42,14 +42,36 @@ module.exports = {
         res.status(200).json(updateProduct);
     }),
     getProducts: asyncMiddleware(async (req, res) => {
-        //TODO
+        const errors = {};
+        const products = await Product.find({ isAvailable: true })
+            .select(['name', 'price', 'stock', 'image', 'category.name']);
+        if (!products) {
+            errors.notFound = 'Products not found';
+            return res.status(404).json(errors);
+        }
+        res.status(200).json(products);
     }),
     getProductById: asyncMiddleware(async (req, res) => {
-        //TODO
+        const errors = {};
+        const _id = req.value.params;
+        const product = await Product.findById(_id)
+            .select(['name', 'price', 'stock', 'image', 'category.name']);
+        if (!product) {
+            errors.notFound = 'Product not found';
+            return res.status(404).json(errors);
+        }
+        res.status(200).json(product);
 
     }),
     deleteProduct: asyncMiddleware(async (req, res) => {
-        //TODO
+        const errors = {};
+        const _id = req.value.params;
+        const product = await Product.findByIdAndRemove(_id)
+        if (!product) {
+            errors.notFound = 'Product not found';
+            return res.status(404).json(errors);
+        }
+        res.status(200).json({ success: true });
 
     })
 
