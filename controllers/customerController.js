@@ -48,8 +48,22 @@ module.exports = {
         res.json(updateCustomer);
 
     }),
-    getCustomers: asyncMiddleware(async (req, res) => {
+    deleteCustomerAddress: asyncMiddleware(async (req, res) => {
+        const errors = {};
+        const user = req.user._id;
+        const addressId = req.value.params
+        const customer = await Customer.findOne({ user });
+        if (!customer) {
+            errors.notFound = "Customer not found";
+            return res.status(404).json(errors);
+        }
 
+        customer.address = [...customer.address.filter(a => a._id.toString() !== addressId)];
+        await customer.save();
+        res.status(200).json(customer);
+    }),
+    getCustomers: asyncMiddleware(async (req, res) => {
+        //TODO GET CUSTOMERS
     }),
     getCustomer: asyncMiddleware(async (req, res) => {
         const errors = {};
