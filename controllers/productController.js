@@ -22,27 +22,21 @@ module.exports = {
             errors.notFound = 'Category  not found';
             return res.status(404).json(errors);
         }
-        productFields.category = {
-            name: categoryFound.name,
-            isAvailable: categoryFound.isAvailable
-        }
+
+        productFields.category = {};
+        productFields.category.name = categoryFound.name;
+        productFields.category.isAvailable = categoryFound.isAvailable;
 
         const product = await Product.findById(_id);
         if (product) {
-            //const updateProduct = Product.findByIdAndUpdate(_id);
-            product.name = name;
-            product.category.name = categoryFound.name;
-            product.category.isAvailable = categoryFound.isAvailable;
-            product.price = price;
-            product.stock = stock;
-            product.image = image;
-            product.isAvailable = productFields.isAvailable;
-            product.discount = discount || undefined;
-            product.description = description || undefined;
-            await product.save();
-            return res.status(200).json(product);
+            const updateProduct = await Product.findByIdAndUpdate(
+                { _id },
+                { $set: productFields },
+                { new: true }
+            );
+            return res.status(200).json(updateProduct);
         }
-        console.log('###')
+
         const updateProduct = await new Product(productFields).save();
 
         res.status(200).json(updateProduct);
