@@ -1,38 +1,38 @@
 class Cart {
   constructor(oldCart) {
-    console.log('constructor ## ', oldCart)
     this.cart = oldCart || [];
-    this.totalAmount = oldCart.totalAmount || 0;
-    this.totalQuantity = oldCart.totalQuantity || 0;
+    this.totalAmount = this.cart.length > 0 ? oldCart.totalAmount : 0;
+    this.totalQuantity = this.cart.length > 0 ? oldCart.totalQuantity : 0;
   }
 
   addItemCart(product) {
-
-    const foundProduct = this.cart.filter(item => {
-      console.log(item.product._id, ' === ', product._id)
-      if (item.product._id === product._id) {
-        console.log(item.product._id, ' === ', product._id)
-        this.cart.quantity++;
-        return item;
+    if (this.cart.length > 0) {
+      const id = product._id;
+      const cartIndex = this.cart.findIndex(item => {
+        console.log("item id > ", item.product._id, " {id >> }", id);
+        return item.product._id == id;
+      });
+      if (cartIndex === -1) {
+        this.addItem(product);
+      } else {
+        this.updateItemCart(id, "+");
       }
-    });
-    console.log('isfoun ', foundProduct)
-    if (foundProduct.length === 0) {
-      this.cart = [...this.cart, { product, quantity: 1 }];
+    } else {
+      this.addItem(product);
     }
-
-
+  }
+  addItem(product) {
+    this.cart = [...this.cart, { product, quantity: 1 }];
     this.totalQuantity = totals(this.cart).qty;
     this.totalAmount = totals(this.cart).amount;
   }
-
-  updateItemCart(product, operator) {
+  updateItemCart(id, operator) {
     const cart = this.cart.map(item =>
-      item._id === product._id
+      item.product._id == id
         ? (item = {
-          ...item,
-          quantity: operator === "+" ? item.quantity + 1 : item.quantity - 1
-        })
+            ...item,
+            quantity: operator === "+" ? item.quantity + 1 : item.quantity - 1
+          })
         : item
     );
     this.cart = cart;
@@ -41,17 +41,16 @@ class Cart {
   }
 
   removeItemCart(id) {
-    this.cart = [...this.cart.filter(item => item._id !== id)]
+    this.cart = [...this.cart.filter(item => item._id !== id)];
     this.totalAmount = totals(this.cart).amount;
     this.totalQuantity = totals(this.cart).qty;
-  };
+  }
 
   clearCart() {
     this.cart = [];
     this.totalQuantity = 0;
     this.totalAmount = 0;
   }
-
 }
 
 const totals = cart => {
@@ -73,5 +72,15 @@ const totals = cart => {
 
   return { amount: Number(totalAmount.toFixed(2)), qty: totalQuantity };
 };
-
+/*
+function remove() {
+  (id, operator, quantity) => {
+    if (quantity === 1 && operator === "-") {
+      this..updateItemCart(id, operator);
+      this.props.removeItemCart(id);
+    } else {
+      this.updateItemCart(id, operator);
+    }
+  };
+}*/
 exports.Cart = Cart;
