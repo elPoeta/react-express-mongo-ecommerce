@@ -18,10 +18,11 @@ signTokenCart = (items, id) => {
 
 module.exports = {
   shoppingCart: asyncMiddleware(async (req, res) => {
-    const cart = req.cart;
+    const errors = {};
     const token = req.header('cart-items');
     if (!token) {
-      return res.status(200).send('')
+      errors.noToken = 'no token'
+      return res.status(404).json(errors)
     }
     res.status(200).json(token);
 
@@ -33,6 +34,11 @@ module.exports = {
       Object.keys(req.cart.items).length > 0 ? req.cart.items.cart : []
     );
     const product = await Product.findById(_id);
+    if (!product) {
+      errors.notFound = 'Product not found';
+      return res.status(404).json(errors);
+
+    }
     cart.addItemCart(product);
     const token = signTokenCart(cart, req.user._id);
     res.header("cart-items", token);
@@ -40,7 +46,6 @@ module.exports = {
 
   }),
   updateAndRemoveItemCart: asyncMiddleware(async (req, res) => {
-    const errors = {};
     const _id = req.value.params;
     const cart = new Cart(
       Object.keys(req.cart.items).length > 0 ? req.cart.items.cart : []
@@ -51,7 +56,6 @@ module.exports = {
     res.status(200).json(token);
   }),
   removeItemCart: asyncMiddleware(async (req, res) => {
-    const errors = {};
     const _id = req.value.params;
     const cart = new Cart(
       Object.keys(req.cart.items).length > 0 ? req.cart.items.cart : []

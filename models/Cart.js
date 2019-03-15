@@ -29,9 +29,9 @@ class Cart {
     const cart = this.cart.map(item =>
       item.product._id == id
         ? (item = {
-            ...item,
-            quantity: operator === "+" ? item.quantity + 1 : item.quantity - 1
-          })
+          ...item,
+          quantity: operator === "+" ? item.quantity + 1 : item.quantity - 1
+        })
         : item
     );
     this.cart = cart;
@@ -41,6 +41,9 @@ class Cart {
 
   removeItem(id, operator) {
     const item = this.cart.filter(item => item.product._id == id);
+    if (item.length === 0) {
+      return;
+    }
     const quantity = item[0].quantity;
     if (quantity == 1 && operator === "-") {
       this.updateItemCart(id, operator);
