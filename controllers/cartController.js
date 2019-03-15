@@ -21,7 +21,7 @@ module.exports = {
     const errors = {};
     const token = req.header('cart-items');
     if (!token) {
-      errors.noToken = 'no token'
+      errors.notFound = 'Token not found';
       return res.status(404).json(errors)
     }
     res.status(200).json(token);
@@ -33,11 +33,16 @@ module.exports = {
     const cart = new Cart(
       Object.keys(req.cart.items).length > 0 ? req.cart.items.cart : []
     );
-    const product = await Product.findById(_id);
+    const product = await Product.findById(_id)
+      .select(['name', 'category.name', 'price', 'stock', 'image']);
     if (!product) {
       errors.notFound = 'Product not found';
-      return res.status(404).json(errors);
+      return res.status(400).json(errors);
 
+    }
+    if (product.stock === 0) {
+      errors.notStock = 'Product not in stock.';
+      return res.status(400).json(errors);
     }
     cart.addItemCart(product);
     const token = signTokenCart(cart, req.user._id);

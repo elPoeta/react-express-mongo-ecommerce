@@ -10,12 +10,16 @@ module.exports = {
                 token = JWT.sign(
                     {
                         id: req.user._id,
-                        items: [],
+                        items: { cart: [] },
                         iat: new Date().getTime(),
                         exp: new Date().setSeconds(3600)
                     },
                     JWT_SECRET_CART
                 );
+                if (!req.params.id) {
+                    res.header("cart-items", token);
+                    return res.status(200).json(token);
+                }
             }
             if (typeof token !== 'undefined') {
                 res.header("cart-items", token);
