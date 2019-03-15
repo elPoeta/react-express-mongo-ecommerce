@@ -1,15 +1,14 @@
 class Cart {
   constructor(oldCart) {
     this.cart = oldCart || [];
-    this.totalAmount = this.cart.length > 0 ? oldCart.totalAmount : 0;
-    this.totalQuantity = this.cart.length > 0 ? oldCart.totalQuantity : 0;
+    this.totalAmount = oldCart.totalAmount || 0;
+    this.totalQuantity = oldCart.totalQuantity || 0;
   }
 
   addItemCart(product) {
     if (this.cart.length > 0) {
       const id = product._id;
       const cartIndex = this.cart.findIndex(item => {
-        console.log("item id > ", item.product._id, " {id >> }", id);
         return item.product._id == id;
       });
       if (cartIndex === -1) {
@@ -40,8 +39,18 @@ class Cart {
     this.totalAmount = totals(this.cart).amount;
   }
 
+  removeItem(id, operator) {
+    const item = this.cart.filter(item => item.product._id == id);
+    const quantity = item[0].quantity;
+    if (quantity == 1 && operator === "-") {
+      this.updateItemCart(id, operator);
+      this.removeItemCart(id);
+    } else {
+      this.updateItemCart(id, operator);
+    }
+  }
   removeItemCart(id) {
-    this.cart = [...this.cart.filter(item => item._id !== id)];
+    this.cart = [...this.cart.filter(item => item.product._id != id)];
     this.totalAmount = totals(this.cart).amount;
     this.totalQuantity = totals(this.cart).qty;
   }
@@ -72,15 +81,5 @@ const totals = cart => {
 
   return { amount: Number(totalAmount.toFixed(2)), qty: totalQuantity };
 };
-/*
-function remove() {
-  (id, operator, quantity) => {
-    if (quantity === 1 && operator === "-") {
-      this..updateItemCart(id, operator);
-      this.props.removeItemCart(id);
-    } else {
-      this.updateItemCart(id, operator);
-    }
-  };
-}*/
+
 exports.Cart = Cart;
