@@ -8,7 +8,7 @@ const orderSchema = new Schema({
     ref: "customer"
   },
   cart: {
-    type: object,
+    type: Object,
     required: true
   },
   paymentId: {
@@ -21,7 +21,7 @@ const validateOrder = {
   order: Joi.object().keys({
     _id: Joi.objectId(),
     customer: Joi.objectId(),
-    cart: Joi.object.required(),
+    cart: Joi.object().required(),
     paymentId: Joi.string().required()
   })
 };
