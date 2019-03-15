@@ -10,83 +10,63 @@ signTokenCart = (items, id) => {
       id,
       items,
       iat: new Date().getTime(),
-      exp: new Date().setDate(new Date().getDate() + 1)
+      exp: new Date().setSeconds(3600)
     },
     JWT_SECRET_CART
   );
 };
+
 module.exports = {
   shoppingCart: asyncMiddleware(async (req, res) => {
-    const token = req.header("cart-items");
-
+    const cart = req.cart;
+    const token = req.header('cart-items');
     if (!token) {
-      const cartToken = signTokenCart([], req.user._id);
-      res.header("cart-items", cartToken);
-      return res.status(200).json({ cart: [] });
+      return res.status(200).send('')
     }
-    res.header("cart-items", token);
-    const decoded = JWT.verify(token, JWT_SECRET_CART);
-    res.status(200).json(decoded.items);
+    res.status(200).json(token);
+
   }),
   addItemCart: asyncMiddleware(async (req, res) => {
     const errors = {};
     const _id = req.value.params;
-    let token = req.header("cart-items");
-
-    if (!token) {
-      token = await signTokenCart([], req.user._id);
-    }
-    let decoded = await JWT.verify(token, JWT_SECRET_CART);
     const cart = new Cart(
-      Object.keys(decoded.items).length > 0 ? decoded.items.cart : []
+      Object.keys(req.cart.items).length > 0 ? req.cart.items.cart : []
     );
     const product = await Product.findById(_id);
     cart.addItemCart(product);
-    token = signTokenCart(cart, req.user._id);
+    const token = signTokenCart(cart, req.user._id);
     res.header("cart-items", token);
-    decoded = JWT.verify(token, JWT_SECRET_CART);
-    res.status(200).json(decoded.items);
+    res.status(200).json(token);
+
   }),
   updateAndRemoveItemCart: asyncMiddleware(async (req, res) => {
     const errors = {};
     const _id = req.value.params;
-    let token = req.header("cart-items");
-
-    if (!token) {
-      token = await signTokenCart([], req.user._id);
-    }
-    let decoded = await JWT.verify(token, JWT_SECRET_CART);
     const cart = new Cart(
-      Object.keys(decoded.items).length > 0 ? decoded.items.cart : []
+      Object.keys(req.cart.items).length > 0 ? req.cart.items.cart : []
     );
-    // const product = await Product.findById(_id);
     cart.removeItem(_id, "-");
-    token = signTokenCart(cart, req.user._id);
+    const token = signTokenCart(cart, req.user._id);
     res.header("cart-items", token);
-    decoded = JWT.verify(token, JWT_SECRET_CART);
-    res.status(200).json(decoded.items);
+    res.status(200).json(token);
   }),
   removeItemCart: asyncMiddleware(async (req, res) => {
     const errors = {};
     const _id = req.value.params;
-    let token = req.header("cart-items");
-
-    if (!token) {
-      token = await signTokenCart([], req.user._id);
-    }
-    let decoded = await JWT.verify(token, JWT_SECRET_CART);
     const cart = new Cart(
-      Object.keys(decoded.items).length > 0 ? decoded.items.cart : []
+      Object.keys(req.cart.items).length > 0 ? req.cart.items.cart : []
     );
-    //const product = await Product.findById(_id);
-    console.log("remove");
     cart.removeItemCart(_id);
-    token = signTokenCart(cart, req.user._id);
+    const token = signTokenCart(cart, req.user._id);
     res.header("cart-items", token);
-    decoded = JWT.verify(token, JWT_SECRET_CART);
-    res.status(200).json(decoded.items);
+    res.status(200).json(token);
   }),
   clearCart: asyncMiddleware(async (req, res) => {
-    res.status(200).json({ msg: "Clear cart" });
+    const cart = new Cart([]);
+    cart.clearCart();
+    const token = signTokenCart(cart, req.user._id);
+    res.header("cart-items", token);
+    res.status(200).json(token);
+
   })
 };
