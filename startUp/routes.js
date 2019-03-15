@@ -6,6 +6,7 @@ const privateCategory = require("../routes/private/category");
 const privateProduct = require("../routes/private/product");
 const product = require("../routes/api/product");
 const shoppingCart = require("../routes/api/shoppingCart");
+const payment = require('../routes/api/payment');
 const order = require("../routes/api/order");
 
 module.exports = app => {
@@ -16,6 +17,7 @@ module.exports = app => {
   app.use("/admin/product", privateProduct);
   app.use("/api/product", product);
   app.use("/api/shopping-cart", shoppingCart);
+  app.use("/api/payment", payment);
   app.use("/api/order", order);
   app.use(errorMiddleware);
 };
