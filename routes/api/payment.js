@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { createPayment, paymentSucces, paymentCancel } = require('../../controllers/paymentController');
+const { createPayment, executePayment } = require('../../controllers/paymentController');
 const { auth } = require('../../middlewares/authorization');
 const { tokenCartItems } = require('../../middlewares/cartToken');
 
-router.post('/', [auth, tokenCartItems], createPayment);
-router.get('/success', [auth, tokenCartItems], paymentSucces);
-router.get('/cancel', [auth], paymentCancel);
+router.post('/create-payment/:token', [auth], createPayment);
+router.post('/execute-payment', [auth], executePayment);
+
 
 module.exports = router;
