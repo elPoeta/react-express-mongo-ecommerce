@@ -34,7 +34,8 @@
     "joi-objectid": "^2.0.0",
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.18",
-    "paypal-rest-sdk": "^1.8.1"
+    "paypal-rest-sdk": "^1.8.1",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
