@@ -1,0 +1,10 @@
+.invalid {
+    color: red;
+    font-size: 0.7em;
+    padding: 5px;
+  }
+  
+  .invalid-input {
+    border-bottom: 1px solid red;
+    box-shadow: 0px 1px 0px 0px red;
+  }

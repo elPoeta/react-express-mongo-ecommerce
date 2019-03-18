@@ -8,12 +8,15 @@ import App from './components/App';
 import Home from './components/layout/pages/home/Home'
 import About from './components/layout/pages/about/About';
 import NotFound from './components/layout/pages/notFound/NotFound';
-
+import SignUp from './components/auth/SignUp';
+import Login from './components/auth/Login';
 
 import store from './store';
 
 
 import * as serviceWorker from './serviceWorker';
+
+
 
 ReactDOM.render(<Provider store={store} >
     <BrowserRouter>
@@ -21,6 +24,8 @@ ReactDOM.render(<Provider store={store} >
             <Switch>
                 <Route exact path='/' component={Home} />
                 <Route path='/about' component={About} />
+                <Route path='/signup' component={SignUp} />
+                <Route path='/login' component={Login} />
                 <Route path='/not-found' component={NotFound} />
                 <Redirect to='not-found' />
             </Switch>

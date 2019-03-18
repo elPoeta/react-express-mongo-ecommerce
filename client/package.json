@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.6",
     "jwt-decode": "^2.2.0",
     "react": "^16.8.4",
     "react-async-script-loader": "^0.3.0",
