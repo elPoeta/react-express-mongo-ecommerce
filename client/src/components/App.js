@@ -5,7 +5,7 @@ import Footer from './layout/footer/Footer';
 import './App.css';
 
 const App = props => (
-  <div className="App">
+  <div className="container">
     <div>
       <Header />
       {props.children}

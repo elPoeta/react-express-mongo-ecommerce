@@ -1,0 +1,13 @@
+.nav-bar ul li{
+    display: inline;
+    list-style: none;
+    padding: 10px;
+}
+
+.nav-bar ul li a{
+    color: #fff;
+    text-decoration: none;
+}
+.nav-bar{
+    justify-self: flex-end;
+  }

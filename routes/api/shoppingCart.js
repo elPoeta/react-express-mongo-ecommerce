@@ -11,14 +11,14 @@ const { auth } = require("../../middlewares/authorization");
 const { validateParamId, schemas } = require("../../middlewares/validator");
 const { tokenCartItems } = require("../../middlewares/cartToken");
 
-router.get("/", [auth, tokenCartItems], shoppingCart);
-router.post("/:id", [validateParamId(schemas.id), auth, tokenCartItems], addItemCart);
+router.get("/", [tokenCartItems], shoppingCart);
+router.post("/:id", [validateParamId(schemas.id), tokenCartItems], addItemCart);
 router.put(
   "/:id",
-  [validateParamId(schemas.id), auth, tokenCartItems],
+  [validateParamId(schemas.id), tokenCartItems],
   updateAndRemoveItemCart
 );
-router.delete("/:id", [validateParamId(schemas.id), auth, tokenCartItems], removeItemCart);
-router.delete("/", [auth, tokenCartItems], clearCart);
+router.delete("/:id", [validateParamId(schemas.id), tokenCartItems], removeItemCart);
+router.delete("/", [tokenCartItems], clearCart);
 
 module.exports = router;

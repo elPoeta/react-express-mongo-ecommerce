@@ -4,10 +4,9 @@ const asyncMiddleware = require("../middlewares/async");
 const { JWT_SECRET_CART } = require("../config/keys");
 const JWT = require("jsonwebtoken");
 
-signTokenCart = (items, id) => {
+signTokenCart = (items) => {
   return JWT.sign(
     {
-      id,
       items,
       iat: new Date().getTime(),
       exp: new Date().setSeconds(3600)
@@ -19,7 +18,8 @@ signTokenCart = (items, id) => {
 module.exports = {
   shoppingCart: asyncMiddleware(async (req, res) => {
     const errors = {};
-    const token = req.header('cart-items');
+    // const token = req.header('cart-items');
+    const { token } = req.body;
     if (!token) {
       errors.notFound = 'Token not found';
       return res.status(404).json(errors)
@@ -45,8 +45,8 @@ module.exports = {
       return res.status(400).json(errors);
     }
     cart.addItemCart(product);
-    const token = signTokenCart(cart, req.user._id);
-    res.header("cart-items", token);
+    const token = signTokenCart(cart);
+    //res.header("cart-items", token);
     res.status(200).json(token);
 
   }),
@@ -56,8 +56,8 @@ module.exports = {
       Object.keys(req.cart.items).length > 0 ? req.cart.items.cart : []
     );
     cart.removeItem(_id, "-");
-    const token = signTokenCart(cart, req.user._id);
-    res.header("cart-items", token);
+    const token = signTokenCart(cart);
+    //res.header("cart-items", token);
     res.status(200).json(token);
   }),
   removeItemCart: asyncMiddleware(async (req, res) => {
@@ -66,15 +66,15 @@ module.exports = {
       Object.keys(req.cart.items).length > 0 ? req.cart.items.cart : []
     );
     cart.removeItemCart(_id);
-    const token = signTokenCart(cart, req.user._id);
-    res.header("cart-items", token);
+    const token = signTokenCart(cart);
+    //res.header("cart-items", token);
     res.status(200).json(token);
   }),
   clearCart: asyncMiddleware(async (req, res) => {
     const cart = new Cart([]);
     cart.clearCart();
-    const token = signTokenCart(cart, req.user._id);
-    res.header("cart-items", token);
+    const token = signTokenCart(cart);
+    // res.header("cart-items", token);
     res.status(200).json(token);
 
   })

@@ -1,0 +1,22 @@
+header {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    grid-template-rows: 60px;
+    background-color: #341456;
+    text-align: center;
+    align-items: center;
+  }
+  .sticky {
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    z-index: 110;
+  }
+  
+  header h1 a {
+    font-size: .7em;
+    font-weight: 900;
+    text-decoration: none;
+    color : #fff;
+  }
+ 
