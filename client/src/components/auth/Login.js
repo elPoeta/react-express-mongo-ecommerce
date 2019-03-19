@@ -10,6 +10,11 @@ class Login extends Component {
     password: "",
     errors: {}
   };
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.errors !== this.props.errors) {
+      this.setState({ errors: this.props.errors });
+    }
+  }
   onSubmit = async e => {
     e.preventDefault();
 
@@ -25,17 +30,20 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   render() {
-    const { email, password } = this.state;
+    const { email, password, errors } = this.state;
+
     return (
       <div>
         <h2>Login</h2>
         <form className="auth-form" onSubmit={this.onSubmit}>
+          {errors.invalid && <div className="invalid">{errors.invalid}</div>}
           <TextFieldInput
             type="email"
             name="email"
             placeholder="Email"
             onChange={this.onChange}
             value={email}
+            error={errors.email}
           />
           <TextFieldInput
             type="password"
@@ -43,6 +51,7 @@ class Login extends Component {
             placeholder="Password"
             onChange={this.onChange}
             value={password}
+            error={errors.password}
           />
           <button>Login</button>
         </form>
@@ -52,8 +61,11 @@ class Login extends Component {
     );
   }
 }
-
+const mapStateToProps = state => ({
+  user: state.auth,
+  errors: state.errors.error
+})
 export default connect(
-  null,
+  mapStateToProps,
   { login }
 )(Login);

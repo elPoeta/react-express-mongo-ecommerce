@@ -1,4 +1,4 @@
-import { AUTH_USER } from "./types";
+import { AUTH_USER, GET_ERRORS } from "./types";
 import jwtDecode from "jwt-decode";
 import { URL_REGISTER, URL_LOGIN } from "../utils/api-url";
 import Http from "../utils/http";
@@ -22,6 +22,6 @@ export const login = userData => async dispatch => {
     dispatch({ type: AUTH_USER, payload: user });
   } catch (error) {
     const err = JSON.parse(error.message);
-    //dispatch({ type: ERROR_MESSAGE, payload: err });
+    dispatch({ type: GET_ERRORS, payload: err });
   }
 };

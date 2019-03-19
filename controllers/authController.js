@@ -31,14 +31,13 @@ module.exports = {
   }),
   login: asyncMiddleware(async (req, res) => {
     const { email, password } = req.body;
-    console.log("#### ", req.body);
     let user = await User.findOne({ email });
     if (!user)
-      return res.status(400).json(`"invalid" Invalid email or password.`);
+      return res.status(400).json(`"invalid" email or password.`);
 
     const isValidPassword = await user.isValidPassword(password);
     if (!isValidPassword)
-      return res.status(400).json(`"invalid" Invalid email or password.`);
+      return res.status(400).json(`"invalid" email or password.`);
 
     const token = `Bearer ${user.generateAuthToken()}`;
     console.log("token ", token);

@@ -32,6 +32,7 @@ class Http {
     let data = await response;
     if (data.status === 400 || data.status === 404 || data.status === 403) {
       const error = await data.json();
+      console.log(error);
       const subString = error.split('"')[1].split('"')[0];
       const errors = { error: { [subString]: error } };
       throw new Error(JSON.stringify(errors));
