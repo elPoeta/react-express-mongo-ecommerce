@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import jwtDecode from 'jwt-decode';
 
 import './index.css';
 import App from './components/App';
@@ -13,9 +14,19 @@ import Login from './components/auth/Login';
 
 import store from './store';
 
+import { AUTH_USER } from './actions/types';
+import { logout } from './actions/authAction';
 
 import * as serviceWorker from './serviceWorker';
 
+if (localStorage.token) {
+    if (jwtDecode(localStorage.getItem("token")).exp < Date.now()) {
+        store.dispatch(logout());
+        //store.dispatch(clearCustomer());
+        window.location.href = '/login';
+    }
+    store.dispatch({ type: AUTH_USER, payload: jwtDecode(localStorage.getItem("token")) });
+}
 
 
 ReactDOM.render(<Provider store={store} >

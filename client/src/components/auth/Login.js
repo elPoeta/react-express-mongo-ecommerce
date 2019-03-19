@@ -10,12 +10,20 @@ class Login extends Component {
     password: "",
     errors: {}
   };
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/');
+    }
+  }
   componentDidUpdate(prevProps, prevState) {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/');
+    }
     if (prevProps.errors !== this.props.errors) {
       this.setState({ errors: this.props.errors });
     }
   }
-  onSubmit = async e => {
+  onSubmit = e => {
     e.preventDefault();
 
     const userData = {
@@ -23,7 +31,7 @@ class Login extends Component {
       password: this.state.password
     };
 
-    await this.props.login(userData);
+    this.props.login(userData);
   };
 
   onChange = e => {
@@ -55,14 +63,12 @@ class Login extends Component {
           />
           <button>Login</button>
         </form>
-        <p>{email}</p>
-        <p>{password}</p>
       </div>
     );
   }
 }
 const mapStateToProps = state => ({
-  user: state.auth,
+  auth: state.auth,
   errors: state.errors.error
 })
 export default connect(

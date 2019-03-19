@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from '../../../../actions/authAction';
 import './Navbar.css';
 
 class Navbar extends Component {
     handleOnclick = () => {
-        console.log('logout');
+        this.props.logout();
     }
-
+    handleCartOnclick = () => {
+        console.log('Cart');
+    }
     render() {
-        //const { isAuthenticated, user } = this.props.auth;
+        const { isAuthenticated, user } = this.props.auth;
         const guestLinks = (
             <ul>
                 <li>
@@ -25,6 +29,11 @@ class Navbar extends Component {
                     <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li>
+                    <Link to="" onClick={this.handleCartOnclick}>
+                        <i className="fas fa-shopping-cart" />{" "}
+                    </Link>
+                </li>
+                <li>
                     <Link to="" onClick={this.handleOnclick}>
                         Logout{" "}
                     </Link>
@@ -32,11 +41,16 @@ class Navbar extends Component {
             </ul>
         );
         return (
-            <nav className='nav-bar'>
-                {guestLinks}
-            </nav>
+            <div>
+                <nav className='nav-bar nav-two'>
+                    {!isAuthenticated ? guestLinks : authLinks}
+                </nav>
+            </div>
+
         )
     }
 }
-
-export default Navbar;
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+export default connect(mapStateToProps, { logout })(Navbar);

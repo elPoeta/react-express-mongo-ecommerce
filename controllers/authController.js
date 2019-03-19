@@ -27,7 +27,7 @@ module.exports = {
     res
       .header("authorization", token)
       .status(200)
-      .send(token);
+      .json({ token });
   }),
   login: asyncMiddleware(async (req, res) => {
     const { email, password } = req.body;
@@ -40,7 +40,6 @@ module.exports = {
       return res.status(400).json(`"invalid" email or password.`);
 
     const token = `Bearer ${user.generateAuthToken()}`;
-    console.log("token ", token);
     res
       .header("authorization", token)
       .status(200)
