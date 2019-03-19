@@ -5,12 +5,14 @@ module.exports = {
   register: asyncMiddleware(async (req, res) => {
     const { email, password, confirmPassword } = req.body;
     if (password !== confirmPassword) {
-      return res.status(400).send("Password and confirm password not equals");
+      return res
+        .status(400)
+        .json(`"invalid" Password and confirm password not equals`);
     }
 
     const foundUser = await User.findOne({ email });
     if (foundUser) {
-      return res.status(400).send("User already registered.");
+      return res.status(400).json(`"exist" User already registered.`);
     }
 
     const newUser = new User({
@@ -29,20 +31,21 @@ module.exports = {
   }),
   login: asyncMiddleware(async (req, res) => {
     const { email, password } = req.body;
-
+    console.log("#### ", req.body);
     let user = await User.findOne({ email });
-    if (!user) return res.status(400).send("Invalid email or password.");
+    if (!user)
+      return res.status(400).json(`"invalid" Invalid email or password.`);
 
     const isValidPassword = await user.isValidPassword(password);
     if (!isValidPassword)
-      return res.status(400).send("Invalid email or password.");
+      return res.status(400).json(`"invalid" Invalid email or password.`);
 
     const token = `Bearer ${user.generateAuthToken()}`;
-
+    console.log("token ", token);
     res
       .header("authorization", token)
       .status(200)
-      .send(token);
+      .json({ token });
   }),
   secret: async (req, res) => {
     res.status(200).json({ message: "secret page!!" });
