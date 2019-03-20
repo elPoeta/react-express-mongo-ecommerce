@@ -47,6 +47,8 @@
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-bottom-left-radius: .5em;
+  border-bottom-right-radius: .5em;
   z-index: 1;
 }
 
@@ -60,7 +62,9 @@
 }
 
 .dropdown-content a:hover {
-  background-color: #ddd;
+  background-color: rgb(139, 150, 189);
+  border-bottom-left-radius: .5em;
+  border-bottom-right-radius: .5em;
 }
 
 .show {

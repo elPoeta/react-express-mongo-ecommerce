@@ -51,6 +51,18 @@ module.exports = {
         }
         res.status(200).json(products);
     }),
+    getProductByCategory: asyncMiddleware(async (req, res) => {
+        const errors = {};
+        const category = req.params.category;
+        const product = await Product.find({ 'category.name': category, isAvailable: true })
+            .select(['name', 'price', 'stock', 'image', 'category.name']);
+        if (!product) {
+            errors.notFound = 'Product not found';
+            return res.status(404).json(errors);
+        }
+        res.status(200).json(product);
+
+    }),
     getProductById: asyncMiddleware(async (req, res) => {
         const errors = {};
         const _id = req.value.params;

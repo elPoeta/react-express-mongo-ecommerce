@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { getCategories } from "../../../../actions/categoryAction";
 
@@ -16,9 +17,9 @@ class NavCategories extends Component {
   };
   render() {
     const category = this.props.categories.map(category => (
-      <a href="#" key={category._id}>
+      <Link to={`/products/category/${category.name}`} key={category._id} onClick={this.toggleMenu}>
         {category.name}
-      </a>
+      </Link>
     ));
     return (
       <div className="dropdown nav-one">
@@ -27,7 +28,12 @@ class NavCategories extends Component {
           <i className="fa fa-caret-down" />
         </button>
         {this.state.visible ? (
-          <div className="dropdown-content">{category}</div>
+          <div className="dropdown-content">
+            {category}
+            <Link to={`/products/category/all`} key={0} onClick={this.toggleMenu}>
+              All
+        </Link>
+          </div>
         ) : null}
       </div>
     );

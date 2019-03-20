@@ -1,6 +1,8 @@
 export const AUTH_USER = "AUTH_USER";
 export const GET_CUSTOMER = "GET_CUSTOMER";
 export const GET_CATEGORIES = "GET_CATEGORIES";
+export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_ERRORS = "GET_ERRORS";
 export const CATEGORY_LOADING = "CATEGORY_LOADING";
+export const PRODUCT_LOADING = "PRODUCT_LOADING";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";

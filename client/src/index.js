@@ -11,6 +11,7 @@ import About from './components/layout/pages/about/About';
 import NotFound from './components/layout/pages/notFound/NotFound';
 import SignUp from './components/auth/SignUp';
 import Login from './components/auth/Login';
+import Products from './components/product/Products';
 
 import store from './store';
 
@@ -37,6 +38,8 @@ ReactDOM.render(<Provider store={store} >
                 <Route path='/about' component={About} />
                 <Route path='/signup' component={SignUp} />
                 <Route path='/login' component={Login} />
+
+                <Route path='/products/category/:category' component={Products} />
                 <Route path='/not-found' component={NotFound} />
                 <Redirect to='not-found' />
             </Switch>
