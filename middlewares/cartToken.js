@@ -5,6 +5,7 @@ module.exports = {
     tokenCartItems: async (req, res, next) => {
         // let token = req.header('cart-items');
         let { token } = req.body;
+
         try {
             if (!token) {
                 token = JWT.sign(

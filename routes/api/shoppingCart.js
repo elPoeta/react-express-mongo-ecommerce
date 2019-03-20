@@ -11,7 +11,7 @@ const { auth } = require("../../middlewares/authorization");
 const { validateParamId, schemas } = require("../../middlewares/validator");
 const { tokenCartItems } = require("../../middlewares/cartToken");
 
-router.get("/", [tokenCartItems], shoppingCart);
+router.post("/", [tokenCartItems], shoppingCart);
 router.post("/:id", [validateParamId(schemas.id), tokenCartItems], addItemCart);
 router.put(
   "/:id",

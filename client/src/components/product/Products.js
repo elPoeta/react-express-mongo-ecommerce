@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Spinner from '../common/spinner/Spinner';
+import ProductItem from './ProductItem';
 import { getProducts, getProductsByCategory } from '../../actions/productAction';
+import { addItemCart } from '../../actions/cartAction';
+
 class Products extends Component {
     componentDidMount() {
         const category = this.props.match.params.category;
@@ -14,6 +17,10 @@ class Products extends Component {
         if (prevProps.errors !== this.props.errors) {
             this.setState({ errors: this.props.errors });
         }
+    }
+    handleOnClick = async id => {
+        console.log('=>)', id);
+        await this.props.addItemCart(id);
     }
     async getProduct(category) {
         if (category === 'all') {
@@ -28,8 +35,12 @@ class Products extends Component {
         if (loading) {
             return <Spinner classNames='spinner1' />
         } else {
-            productDisplay = products.map(p => (
-                <li key={p._id}>{p.name} {' '}{'U$$ '} {p.price} </li>
+            productDisplay = products.map(product => (
+                <ProductItem
+                    key={product._id}
+                    handleOnClick={() => { this.handleOnClick(product._id) }}
+                    product={product}
+                />
             ));
         }
         return (
@@ -43,4 +54,4 @@ class Products extends Component {
 const mapStateToProps = state => ({
     products: state.products
 });
-export default connect(mapStateToProps, { getProducts, getProductsByCategory })(Products);
+export default connect(mapStateToProps, { getProducts, getProductsByCategory, addItemCart })(Products);

@@ -30,6 +30,7 @@ module.exports = {
   addItemCart: asyncMiddleware(async (req, res) => {
     const errors = {};
     const _id = req.value.params;
+    console.log('add item ', _id)
     const cart = new Cart(
       Object.keys(req.cart.items).length > 0 ? req.cart.items.cart : []
     );

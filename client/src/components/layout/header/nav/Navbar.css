@@ -1,5 +1,8 @@
 .nav-bar {
   color: #fff;
+ display: flex;
+justify-content: flex-end;
+margin-right: 10px;
 }
 .nav-bar ul li {
   display: inline;
