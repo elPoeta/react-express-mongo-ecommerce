@@ -16,7 +16,9 @@ import Products from './components/product/Products';
 import store from './store';
 
 import { AUTH_USER } from './actions/types';
+import { GET_CART } from './actions/types';
 import { logout } from './actions/authAction';
+
 
 import * as serviceWorker from './serviceWorker';
 
@@ -26,7 +28,21 @@ if (localStorage.token) {
         //store.dispatch(clearCustomer());
         window.location.href = '/login';
     }
+    console.log('stors ', JSON.parse(localStorage.getItem("cartItems")).token)
     store.dispatch({ type: AUTH_USER, payload: jwtDecode(localStorage.getItem("token")) });
+
+
+}
+if (localStorage.cartItems) {
+    if (jwtDecode(localStorage.getItem("cartItems")).exp < Date.now()) {
+        console.log('clear carttoken')
+
+
+    }
+    console.log('stors ', JSON.parse(localStorage.getItem("cartItems")).token)
+
+
+    store.dispatch({ type: GET_CART, payload: jwtDecode(JSON.parse(localStorage.getItem("cartItems")).token) });
 }
 
 

@@ -10,6 +10,7 @@ class NavCategories extends Component {
   async componentDidMount() {
     await this.props.getCategories();
   }
+
   toggleMenu = () => {
     this.setState({
       visible: !this.state.visible

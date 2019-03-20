@@ -6,16 +6,22 @@ import { getCart } from '../../../../actions/cartAction';
 import './Navbar.css';
 
 class Navbar extends Component {
+    componentDidUpdate(prevProps) {
+        if (this.props.items.items !== prevProps.items.items) {
+            console.log('did', this.props.items)
+        }
+
+    }
     handleOnclick = () => {
         this.props.logout();
     }
     handleCartOnclick = async () => {
         await this.props.getCart();
-        console.log('Cart ', this.props.cart.cart.totalQuantity);
+        console.log('Cart ', this.props.items.items);
     }
     render() {
         const { isAuthenticated, user } = this.props.auth;
-        const { cart } = this.props.cart
+        const { items } = this.props.items
         const guestLinks = (
             <ul>
                 <li>
@@ -46,7 +52,7 @@ class Navbar extends Component {
                     <ul>
                         <li>
                             <Link to="" onClick={this.handleCartOnclick}>
-                                <i className="fas fa-shopping-cart" />{" "}{cart.totalQuantity ? cart.totalQuantity : 0}
+                                <i className="fas fa-shopping-cart" />{" "}{items.totalQuantity ? items.totalQuantity : 0}
                             </Link>
                         </li>
                     </ul>
@@ -59,6 +65,6 @@ class Navbar extends Component {
 }
 const mapStateToProps = state => ({
     auth: state.auth,
-    cart: state.cart
+    items: state.items
 })
 export default connect(mapStateToProps, { logout, getCart })(Navbar);

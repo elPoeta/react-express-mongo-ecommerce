@@ -1,6 +1,6 @@
 import { GET_CART, ADD_ITEM_CART, REMOVE_ITEM_CART, UPDATE_ITEM_CART, CART_LOADING } from "../actions/types";
 const initialState = {
-    cart: {},
+    items: {},
     loading: false,
     errors: {}
 };
@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
         case GET_CART:
             return {
                 ...state,
-                cart: action.payload,
+                items: action.payload,
                 loading: false
             };
         case CART_LOADING:
