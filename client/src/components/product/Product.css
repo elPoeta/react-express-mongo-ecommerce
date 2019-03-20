@@ -1,0 +1,11 @@
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  width: 80%;
+  margin: 0 auto;
+  grid-gap: 15px;
+}
+.product-container div {
+  box-sizing: border-box;
+}

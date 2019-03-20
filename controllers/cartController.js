@@ -4,7 +4,7 @@ const asyncMiddleware = require("../middlewares/async");
 const { JWT_SECRET_CART } = require("../config/keys");
 const JWT = require("jsonwebtoken");
 
-signTokenCart = (items) => {
+signTokenCart = items => {
   return JWT.sign(
     {
       items,
@@ -21,35 +21,36 @@ module.exports = {
     // const token = req.header('cart-items');
     const { token } = req.body;
     if (!token) {
-      errors.notFound = 'Token not found';
-      return res.status(404).json(errors)
+      errors.notFound = "Token not found";
+      return res.status(404).json(errors);
     }
     res.status(200).json(token);
-
   }),
   addItemCart: asyncMiddleware(async (req, res) => {
     const errors = {};
     const _id = req.value.params;
-    console.log('add item ', _id)
     const cart = new Cart(
       Object.keys(req.cart.items).length > 0 ? req.cart.items.cart : []
     );
-    const product = await Product.findById(_id)
-      .select(['name', 'category.name', 'price', 'stock', 'image']);
+    const product = await Product.findById(_id).select([
+      "name",
+      "category.name",
+      "price",
+      "stock",
+      "image"
+    ]);
     if (!product) {
-      errors.notFound = 'Product not found';
+      errors.notFound = "Product not found";
       return res.status(400).json(errors);
-
     }
     if (product.stock === 0) {
-      errors.notStock = 'Product not in stock.';
+      errors.notStock = "Product not in stock.";
       return res.status(400).json(errors);
     }
     cart.addItemCart(product);
     const token = signTokenCart(cart);
     //res.header("cart-items", token);
     res.status(200).json(token);
-
   }),
   updateAndRemoveItemCart: asyncMiddleware(async (req, res) => {
     const _id = req.value.params;
@@ -77,6 +78,5 @@ module.exports = {
     const token = signTokenCart(cart);
     // res.header("cart-items", token);
     res.status(200).json(token);
-
   })
 };
