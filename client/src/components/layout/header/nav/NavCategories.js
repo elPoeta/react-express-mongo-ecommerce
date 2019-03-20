@@ -1,35 +1,48 @@
-import React, { Component } from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import Category from './Category';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getCategories } from "../../../../actions/categoryAction";
 
 class NavCategories extends Component {
-    state = {
-        visible: false
-    };
-    toggleMenu = () => {
-        this.setState({
-            visible: !this.state.visible
-        });
-    }
+  state = {
+    visible: false
+  };
+  async componentDidMount() {
+    await this.props.getCategories();
+  }
+  toggleMenu = () => {
+    this.setState({
+      visible: !this.state.visible
+    });
+  };
+  render() {
+    const category = this.props.categories.map(category => (
+      <a href="#" key={category._id}>
+        {category.name}
+      </a>
+    ));
+    return (
+      <div className="dropdown nav-one">
+        <button className="dropbtn" onClick={this.toggleMenu}>
+          Categories
+          <i className="fa fa-caret-down" />
+        </button>
+        {this.state.visible ? (
+          <div className="dropdown-content">{category}</div>
+        ) : null}
+      </div>
+    );
+  }
 }
-export default NavCategories;
-class Submenu extends React.Component {
-    render() {
-        return (
-            <ul className="nav__submenu">
-                <li className="nav__submenu-item ">
-                    <a>Our Company</a>
-                </li>
-                <li className="nav__submenu-item ">
-                    <a>Our Team</a>
-                </li>
-                <li className="nav__submenu-item ">
-                    <a>Our Portfolio</a>
-                </li>
-            </ul>
-        )
-    }
-}
+const mapStateToProps = state => ({
+  categories: state.category.categories,
+  loading: state.category.loading,
+  errors: state.errors.error
+});
+export default connect(
+  mapStateToProps,
+  { getCategories }
+)(NavCategories);
+
 /*        state = {
         categories: [],
     };
@@ -59,4 +72,3 @@ class Submenu extends React.Component {
                 </ul>
             </nav>
    */
-

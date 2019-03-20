@@ -1,20 +1,20 @@
 footer {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 70px;
-    background: #341456;
-    color: #fff;
-    align-items: center;
-    text-align: center;
-    margin-top: 25px;
-    font-size: 1em;
-  }
-  
-  footer a {
-    color: #fff;
-    text-decoration: none;
-    padding: 2px;
-  }
-  footer i {
-    padding: 2px;
-  }
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 70px;
+  background: #341456;
+  color: #fff;
+  align-items: center;
+  text-align: center;
+  margin-top: 25px;
+  font-size: 1em;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  padding: 2px;
+}
+footer i {
+  padding: 2px;
+}
