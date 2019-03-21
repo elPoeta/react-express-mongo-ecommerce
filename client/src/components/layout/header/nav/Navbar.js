@@ -1,14 +1,35 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 import { logout } from '../../../../actions/authAction';
 import { getCart } from '../../../../actions/cartAction';
 import './Navbar.css';
 
 class Navbar extends Component {
+    state = {
+        totalQuantity: 0
+    }
+    componentDidMount() {
+        console.log(jwtDecode(localStorage.getItem("cartItems")).exp);
+        if (localStorage.cartItems) {
+            if (jwtDecode(localStorage.getItem("cartItems")).exp < Date.now()) {
+                console.log("clear carttoken");
+                localStorage.removeItem('cartIitems');
+            } else {
+                const { items } = jwtDecode(JSON.parse(localStorage.getItem("cartItems")).token)
+                this.setState({
+                    totalQuantity: items.totalQuantity
+                });
+            }
+        }
+    }
+
     componentDidUpdate(prevProps) {
-        if (this.props.items.items !== prevProps.items.items) {
-            console.log('did', this.props.items)
+        if (this.props.items !== prevProps.items) {
+            this.setState({
+                totalQuantity: this.props.items.items.totalQuantity
+            })
         }
 
     }
@@ -17,11 +38,11 @@ class Navbar extends Component {
     }
     handleCartOnclick = async () => {
         await this.props.getCart();
-        console.log('Cart ', this.props.items.items);
     }
     render() {
         const { isAuthenticated, user } = this.props.auth;
-        const { items } = this.props.items
+        //const { items } = this.props.items
+        const { totalQuantity } = this.state;
         const guestLinks = (
             <ul>
                 <li>
@@ -52,7 +73,7 @@ class Navbar extends Component {
                     <ul>
                         <li>
                             <Link to="" onClick={this.handleCartOnclick}>
-                                <i className="fas fa-shopping-cart" />{" "}{items.totalQuantity ? items.totalQuantity : 0}
+                                <i className="fas fa-shopping-cart" />{" "}{totalQuantity}
                             </Link>
                         </li>
                     </ul>

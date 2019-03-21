@@ -35,6 +35,7 @@ const productSchema = new mongoose.Schema({
   },
   image: {
     type: String,
+    default: 'https://www.freeiconspng.com/uploads/no-image-icon-4.png',
     required: true
   },
   isAvailable: {

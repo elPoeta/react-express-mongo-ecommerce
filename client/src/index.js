@@ -33,16 +33,6 @@ if (localStorage.token) {
     payload: jwtDecode(localStorage.getItem("token"))
   });
 }
-if (localStorage.cartItems) {
-  if (jwtDecode(localStorage.getItem("cartItems")).exp < Date.now()) {
-    console.log("clear carttoken");
-  }
-
-  store.dispatch({
-    type: GET_CART,
-    payload: jwtDecode(JSON.parse(localStorage.getItem("cartItems")).token)
-  });
-}
 
 ReactDOM.render(
   <Provider store={store}>

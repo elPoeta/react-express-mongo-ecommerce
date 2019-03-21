@@ -21,8 +21,8 @@ class Products extends Component {
       this.setState({ errors: this.props.errors });
     }
   }
-  handleOnClick = async id => {
-    console.log("=>)", id);
+  handleOnClick = async (event, id) => {
+    event.preventDefault();
     await this.props.addItemCart(id);
   };
   async getProduct(category) {
@@ -41,8 +41,8 @@ class Products extends Component {
       productDisplay = products.map(product => (
         <ProductItem
           key={product._id}
-          handleOnClick={() => {
-            this.handleOnClick(product._id);
+          handleOnClick={e => {
+            this.handleOnClick(e, product._id);
           }}
           product={product}
         />

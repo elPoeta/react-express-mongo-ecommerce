@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import "./ProductItem.css";
 const ProductItem = props => {
   const { name, price, image, category } = props.product;
@@ -19,12 +20,7 @@ const ProductItem = props => {
             <small>$96.00</small>U${price}
           </div>
           <div className="product-links">
-            <a href="">
-              <i className="fa fa-heart" />
-            </a>
-            <a href="#" onClick={handleOnClick}>
-              <i className="fas fa-cart-plus" />
-            </a>
+            <i className="fas fa-cart-plus fa-2x" onClick={handleOnClick} />
           </div>
         </div>
       </div>
