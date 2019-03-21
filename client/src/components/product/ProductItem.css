@@ -91,6 +91,7 @@
   text-decoration: line-through;
   display: inline-block;
   margin-right: 5px;
+  color: red;
 }
 
 .product-links {

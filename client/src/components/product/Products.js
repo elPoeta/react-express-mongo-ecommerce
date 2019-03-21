@@ -63,3 +63,4 @@ export default connect(
   mapStateToProps,
   { getProducts, getProductsByCategory, addItemCart }
 )(Products);
+

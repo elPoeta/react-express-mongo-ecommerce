@@ -44,7 +44,7 @@ module.exports = {
     getProducts: asyncMiddleware(async (req, res) => {
         const errors = {};
         const products = await Product.find({ isAvailable: true })
-            .select(['name', 'price', 'stock', 'image', 'category.name']);
+            .select(['name', 'price', 'stock', 'discount', 'image', 'category.name']);
         if (!products) {
             errors.notFound = 'Products not found';
             return res.status(404).json(errors);
@@ -55,7 +55,7 @@ module.exports = {
         const errors = {};
         const category = req.params.category;
         const product = await Product.find({ 'category.name': category, isAvailable: true })
-            .select(['name', 'price', 'stock', 'image', 'category.name']);
+            .select(['name', 'price', 'stock', 'discount', 'image', 'category.name']);
         if (!product) {
             errors.notFound = 'Product not found';
             return res.status(404).json(errors);
@@ -67,7 +67,7 @@ module.exports = {
         const errors = {};
         const _id = req.value.params;
         const product = await Product.findById(_id)
-            .select(['name', 'price', 'stock', 'image', 'category.name']);
+            .select(['name', 'price', 'stock', 'discount', 'image', 'category.name']);
         if (!product) {
             errors.notFound = 'Product not found';
             return res.status(404).json(errors);
