@@ -31,6 +31,7 @@ class Navbar extends Component {
   };
   handleCartOnclick = async () => {
     await this.props.getCart();
+
   };
   render() {
     const { isAuthenticated, user } = this.props.auth;
@@ -65,7 +66,7 @@ class Navbar extends Component {
           {!isAuthenticated ? guestLinks : authLinks}
           <ul>
             <li>
-              <Link to="" onClick={this.handleCartOnclick}>
+              <Link to="/cart" onClick={this.handleCartOnclick}>
                 <i className="fas fa-shopping-cart" /> {totalQuantity}
               </Link>
             </li>

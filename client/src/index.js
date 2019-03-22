@@ -13,6 +13,7 @@ import SignUp from "./components/auth/SignUp";
 import Login from "./components/auth/Login";
 import Products from "./components/product/Products";
 import Product from "./components/product/Product";
+import Cart from "./components/shopping-cart/Cart";
 
 import store from "./store";
 
@@ -20,6 +21,7 @@ import { AUTH_USER } from "./actions/types";
 import { logout } from "./actions/authAction";
 
 import * as serviceWorker from "./serviceWorker";
+
 
 if (localStorage.token) {
   if (jwtDecode(localStorage.getItem("token")).exp < Date.now()) {
@@ -44,6 +46,7 @@ ReactDOM.render(
           <Route path="/login" component={Login} />
           <Route path="/product/:id" component={Product} />
           <Route path="/products/category/:category" component={Products} />
+          <Route path="/cart" component={Cart} />
           <Route path="/not-found" component={NotFound} />
           <Redirect to="not-found" />
         </Switch>

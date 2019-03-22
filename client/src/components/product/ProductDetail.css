@@ -51,7 +51,7 @@
   .product-detail-desc{
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 200px;
+    grid-template-rows: 1fr 100px 200px;
     grid-row-gap: 10px;
   }
   .product-detail-icons {
@@ -80,4 +80,27 @@
     font-size: 1.2em;
     font-weight: 700;
   }
-
+  .product-detail-price {
+    font-size: 1.8em;
+    color: #341456;
+    font-weight: 700;
+  }
+  
+  .product-detail-price small {
+    font-size: 80%;
+    font-weight: 400;
+    text-decoration: line-through;
+    display: inline-block;
+    margin-right: 5px;
+    color: red;
+  }
+.product-detail-desc a{
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  color: #fff;
+  background: #341456;
+  border-radius: .5em;
+  text-decoration: none;
+  font-weight: 700;
+}

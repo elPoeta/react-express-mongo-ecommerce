@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import Spinner from "../common/spinner/Spinner";
 import { getProductById } from "../../actions/productAction";
@@ -63,7 +64,10 @@ class Product extends Component {
                 <p>{product.description}</p>
               </div>
 
-
+              <div className="product-detail-price">
+                {product.discount && product.discount > 0 ? <small>$ {product.price}</small> : null}{' '}
+                ${product.discount && product.discount > 0 ? Number(product.price - product.discount * product.price * 0.01).toFixed(2) : product.price}
+              </div>
               <div>
 
                 {Object.keys(items).length && Object.keys(this.inCart(product._id)).length ? <ul className='product-detail-icons'>
@@ -75,6 +79,7 @@ class Product extends Component {
                     <li> <i className="fas fa-cart-plus fa-2x i-add-color" onClick={() => this.handleAddOnClick(product._id)} /></li>
                   </ul>
                 }
+                {items.totalQuantity ? <Link to='/cart'>Go to Cart</Link> : null}
               </div>
             </div>
           </section>
