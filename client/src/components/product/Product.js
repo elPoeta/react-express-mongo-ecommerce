@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import Spinner from "../common/spinner/Spinner";
 import { getProductById } from "../../actions/productAction";
 import { addItemCart, updateAndRemoveItemCart } from "../../actions/cartAction";
+import './ProductDetail.css';
+
 class Product extends Component {
   async componentDidMount() {
     const id = this.props.match.params.id;
@@ -15,9 +17,19 @@ class Product extends Component {
       return <Spinner classNames="spinner1" />;
     } else {
       displayProduct = (
-        <div>
-          <img src={product.image} alt={product.name} />
-          <h2>{product.name}</h2>
+        <div className='product-detail-container'>
+          <section className='product-detail'>
+            <figure className='product-detail-tumb'>
+              {product.discount && product.discount > 0 ? (
+                <div className="badge-detail">{product.discount}% off</div>
+              ) : null}
+              <img src={product.image} alt={product.name} />
+            </figure>
+            <div className='product-detail-desc'>
+              <h2>{product.name}</h2>
+              <p>{product.description}</p>
+            </div>
+          </section>
         </div>
       );
     }

@@ -67,7 +67,7 @@ module.exports = {
         const errors = {};
         const _id = req.value.params;
         const product = await Product.findById(_id)
-            .select(['name', 'price', 'stock', 'discount', 'image', 'category.name']);
+            .select(['name', 'price', 'stock', 'discount', 'image', 'description']);
         if (!product) {
             errors.notFound = 'Product not found';
             return res.status(404).json(errors);

@@ -19,8 +19,8 @@ const ProductItem = props => {
         </h4>
         <div className="product-bottom-details">
           <div className="product-price">
-            {discount && discount > 0 ? <small>$ {price}</small> : null}${" "}
-            {discount && discount > 0 ? price - discount * price * 0.01 : price}
+            {discount && discount > 0 ? <small>$ {price}</small> : null}{' '}
+            ${discount && discount > 0 ? Number(price - discount * price * 0.01).toFixed(2) : price}
           </div>
           <div className="product-links">
             <i className="fas fa-cart-plus fa-2x" onClick={handleOnClick} />
