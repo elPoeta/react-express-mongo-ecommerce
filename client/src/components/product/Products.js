@@ -7,11 +7,19 @@ import {
   getProductsByCategory
 } from "../../actions/productAction";
 import { addItemCart } from "../../actions/cartAction";
+import { checkCartItemsStorage } from "../../utils/checkCartItemsStorage";
 import "./Product.css";
 class Products extends Component {
+  state = {
+    items: {}
+  };
   componentDidMount() {
     const category = this.props.match.params.category;
     this.getProduct(category);
+    const items = checkCartItemsStorage();
+    this.setState({
+      items: items || {}
+    });
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.category !== prevProps.match.params.category) {
@@ -21,9 +29,16 @@ class Products extends Component {
       this.setState({ errors: this.props.errors });
     }
   }
-  handleOnClick = async (event, id) => {
+  handleOnClick = async (event, id, stock) => {
     event.preventDefault();
-    await this.props.addItemCart(id);
+    const inCart = this.inCart(id);
+    if (stock > inCart.quantity || inCart.quantity === undefined) {
+      await this.props.addItemCart(id);
+      const items = checkCartItemsStorage();
+      this.setState({
+        items: items || {}
+      });
+    }
   };
   async getProduct(category) {
     if (category === "all") {
@@ -31,6 +46,15 @@ class Products extends Component {
     } else {
       await this.props.getProductsByCategory(category);
     }
+  }
+  inCart(id) {
+    if (Object.keys(this.state.items).length && this.state.items.cart.length) {
+      const found = this.state.items.cart.filter(
+        cart => cart.product._id === id
+      );
+      return found.length ? found[0] : [];
+    }
+    return {};
   }
   render() {
     const { products, loading, errors } = this.props.products;
@@ -42,7 +66,7 @@ class Products extends Component {
         <ProductItem
           key={product._id}
           handleOnClick={e => {
-            this.handleOnClick(e, product._id);
+            this.handleOnClick(e, product._id, product.stock);
           }}
           product={product}
         />
@@ -63,4 +87,3 @@ export default connect(
   mapStateToProps,
   { getProducts, getProductsByCategory, addItemCart }
 )(Products);
-
