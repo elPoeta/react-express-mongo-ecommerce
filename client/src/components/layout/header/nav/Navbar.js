@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import jwtDecode from "jwt-decode";
 import { logout } from "../../../../actions/authAction";
 import { getCart } from "../../../../actions/cartAction";
+import { checkCartItemsStorage } from '../../../../utils/checkCartItemsStorage';
 import "./Navbar.css";
 
 class Navbar extends Component {
@@ -11,21 +11,13 @@ class Navbar extends Component {
     totalQuantity: 0
   };
   componentDidMount() {
-    if (localStorage.cartItems) {
-      console.log(jwtDecode(localStorage.getItem("cartItems")).exp);
-      if (jwtDecode(localStorage.getItem("cartItems")).exp < Date.now()) {
-        console.log("clear carttoken");
-        localStorage.removeItem("cartIitems");
-      } else {
-        const { items } = jwtDecode(
-          JSON.parse(localStorage.getItem("cartItems")).token
-        );
-        this.setState({
-          totalQuantity: items.totalQuantity || 0
-        });
-      }
-    }
+    const items = checkCartItemsStorage();
+    this.setState({
+      totalQuantity: items.totalQuantity || 0
+    });
   }
+
+
 
   componentDidUpdate(prevProps) {
     if (this.props.items !== prevProps.items) {

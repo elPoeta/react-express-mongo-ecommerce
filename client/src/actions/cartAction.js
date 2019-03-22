@@ -37,4 +37,19 @@ export const addItemCart = id => async distpatch => {
   }
 };
 
-export const updateAndRemoveItemCart = id => async distpatch => {};
+export const updateAndRemoveItemCart = id => async distpatch => {
+  try {
+    distpatch({ type: CART_LOADING, payload: true });
+    const token = await Http.put(
+      `${URL_GET_CART}/${id}`,
+      JSON.parse(localStorage.getItem("cartItems")) || {}
+    );
+    const cartToken = { token };
+    localStorage.setItem("cartItems", JSON.stringify(cartToken));
+    const { items } = jwtDecode(token);
+    distpatch({ type: GET_CART, payload: items });
+  } catch (error) {
+    const err = JSON.parse(error.message);
+    distpatch({ type: GET_ERRORS, payload: err });
+  }
+};
