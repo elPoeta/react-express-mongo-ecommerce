@@ -12,11 +12,11 @@ import NotFound from "./components/layout/pages/notFound/NotFound";
 import SignUp from "./components/auth/SignUp";
 import Login from "./components/auth/Login";
 import Products from "./components/product/Products";
+import Product from "./components/product/Product";
 
 import store from "./store";
 
 import { AUTH_USER } from "./actions/types";
-import { GET_CART } from "./actions/types";
 import { logout } from "./actions/authAction";
 
 import * as serviceWorker from "./serviceWorker";
@@ -27,7 +27,6 @@ if (localStorage.token) {
     //store.dispatch(clearCustomer());
     window.location.href = "/login";
   }
-  console.log("stors ", JSON.parse(localStorage.getItem("cartItems")).token);
   store.dispatch({
     type: AUTH_USER,
     payload: jwtDecode(localStorage.getItem("token"))
@@ -43,7 +42,7 @@ ReactDOM.render(
           <Route path="/about" component={About} />
           <Route path="/signup" component={SignUp} />
           <Route path="/login" component={Login} />
-
+          <Route path="/product/:id" component={Product} />
           <Route path="/products/category/:category" component={Products} />
           <Route path="/not-found" component={NotFound} />
           <Redirect to="not-found" />

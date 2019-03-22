@@ -1,23 +1,25 @@
 .product-card {
   width: 320px;
   box-shadow: 0 2px 7px #dfdfdf;
-  background: #fafafa;
-  border-top-right-radius: 0.5em;
-  border-top-left-radius: 0.5em;
+  background: #fcfcfc;
+  border-radius: 0.5em;
+  border: 1px solid #ccc;
 }
 
 .badge {
   position: relative;
-  left: 0;
-  top: 20px;
+  text-align: center;
+  left: -15px;
+  top: 15px;
   font-size: 0.7em;
-  font-weight: 700;
+  font-weight: 900;
   background: red;
-  color: #fff;
+  color: #fcfcfc;
   padding: 3px 10px;
   width: 23%;
   transform: rotate(-45deg);
-  border-top-right-radius: 0.5em;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 0.9em;
 }
 
 .product-tumb {
@@ -26,7 +28,9 @@
   justify-content: center;
   height: 300px;
   padding: 50px;
-  background: #f0f0f0;
+  background: #fcfcfc;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
 }
 
 .product-tumb img {
@@ -40,10 +44,11 @@
 
 .product-catagory {
   display: block;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 0.9em;
+  font-weight: 300;
+  font-style: italic;
   text-transform: uppercase;
-  color: #ccc;
+  color: #444;
   margin-bottom: 18px;
 }
 
@@ -70,7 +75,7 @@
 
 .product-bottom-details {
   overflow: hidden;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #444;
   padding-top: 20px;
 }
 
@@ -104,8 +109,6 @@
   text-align: center;
   color: #e1e1e1;
   transition: 0.3s;
-  
-
 }
 
 .product-links i:hover {
