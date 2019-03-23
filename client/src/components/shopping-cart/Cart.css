@@ -61,3 +61,37 @@
 .i-sale-color {
   color: rgb(124, 12, 12);
 }
+
+.cart-total {
+  color: #444;
+  font-weight: 900;
+  text-align: right;
+}
+.cart-checkout-btn {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 10px;
+}
+.cart-btn-link {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px;
+  border-radius: 0.5em;
+  border: 1px solid #ccc;
+}
+.cart-continue-shopping {
+  background-color: #341456;
+  justify-self: flex-start;
+}
+.cart-checkout {
+  background-color: #444;
+  justify-self: flex-end;
+}
+
+.cart-checkout:hover {
+  background-color: rgb(153, 151, 151);
+}
+
+.cart-continue-shopping:hover {
+  background-color: #60378b;
+}

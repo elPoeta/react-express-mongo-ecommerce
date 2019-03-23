@@ -62,7 +62,19 @@ class Cart extends Component {
           <div>
             <hr />
           </div>
-          <h3>total $ {items.totalAmount}</h3>
+          <h4 className="cart-total">Items: {items.totalQuantity}</h4>
+          <h3 className="cart-total">Total: $ {items.totalAmount}</h3>
+          <div className="cart-checkout-btn">
+            <Link
+              to="/products/category/all"
+              className="cart-continue-shopping cart-btn-link"
+            >
+              Continue Shopping
+            </Link>
+            <Link to="/checkout" className="cart-checkout cart-btn-link">
+              Checkout
+            </Link>
+          </div>
         </div>
       );
     } else {
