@@ -1,59 +1,63 @@
-.cart-container{
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 80%;
-    margin: 20px auto;
-    border: 1px solid #ccc;
-    border-radius: .5em;
-    background-color: #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    padding: 10px;
+.cart-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 80%;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding: 10px;
 }
 
-.cart-container h2{
-    color: #444;
-    padding: 5px;
-    font-weight: 300;
-    margin-right: 5px;
+.cart-container h2 {
+  color: #444;
+  padding: 5px;
+  font-weight: 300;
+  margin-right: 5px;
 }
-.cart-container-title{
-    display:grid;
-    grid-template-columns: 1fr 1fr
+.cart-container-title {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
-.cart-clear{
-    padding: 8px;
-    border-radius: .3em;
-    background-color: rgb(163, 48, 48);
-    color: #fff;
-    justify-self: end;
-    align-self: center;
-    cursor: pointer;
+.cart-clear {
+  padding: 8px;
+  border-radius: 0.3em;
+  background-color: rgb(163, 48, 48);
+  color: #fff;
+  justify-self: end;
+  align-self: center;
+  cursor: pointer;
 }
 
-.cart-clear:hover{
-    background-color: rgb(240, 33, 33);
+.cart-clear:hover {
+  background-color: rgb(240, 33, 33);
 }
-.cart-items-container{
-    display: grid;
-    grid-template-columns: 50px repeat(5, 1fr);
-    grid-gap: 4px;
-    align-items: center;
-    justify-items: center;
+.cart-items-container {
+  display: grid;
+  grid-template-columns: 50px repeat(5, 1fr);
+  grid-gap: 4px;
+  align-items: center;
+  justify-items: center;
 }
-.cart-items-container img{
-    height: 70px;
+.cart-items-container img {
+  height: 70px;
 }
-.i-remove-color{
-    color: rgb(85, 6, 6);
-    cursor: pointer;
+.i-remove-color {
+  color: rgb(85, 6, 6);
+  cursor: pointer;
 }
-.i-remove-color:hover{
-    color: rgb(175, 33, 33);
+.i-remove-color:hover {
+  color: rgb(175, 33, 33);
 }
-.cart-item-qty{
-    border: 2px solid #ccc;
-    border-radius: .5em;
-    padding: 5px;
-    font-size: 1em;
-    font-weight: 700;
+.cart-item-qty {
+  border: 2px solid #ccc;
+  border-radius: 0.5em;
+  padding: 5px;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.i-sale-color {
+  color: rgb(124, 12, 12);
 }

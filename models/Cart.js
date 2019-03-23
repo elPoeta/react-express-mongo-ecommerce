@@ -29,9 +29,9 @@ class Cart {
     const cart = this.cart.map(item =>
       item.product._id == id
         ? (item = {
-          ...item,
-          quantity: operator === "+" ? item.quantity + 1 : item.quantity - 1
-        })
+            ...item,
+            quantity: operator === "+" ? item.quantity + 1 : item.quantity - 1
+          })
         : item
     );
     this.cart = cart;
@@ -68,7 +68,12 @@ class Cart {
 const totals = cart => {
   const totalAmount = cart
     .map(item => {
-      return item.product.price * item.quantity;
+      return item.product.discount && item.product.discount > 0
+        ? Number(
+            item.product.price -
+              item.product.discount * item.product.price * 0.01
+          ).toFixed(2) * item.quantity
+        : item.product.price * item.quantity;
     })
     .reduce((a, b) => {
       return a + b;
