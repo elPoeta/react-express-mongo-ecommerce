@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../../../actions/authAction";
-import { getCart } from "../../../../actions/cartAction";
 import { checkCartItemsStorage } from '../../../../utils/checkCartItemsStorage';
 import "./Navbar.css";
 
@@ -29,10 +28,7 @@ class Navbar extends Component {
   handleOnclick = () => {
     this.props.logout();
   };
-  handleCartOnclick = async () => {
-    await this.props.getCart();
 
-  };
   render() {
     const { isAuthenticated, user } = this.props.auth;
     //const { items } = this.props.items
@@ -66,7 +62,7 @@ class Navbar extends Component {
           {!isAuthenticated ? guestLinks : authLinks}
           <ul>
             <li>
-              <Link to="/cart" onClick={this.handleCartOnclick}>
+              <Link to="/cart">
                 <i className="fas fa-shopping-cart" /> {totalQuantity}
               </Link>
             </li>
@@ -82,5 +78,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { logout, getCart }
+  { logout }
 )(Navbar);

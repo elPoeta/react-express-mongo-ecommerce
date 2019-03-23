@@ -18,7 +18,7 @@ router.put(
   [validateParamId(schemas.id), tokenCartItems],
   updateAndRemoveItemCart
 );
-router.delete("/:id", [validateParamId(schemas.id), tokenCartItems], removeItemCart);
+router.put("/delete/:id", [validateParamId(schemas.id), tokenCartItems], removeItemCart);
 router.delete("/", [tokenCartItems], clearCart);
 
 module.exports = router;

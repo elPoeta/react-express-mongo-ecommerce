@@ -37,7 +37,8 @@ module.exports = {
       "category.name",
       "price",
       "stock",
-      "image"
+      "image",
+      "discount"
     ]);
     if (!product) {
       errors.notFound = "Product not found";
