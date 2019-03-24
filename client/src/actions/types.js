@@ -6,6 +6,7 @@ export const GET_PRODUCT = "GET_PRODUCT";
 export const GET_CART = "GET_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const GET_ERRORS = "GET_ERRORS";
+export const CUSTOMER_LOADING = "CUSTOMER_LOADING";
 export const CATEGORY_LOADING = "CATEGORY_LOADING";
 export const PRODUCT_LOADING = "PRODUCT_LOADING";
 export const CART_LOADING = "CART_LOADING";

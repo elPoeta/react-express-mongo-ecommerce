@@ -1,4 +1,4 @@
-import { AUTH_USER, GET_ERRORS } from "./types";
+import { AUTH_USER, GET_ERRORS, GET_CART } from "./types";
 import jwtDecode from "jwt-decode";
 import { URL_REGISTER, URL_LOGIN } from "../utils/api-url";
 import Http from "../utils/http";
@@ -22,16 +22,22 @@ export const login = userData => async dispatch => {
     localStorage.setItem("token", token);
     dispatch({ type: AUTH_USER, payload: user });
   } catch (error) {
+    console.log('cust err ', error)
     const err = JSON.parse(error.message);
     dispatch({ type: GET_ERRORS, payload: err });
   }
 };
 
 
-export const logout = () => {
+export const logout = () => dispatch => {
   localStorage.removeItem("token");
-  return {
+  localStorage.removeItem('cartItems');
+  dispatch({
+    type: GET_CART,
+    payload: {}
+  });
+  dispatch({
     type: AUTH_USER,
     payload: {}
-  };
+  });
 };

@@ -40,7 +40,7 @@ module.exports = {
         const customer = await Customer.findOne({ user: req.user._id });
         if (!customer) {
             errors.notFound = 'User not found';
-            res.status(400).json(errors);
+            return res.status(400).json(errors);
         }
         customer.address = [...customer.address, newAddress];
         const updateCustomer = await customer.save();
@@ -68,8 +68,8 @@ module.exports = {
         const errors = {};
         const customer = await Customer.findOne({ user: req.user._id });
         if (!customer) {
-            errors.notFound = 'User not found';
-            res.status(400).json(errors);
+            errors.notFound = '"notFound" User not found';
+            return res.status(400).json('"notFound" User not found');
         }
         res.status(200).json(customer);
     }),

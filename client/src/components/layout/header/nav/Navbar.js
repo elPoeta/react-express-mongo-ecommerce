@@ -46,7 +46,7 @@ class Navbar extends Component {
     const authLinks = (
       <ul>
         <li>
-          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/my-account">My Account</Link>
         </li>
 
         <li>

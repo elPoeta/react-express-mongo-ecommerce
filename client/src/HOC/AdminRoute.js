@@ -13,11 +13,13 @@ export default AdminRoute => {
         }
 
         navigatePermission() {
-            if (!this.props.isAuthenticated &&
-                !this.props.isAdmin &&
-                this.role !== 'admin') {
-                this.props.history.push('/');
-            }
+            const { isAuthenticated, user } = this.props.auth;
+            if (!isAuthenticated)
+                return this.props.history.push('/');
+            if (isAuthenticated)
+                if (!user.isAdmin && user.role !== 'admin')
+                    return this.props.history.push('/');
+
         }
 
         render() {
@@ -26,9 +28,7 @@ export default AdminRoute => {
     }
 
     const mapStateToProps = state => ({
-        isAuthenticated: state.auth.isAuthenticated,
-        role: state.auth.user.role,
-        isAdmin: state.auth.user.isAdmin
+        auth: state.auth
     })
 
     return connect(mapStateToProps)(ComposedComponent);

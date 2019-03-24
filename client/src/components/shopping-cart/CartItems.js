@@ -19,7 +19,7 @@ const CartItems = ({
       <h3>
         {" "}
         {product.discount && product.discount > 0 ? (
-          <i class="fas fa-tags i-sale-color" />
+          <i className="fas fa-tags i-sale-color" />
         ) : null}{" "}
         {product.name}
       </h3>
@@ -27,8 +27,8 @@ const CartItems = ({
         ${" "}
         {product.discount && product.discount > 0
           ? Number(
-              product.price - product.discount * product.price * 0.01
-            ).toFixed(2)
+            product.price - product.discount * product.price * 0.01
+          ).toFixed(2)
           : product.price}
       </p>
       <ul className="product-detail-icons">
@@ -54,8 +54,8 @@ const CartItems = ({
         ${" "}
         {product.discount && product.discount > 0
           ? Number(
-              product.price - product.discount * product.price * 0.01
-            ).toFixed(2) * quantity
+            product.price - product.discount * product.price * 0.01
+          ).toFixed(2) * quantity
           : product.price * quantity}
       </p>
     </div>
