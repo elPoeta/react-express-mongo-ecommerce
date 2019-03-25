@@ -5,6 +5,7 @@ import { getCustomer } from '../../actions/customerAction';
 import CustomerMenu from '../customer/CustomerMenu';
 import Spinner from '../common/spinner/Spinner';
 import UserRoute from '../../HOC/UserRoute';
+import CustomerAddress from '../customer/CustomerAddress';
 
 class MyAccount extends Component {
     async componentDidMount() {
@@ -28,6 +29,7 @@ class MyAccount extends Component {
                             </Link>
                         </h3>
                         <CustomerMenu />
+                        <CustomerAddress address={customer.address} />
                     </div>
                 );
             } else {
@@ -50,6 +52,7 @@ class MyAccount extends Component {
             <div className="dashboard-container">
                 <h2>My Account</h2>
                 {myaccountContent}
+
             </div>
         );
     }

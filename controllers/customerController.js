@@ -39,8 +39,8 @@ module.exports = {
 
         const customer = await Customer.findOne({ user: req.user._id });
         if (!customer) {
-            errors.notFound = 'User not found';
-            return res.status(400).json(errors);
+            errors.notFound = '"User" not found';
+            return res.status(400).json('"user" not found');
         }
         customer.address = [...customer.address, newAddress];
         const updateCustomer = await customer.save();
@@ -53,8 +53,8 @@ module.exports = {
         const addressId = req.value.params
         const customer = await Customer.findOne({ user });
         if (!customer) {
-            errors.notFound = "Customer not found";
-            return res.status(404).json(errors);
+            errors.notFound = "customer not found";
+            return res.status(404).json('"customer" not found');
         }
 
         customer.address = [...customer.address.filter(a => a._id.toString() !== addressId)];
@@ -79,7 +79,7 @@ module.exports = {
         const customer = await Customer.findByIdAndRemove(_id);
         if (!customer) {
             errors.notFound = 'Customer not found'
-            return res.status(400).json(errors)
+            return res.status(400).json('"customer" not found')
         }
 
         res.status(200).json({ success: true });
