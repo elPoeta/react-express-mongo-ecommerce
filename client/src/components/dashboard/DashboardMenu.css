@@ -1,9 +1,5 @@
-.dashboard-menu-links li{
-    list-style: none;
-    padding: 20px 2px;
-}
-
-.dashboard-menu-links li a{
-    text-decoration: none;
+.dashboard-menu li:last-child a{
+  border: 2px solid #ccc;
+    background-color: transparent;
     color: #444;
 }
