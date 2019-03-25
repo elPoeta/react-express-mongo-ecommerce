@@ -1,0 +1,16 @@
+.customer-menu ul li {
+    list-style: none;
+    display: inline;
+    padding: 10px;
+}
+.customer-menu ul li a{
+    text-decoration: none;
+    color: #fff;
+    padding: 10px;
+    background-color: #341456;
+    border-radius: 8px;
+}
+
+.customer-menu ul li a i{
+    padding: 3px;
+}

@@ -13,13 +13,13 @@ class MyAccount extends Component {
     render() {
         const { loading, customer } = this.props.customer;
         const { user } = this.props.auth;
-        let dashboardContent;
+        let myaccountContent;
 
         if (customer === null || loading) {
-            dashboardContent = <Spinner classNames='spinner2' />;
+            myaccountContent = <Spinner classNames='spinner2' />;
         } else {
             if (Object.keys(customer).length) {
-                dashboardContent = (
+                myaccountContent = (
                     <div>
                         <h3>
                             Welcome{" "}
@@ -31,14 +31,14 @@ class MyAccount extends Component {
                     </div>
                 );
             } else {
-                dashboardContent = (
+                myaccountContent = (
                     <div>
                         <h3>
                             Welcome <span className="dashboard-username">Customer</span>
                         </h3>
                         <p>You have not yet setup a profile, please add some info ;)</p>
                         <div>
-                            <Link to="/createcustomer" className="btn-create-create-customer">
+                            <Link to="/createcustomer" className="btn-create-customer">
                                 Create Customer
                   </Link>
                         </div>
@@ -49,7 +49,7 @@ class MyAccount extends Component {
         return (
             <div className="dashboard-container">
                 <h2>My Account</h2>
-                {dashboardContent}
+                {myaccountContent}
             </div>
         );
     }

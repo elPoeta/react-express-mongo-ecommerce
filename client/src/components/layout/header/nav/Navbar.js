@@ -46,7 +46,8 @@ class Navbar extends Component {
     const authLinks = (
       <ul>
         <li>
-          <Link to="/my-account">My Account</Link>
+          {user.role === 'user' ? <Link to="/my-account">My Account</Link> : null}
+          {user.role === 'admin' ? <Link to="/dashboard">Dashboard</Link> : null}
         </li>
 
         <li>
