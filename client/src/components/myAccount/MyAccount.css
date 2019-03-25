@@ -1,1 +1,40 @@
 
+.myaccount-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 80%;
+    margin: 0 auto;
+  }
+  .myaccount-container h3 {
+    font-weight: 100;
+    font-size: 2em;
+  }
+  .myaccount-container .myaccount-username {
+    color: #444;
+    font-style: italic;
+  }
+  
+  .myaccount-container h3,
+  p,
+  a {
+    margin-left: 20px;
+  }
+  .myaccount-container p {
+    padding: 10px;
+  }
+  .myaccount-container .btn-create-customer {
+    text-decoration: none;
+    padding: 20px;
+    background-color: #341456;
+    color: #fff;
+    border-radius: 10px;
+    margin-top: 25px;
+  }
+  .myaccount-container .btn-create-customer:hover {
+    background-color: #6f38aa;
+   
+  }
+  
+  .myaccount-container h3 a {
+    color: #444;
+  }
