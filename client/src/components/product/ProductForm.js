@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import TextFieldInput from "../common/input/TextField";
 import CheckBox from "../common/input/CheckBox";
 import TextAreaField from "../common/input/TextAreaField";
-const ProductForm = ({ name, category, price, discount, stock, description, image, isAvailable, errors, onChange, onSubmit }) =>
+import SelectListField from '../common/input/SelecListField'
+const ProductForm = ({ name, category, price, discount, stock, description, image, isAvailable, options, errors, onChange, onSubmit }) =>
     (
         <form className="" onSubmit={onSubmit}>
             {errors.invalid && <div className="invalid">{errors.invalid}</div>}
@@ -15,14 +17,15 @@ const ProductForm = ({ name, category, price, discount, stock, description, imag
                 onChange={onChange}
                 error={errors.name}
             />
-            <TextFieldInput
-                type="text"
-                name="category"
+            <SelectListField
                 placeholder="Category"
+                name="category"
                 value={category}
                 onChange={onChange}
-                error={errors.category}
+                options={options}
+                error={errors.categoryId}
             />
+            <Link to='/admin/add-category'>New Category</Link>
             <TextFieldInput
                 type="text"
                 name="price"
