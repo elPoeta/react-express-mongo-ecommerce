@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getCustomer, createCustomer } from '../../actions/customerAction';
 import UserRoute from '../../HOC/UserRoute';
-import TextField from '../common/input/TextField';
+import CustomerForm from './CustomerForm';
 
 class CreateCustomer extends Component {
     state = {
@@ -33,26 +33,14 @@ class CreateCustomer extends Component {
         const { name, phone, errors } = this.state;
         return (
             <div>
-                <form onSubmit={this.onSubmit}>
-                    <TextField
-                        type='text'
-                        placeholder='Your Name'
-                        name='name'
-                        value={name}
-                        onChange={this.onChange}
-                        error={errors.name}
-                    />
-                    <TextField
-                        type='text'
-                        placeholder='Your Phone'
-                        name='phone'
-                        value={phone}
-                        onChange={this.onChange}
-                        error={errors.phone}
-                    />
-                    <button>Create</button>
-                </form>
-
+                <h2>Create Customer</h2>
+                <CustomerForm
+                    name={name}
+                    phone={phone}
+                    onChange={this.onChange}
+                    onSubmit={this.onSubmit}
+                    errors={errors}
+                />
             </div>
         )
     }

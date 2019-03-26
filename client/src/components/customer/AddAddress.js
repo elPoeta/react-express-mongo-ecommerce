@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addCustomerAddress } from '../../actions/customerAction';
 import UserRoute from '../../HOC/UserRoute';
-import TextField from '../common/input/TextField';
-import isEmpty from '../../utils/isEmpty';
+import AddressForm from './AddressForm';
+
 
 class AddAddress extends Component {
     state = {
@@ -51,35 +51,16 @@ class AddAddress extends Component {
         const { street, number, location, errors, isAdd } = this.state;
         return (
             <div>
-                <form onSubmit={this.onSubmit}>
-                    {isAdd && <div className="">Address Add <i className="fas fa-check-circle"></i></div>}
-                    {errors.user && <div className="invalid">{errors.user}</div>}
-                    <TextField
-                        type='text'
-                        placeholder='Street'
-                        name='street'
-                        value={street}
-                        onChange={this.onChange}
-                        error={errors.street}
-                    />
-                    <TextField
-                        type='text'
-                        placeholder='Number'
-                        name='number'
-                        value={number}
-                        onChange={this.onChange}
-                        error={errors.number}
-                    />
-                    <TextField
-                        type='text'
-                        placeholder='Location'
-                        name='location'
-                        value={location}
-                        onChange={this.onChange}
-                        error={errors.location}
-                    />
-                    <button>Add Address</button>
-                </form>
+                <h2>Add Address</h2>
+                <AddressForm
+                    street={street}
+                    number={number}
+                    location={location}
+                    isAdd={isAdd}
+                    errors={errors}
+                    onChange={this.onChange}
+                    onSubmit={this.onSubmit}
+                />
                 <Link to='my-account'>Back</Link>
             </div>
         )
