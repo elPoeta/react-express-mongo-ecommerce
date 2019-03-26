@@ -84,7 +84,7 @@ class Cart extends Component {
       <div className="cart-container">
         <div className="cart-container-title">
           <h2>Items in Your Bag</h2>
-          <a href="#" className="cart-clear">
+          <a href="#" rel="noopener noreferrer" className="cart-clear">
             <i className="fas fa-trash" onClick={this.handleClearOnClick}>
               {" "}
               Clear Cart
