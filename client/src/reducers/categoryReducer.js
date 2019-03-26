@@ -1,4 +1,4 @@
-import { GET_CATEGORIES, CATEGORY_LOADING } from "../actions/types";
+import { GET_CATEGORIES, GET_CATEGORY, CATEGORY_LOADING } from "../actions/types";
 const initialState = {
   categories: [],
   category: {},
@@ -11,6 +11,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         categories: action.payload,
+        loading: false
+      };
+    case GET_CATEGORY:
+      return {
+        ...state,
+        category: action.payload,
         loading: false
       };
     case CATEGORY_LOADING:

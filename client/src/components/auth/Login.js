@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import TextFieldInput from "../common/input/TextField";
+import LoginForm from './LoginForm';
 import { login } from "../../actions/authAction";
 import "./auth.css";
 
@@ -43,26 +43,13 @@ class Login extends Component {
     return (
       <div>
         <h2>Login</h2>
-        <form className="auth-form" onSubmit={this.onSubmit}>
-          {errors.invalid && <div className="invalid">{errors.invalid}</div>}
-          <TextFieldInput
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={this.onChange}
-            value={email}
-            error={errors.email}
-          />
-          <TextFieldInput
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={this.onChange}
-            value={password}
-            error={errors.password}
-          />
-          <button>Login</button>
-        </form>
+        <LoginForm
+          email={email}
+          password={password}
+          errors={errors}
+          onChange={this.onChange}
+          onSubmit={this.onSubmit}
+        />
       </div>
     );
   }

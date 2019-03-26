@@ -32,7 +32,7 @@ class NavCategories extends Component {
           <div className="dropdown-content">
             {category}
             <Link to={`/products/category/all`} key={0} onClick={this.toggleMenu}>
-              All
+              all
         </Link>
           </div>
         ) : null}

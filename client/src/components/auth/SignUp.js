@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { signUp } from '../../actions/authAction';
-import TextFieldInput from "../common/input/TextField";
+import SignUpForm from './SignUpForm';
 
 class SignUp extends Component {
   state = {
@@ -40,36 +40,14 @@ class SignUp extends Component {
     return (
       <div>
         <h2>Sign Up!</h2>
-        <form className="auth-form" onSubmit={this.onSubmit}>
-          {errors.invalid && <div className="invalid">{errors.invalid}</div>}
-          {errors.exist && <div className="invalid">{errors.exist}</div>}
-          <TextFieldInput
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={this.onChange}
-            error={errors.email}
-          />
-          <TextFieldInput
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={this.onChange}
-            error={errors.password}
-          />
-          <TextFieldInput
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={this.onChange}
-            error={errors.confirmPassword}
-
-          />
-          <button>Sign Up</button>
-        </form>
+        <SignUpForm
+          email={email}
+          password={password}
+          confirmPassword={confirmPassword}
+          errors={errors}
+          onChange={this.onChange}
+          onSubmit={this.onSubmit}
+        />
       </div>
     );
   }

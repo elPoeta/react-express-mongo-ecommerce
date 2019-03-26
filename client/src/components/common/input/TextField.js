@@ -11,7 +11,8 @@ const TextField = ({
   info,
   type,
   onChange,
-  disabled
+  disabled,
+  checked
 }) => {
   return (
     <div>
@@ -23,6 +24,7 @@ const TextField = ({
         value={value}
         onChange={onChange}
         disabled={disabled}
+        checked={checked}
       />
       {info && <small className="">{info}</small>}
       {error && <div className="invalid">{error}</div>}

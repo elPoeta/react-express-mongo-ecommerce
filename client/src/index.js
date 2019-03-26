@@ -20,6 +20,8 @@ import Dashboard from "./components/dashboard/Dashboard";
 import MyAccount from "./components/myAccount/MyAccount";
 import CreateCustomer from "./components/customer/CreateCustomer";
 import AddAddress from "./components/customer/AddAddress";
+import CreateCategory from './components/category/CreateCategory';
+import CreateProduct from "./components/product/CreateProduct";
 
 import store from "./store";
 
@@ -27,6 +29,7 @@ import { AUTH_USER } from "./actions/types";
 import { logout } from "./actions/authAction";
 
 import * as serviceWorker from "./serviceWorker";
+
 
 
 
@@ -60,6 +63,8 @@ ReactDOM.render(
           <Route path="/products/category/:category" component={Products} />
           <Route path="/cart" component={Cart} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/admin/add-category" component={CreateCategory} />
+          <Route path="/admin/add-product" component={CreateProduct} />
           <Route path="/not-found" component={NotFound} />
           <Redirect to="not-found" />
         </Switch>
