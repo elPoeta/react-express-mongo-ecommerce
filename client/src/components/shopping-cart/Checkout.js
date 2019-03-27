@@ -7,20 +7,30 @@ import isEmpty from "../../utils/isEmpty";
 import Spinner from '../common/spinner/Spinner';
 
 class Checkout extends Component {
+
   async componentDidMount() {
+    await this.props.getCustomer();
+  }
+  async componentDidUpdate() {
     await this.props.getCustomer();
   }
   render() {
     const { customer, loading } = this.props.customer;
     let displayContent = '';
     if (customer === null || loading) {
+
       return <Spinner classNames='spinner2' />
+
     } else if (isEmpty(customer)) {
+
       return <Redirect to="/createcustomer" />;
     }
     else if (!isEmpty(customer) && isEmpty(customer.address)) {
+
       return <Redirect to="/address" />;
     } else {
+
+
       displayContent = (
         <div>
           <Link

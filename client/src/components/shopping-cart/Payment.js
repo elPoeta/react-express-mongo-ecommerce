@@ -11,6 +11,9 @@ class Payment extends Component {
     async componentDidMount() {
         await this.props.getCustomer();
     }
+    async componentDidUpdate() {
+        await this.props.getCustomer();
+    }
     render() {
         const { customer, loading } = this.props.customer;
         let displayContent = '';
