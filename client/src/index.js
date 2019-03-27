@@ -15,6 +15,7 @@ import Products from "./components/product/Products";
 import Product from "./components/product/Product";
 import Cart from "./components/shopping-cart/Cart";
 import Checkout from "./components/shopping-cart/Checkout";
+import Payment from "./components/shopping-cart/Payment";
 import Customer from "./components/customer/Customer";
 import Dashboard from "./components/dashboard/Dashboard";
 import MyAccount from "./components/myAccount/MyAccount";
@@ -63,6 +64,7 @@ ReactDOM.render(
           <Route path="/products/category/:category" component={Products} />
           <Route path="/cart" component={Cart} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/payment" component={Payment} />
           <Route path="/admin/add-category" component={CreateCategory} />
           <Route path="/admin/add-product" component={CreateProduct} />
           <Route path="/not-found" component={NotFound} />
