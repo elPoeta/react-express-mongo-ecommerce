@@ -2,6 +2,7 @@ export const AUTH_USER = "AUTH_USER";
 
 export const GET_CUSTOMER = "GET_CUSTOMER";
 export const CUSTOMER_LOADING = "CUSTOMER_LOADING";
+export const CLEAR_CUSTOMER = 'CLEAR_CUSTOMER'; 
 
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_CATEGORY = "GET_CATEGORY";

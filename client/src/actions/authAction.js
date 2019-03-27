@@ -1,4 +1,4 @@
-import { AUTH_USER, GET_ERRORS, GET_CART } from "./types";
+import { AUTH_USER, GET_ERRORS, GET_CART, CLEAR_CUSTOMER } from "./types";
 import jwtDecode from "jwt-decode";
 import { URL_REGISTER, URL_LOGIN } from "../utils/api-url";
 import Http from "../utils/http";
@@ -35,6 +35,10 @@ export const logout = () => dispatch => {
   dispatch({
     type: GET_CART,
     payload: {}
+  });
+   dispatch({
+    type: CLEAR_CUSTOMER,
+    payload: null
   });
   dispatch({
     type: AUTH_USER,

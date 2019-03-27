@@ -1,4 +1,4 @@
-import { GET_CUSTOMER, CUSTOMER_LOADING, GET_ERRORS } from './types';
+import { GET_CUSTOMER, CLEAR_CUSTOMER, CUSTOMER_LOADING, GET_ERRORS } from './types';
 import { URL_CUSTOMER, URL_ADD_ADDRESS_CUSTOMER } from '../utils/api-url';
 import Http from '../utils/http';
 
@@ -46,4 +46,8 @@ export const deleteCustomerAddress = id => async dispatch => {
         dispatch({ type: GET_ERRORS, payload: err });
 
     }
+}
+
+export const clearCustomer = () =>dispatch=>{
+    dispatch({type:CLEAR_CUSTOMER, payload:null})
 }

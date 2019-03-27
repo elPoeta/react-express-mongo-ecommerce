@@ -11,9 +11,15 @@ class Checkout extends Component {
   async componentDidMount() {
     await this.props.getCustomer();
   }
-  async componentDidUpdate() {
-    await this.props.getCustomer();
+     componentWillReceiveProps(nextProps) {
+    if (nextProps.customer.customer === null && this.props.customer.loading) {
+      this.props.history.push('/createcustomer');
+    }
+    if (nextProps.customer.customer !==  this.props.customer.customer) {
+      this.props.history.push('/checkout');
+    }
   }
+
   render() {
     const { customer, loading } = this.props.customer;
     let displayContent = '';
