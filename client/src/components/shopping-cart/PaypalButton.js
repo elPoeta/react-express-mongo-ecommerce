@@ -59,6 +59,11 @@ class PaypalButton extends Component {
     } = this.state;
     const payment = (data, actions) =>
       actions.request.post(`/api/payment/create-payment/${JSON.parse(localStorage.getItem('cartItems')).token}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token")
+          }
+        }
       )
         .then(function (res) {
           // 3. Return res.id desde response
@@ -70,11 +75,15 @@ class PaypalButton extends Component {
       actions.request.post(`/api/payment/execute-payment/${JSON.parse(localStorage.getItem('cartItems')).token}`, {
         paymentID: data.paymentID,
         payerID: data.payerID,
-      })
-        .then(function (res) {
-          console.log(res);
-          onSuccess(res.payment);
-        });
+      }, {
+          headers: {
+            Authorization: localStorage.getItem("token")
+          }
+        }
+      ).then(function (res) {
+        console.log(res);
+        onSuccess(res.payment);
+      });
     return (
       <div>
         {showButton && <paypal.Button.react

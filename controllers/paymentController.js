@@ -1,14 +1,36 @@
-//const paypal = require('paypal-rest-sdk');
+const { Order } = require('../models/Order');
+const { Product } = require('../models/Product');
+const { Customer } = require('../models/Customer');
 const request = require("request");
 const JWT = require("jsonwebtoken");
 
 //const asyncMiddleware = require('../middlewares/async');
-const { PAYPAL, PAYPAL_API, JWT_SECRET_CART } = require("../config/keys");
+const { PAYPAL, PAYPAL_API, JWT_SECRET_CART, JWT_SECRET } = require("../config/keys");
 
+const verifyUserAuth = async bearerToken => {
+  if (!bearerToken) {
+    return null;
+  }
+  try {
+    if (typeof bearerToken !== 'undefined') {
+      const bearer = bearerToken.split(' ');
+      const token = bearer[1];
+      const decoded = await JWT.verify(token, JWT_SECRET);
+      return decoded;
+
+    }
+    else {
+      return null;
+    }
+
+  }
+  catch (err) {
+    return null;
+  }
+}
 module.exports = {
   createPayment: function (req, res) {
     // 2. Call /v1/payments/payment to set up the payment
-
     const token = req.params.token;
     const { items } = JWT.verify(token, JWT_SECRET_CART);
     const cart = items.cart.map(item => {
@@ -69,7 +91,12 @@ module.exports = {
           });
       });
   },
-  executePayment: function (req, res) {
+  executePayment: async function (req, res) {
+
+    const user = await verifyUserAuth(req.header('authorization'));
+    if (user === null) {
+      return res.status(401).send('Access denied. No token provided.');
+    }
     const token = req.params.token;
     const { items } = JWT.verify(token, JWT_SECRET_CART);
 
@@ -104,12 +131,29 @@ module.exports = {
         },
         json: true
       },
-      function (err, response) {
+      async function (err, response) {
         if (err) {
           console.error(err);
           return res.status(500).send(err);
         }
         // 4. Return a success response to the client 
+        const customer = await Customer.findOne({ user: user._id }).select('_id');
+        if (!customer) {
+          errors.notFound = 'Customer not found';
+          return res.status(400).json(errors);
+        }
+        items.cart.map(async item => {
+          const stock = item.product.stock - item.quantity;
+          await Product.findByIdAndUpdate(item.product._id, { stock: stock }, { new: true });
+        })
+
+        const order = new Order({
+          customer: customer._id,
+          items: items,
+          paymentId: response.body.id
+        });
+
+        await order.save();
 
         const payment = {
           paid: true,
@@ -126,3 +170,4 @@ module.exports = {
 
   }
 }
+
