@@ -51,6 +51,7 @@ module.exports = {
     res.status(200).json(updateProduct);
   }),
   getProducts: asyncMiddleware(async (req, res) => {
+    //req.protocol req.secure req.subdomains req.hostname req.baseUrl req.baseUrl req.params req.path req.query req.originalUrl
     const errors = {};
     const products = await Product.find({ isAvailable: true }).select([
       "name",
