@@ -41,7 +41,7 @@ class Login extends Component {
     const { email, password, errors } = this.state;
 
     return (
-      <div>
+      <div className="forms">
         <h2>Login</h2>
         <LoginForm
           email={email}

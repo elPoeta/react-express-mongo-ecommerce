@@ -50,8 +50,9 @@ class AddAddress extends Component {
     render() {
         const { street, number, location, errors, isAdd } = this.state;
         return (
-            <div>
+            <div className="forms">
                 <h2>Add Address</h2>
+                <Link to='my-account' className="btn-back">Back</Link>
                 <AddressForm
                     street={street}
                     number={number}
@@ -61,7 +62,7 @@ class AddAddress extends Component {
                     onChange={this.onChange}
                     onSubmit={this.onSubmit}
                 />
-                <Link to='my-account'>Back</Link>
+
             </div>
         )
     }

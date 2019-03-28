@@ -67,3 +67,18 @@
     background-color: rgb(73, 14, 14);
     color: #fff;
   }
+
+  .btn-back{
+    text-decoration: none;
+    padding: 10px;
+    border-radius: .5em;
+    color: #fff;
+    background-color: #444;
+    cursor: pointer;
+    width: 100px;
+    margin: 10px;
+    text-align: center;
+  }
+  .btn-back:hover{
+    background-color: rgb(105, 105, 105);
+  }

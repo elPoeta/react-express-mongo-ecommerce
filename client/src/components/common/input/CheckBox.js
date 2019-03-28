@@ -18,7 +18,7 @@ const CheckBox = ({
         <div>
             <input
                 type={type}
-                className={classnames("input", error && "invalid-input")}
+                className={classnames("", error && "invalid-input")}
                 placeholder={placeholder}
                 name={name}
                 value={value}

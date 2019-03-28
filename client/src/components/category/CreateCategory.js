@@ -37,16 +37,18 @@ class CreateCategory extends Component {
         const { name, description, isAvailable, errors } = this.state;
         return (
             <div>
-                <h2>Add Category</h2>
-                <CategoryForm
-                    name={name}
-                    description={description}
-                    isAvailable={isAvailable}
-                    onChange={this.onChange}
-                    onSubmit={this.onSubmit}
-                    checked={isAvailable}
-                    errors={errors}
-                />
+                <section className="forms">
+                    <h2>Add Category</h2>
+                    <CategoryForm
+                        name={name}
+                        description={description}
+                        isAvailable={isAvailable}
+                        onChange={this.onChange}
+                        onSubmit={this.onSubmit}
+                        checked={isAvailable}
+                        errors={errors}
+                    />
+                </section>
             </div>
         )
     }

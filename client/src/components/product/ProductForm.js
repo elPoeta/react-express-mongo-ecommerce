@@ -13,89 +13,113 @@ const ProductForm = ({ name, category, price, discount, stock, description, imag
             {errors.exist && <div className="invalid">{errors.exist}</div>}
             <div className="image-area">
                 <figure class="tumb">
-                    <img src={image} alt='image not found' />
+                    <img src={image} alt='not found' />
                 </figure>
 
             </div>
             <div className="input-area">
-                <div className="name-area">
-                    <TextFieldInput
-                        type="text"
-                        name="name"
-                        placeholder="Name"
-                        value={name}
-                        onChange={onChange}
-                        error={errors.name}
-                    />
-                </div>
-                <div className="select-area">
-                    <SelectListField
-                        placeholder="Category"
-                        name="category"
-                        value={category}
-                        onChange={onChange}
-                        options={options}
-                        error={errors.categoryId}
-                    />
-                    <Link to='/admin/add-category'>New Category</Link>
-                </div>
-                <div className="number-area">
-                    <TextFieldInput
-                        type="text"
-                        name="price"
-                        placeholder="Price $"
-                        value={price}
-                        onChange={onChange}
-                        error={errors.price}
-                    />
-                    <TextFieldInput
-                        type="text"
-                        name="stock"
-                        placeholder="Stock"
-                        value={stock}
-                        onChange={onChange}
-                        error={errors.stock}
-                    />
-                    <TextFieldInput
-                        type="text"
-                        name="discount"
-                        placeholder="Discount"
-                        value={discount}
-                        onChange={onChange}
-                        error={errors.discount}
-                    />
-                    <div>
-                        <CheckBox
-                            type="checkbox"
-                            name="isAvailable"
-                            placeholder="is available"
-                            value={isAvailable}
+                <fieldset>
+                    <legend>Product Name</legend>
+                    <div className="name-area">
+
+                        <TextFieldInput
+                            type="text"
+                            name="name"
+                            placeholder="*Name"
+                            value={name}
                             onChange={onChange}
-                            checked={isAvailable}
-                            error={errors.isAvailable}
-                        /> Available
-                </div>
-                </div>
+                            error={errors.name}
+                        />
+                    </div>
+                </fieldset>
+
+
+                <fieldset>
+                    <legend>Category Product</legend>
+                    <div className="select-area">
+                        <SelectListField
+                            placeholder="Category"
+                            name="category"
+                            value={category}
+                            onChange={onChange}
+                            options={options}
+                            error={errors.categoryId}
+                        />
+                        <Link to='/admin/add-category'>New Category</Link>
+                    </div>
+                </fieldset>
+
+
+                <fieldset>
+                    <legend>Price - Stock - Discount</legend>
+                    <div className="number-area">
+                        <TextFieldInput
+                            type="text"
+                            name="price"
+                            placeholder="*Price U$"
+                            value={price}
+                            onChange={onChange}
+                            error={errors.price}
+                        />
+                        <TextFieldInput
+                            type="text"
+                            name="stock"
+                            placeholder="*Stock"
+                            value={stock}
+                            onChange={onChange}
+                            error={errors.stock}
+                        />
+                        <TextFieldInput
+                            type="text"
+                            name="discount"
+                            placeholder="Discount %"
+                            value={discount}
+                            onChange={onChange}
+                            error={errors.discount}
+                        />
+                    </div>
+                </fieldset>
+
                 <div className="description-area">
-                    <TextFieldInput
-                        type="text"
-                        name="image"
-                        placeholder="Image"
-                        value={image}
-                        onChange={onChange}
-                        error={errors.image}
-                    />
-                    <TextAreaField
-                        name="description"
-                        rows="5"
-                        placeholder="Description"
-                        value={description}
-                        onChange={onChange}
-                        error={errors.description}
-                    />
+                    <fieldset>
+                        <legend>Image url</legend>
+                        <TextFieldInput
+                            type="text"
+                            name="image"
+                            placeholder="*URL Image"
+                            value={image}
+                            onChange={onChange}
+                            error={errors.image}
+                        />
+                    </fieldset>
+                    <fieldset>
+                        <legend>Description</legend>
+                        <TextAreaField
+                            name="description"
+                            rows="5"
+                            placeholder="Description"
+                            value={description}
+                            onChange={onChange}
+                            error={errors.description}
+                        />
+                    </fieldset>
                 </div>
             </div>
-            <button className="button-area">Add Product</button>
+            <div className="button-area">
+                <label htmlFor="isAvailable" className="checkbox-container ">Available
+               <CheckBox
+                        type="checkbox"
+                        name="isAvailable"
+                        placeholder="is available"
+                        value={isAvailable}
+                        onChange={onChange}
+                        checked={isAvailable}
+                        error={errors.isAvailable}
+                    />
+
+                </label>
+                <button >Add Product</button>
+            </div>
         </form>
     )
 

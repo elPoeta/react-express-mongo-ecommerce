@@ -27,11 +27,12 @@ class CreateProduct extends Component {
             });
         }
     }
+
     onChange = e => {
         const { name, value, type, checked } = e.target
         type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value })
-
     }
+
     onSubmit = async e => {
         e.preventDefault();
         const product = {
@@ -63,7 +64,7 @@ class CreateProduct extends Component {
         return (
             <div>
 
-                <section className="form-product">
+                <section className="forms">
                     <h2>Add Product</h2>
                     <ProductForm
                         name={name}
@@ -80,6 +81,7 @@ class CreateProduct extends Component {
                         options={options}
                     />
                 </section>
+                {this.state.isAvailable}
             </div>
         )
     }

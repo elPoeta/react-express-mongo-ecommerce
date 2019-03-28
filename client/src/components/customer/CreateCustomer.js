@@ -33,14 +33,16 @@ class CreateCustomer extends Component {
         const { name, phone, errors } = this.state;
         return (
             <div>
-                <h2>Create Customer</h2>
-                <CustomerForm
-                    name={name}
-                    phone={phone}
-                    onChange={this.onChange}
-                    onSubmit={this.onSubmit}
-                    errors={errors}
-                />
+                <section className="forms">
+                    <h2>Create Customer</h2>
+                    <CustomerForm
+                        name={name}
+                        phone={phone}
+                        onChange={this.onChange}
+                        onSubmit={this.onSubmit}
+                        errors={errors}
+                    />
+                </section>
             </div>
         )
     }

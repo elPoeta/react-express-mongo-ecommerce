@@ -38,7 +38,7 @@ class SignUp extends Component {
   render() {
     const { email, password, confirmPassword, errors } = this.state;
     return (
-      <div>
+      <div className="forms">
         <h2>Sign Up!</h2>
         <SignUpForm
           email={email}
