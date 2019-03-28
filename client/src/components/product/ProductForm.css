@@ -1,0 +1,91 @@
+.form-product{
+    display:grid;
+    grid-template-columns: 1fr;
+    margin:0 auto;
+    width: 80%;
+ 
+}
+.form-container {
+    margin:0 auto;
+    width: 90%;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 5px;
+    height: 100%;
+    display: grid;
+    grid-gap: 3px;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "i i c c c c c"
+        "i i c c c c c"
+        "b b c c c c c";
+}
+
+
+
+.image-area {
+    grid-area: i;
+}
+
+.input-area {
+    grid-area: c;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 8px;
+    padding: 2px;
+}
+.input-area input{
+    padding: 8px;
+}
+
+.button-area {
+    grid-area: b;
+}
+
+.tumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  padding: 10px;
+  background: #fcfcfc;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+}
+
+.tumb img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.name-area{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.name-area input{
+    width: 98%;
+}
+.select-area{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.number-area{
+    display: grid;
+    grid-template-columns: repeat(3, 120px) 1fr;
+    grid-gap: 5px;
+}
+
+.description-area{
+    display: grid;
+    grid-template-columns: 1fr;
+     grid-gap: 5px;
+}
+.description-area textarea{
+    resize: none;
+    width: 98%;
+    padding: 8px;
+}
+.description-area input{
+ width: 98%;
+}

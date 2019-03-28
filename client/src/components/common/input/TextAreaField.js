@@ -8,7 +8,8 @@ const TextAreaField = ({
     value,
     error,
     info,
-    onChange
+    onChange,
+    rows
 }) => {
     return (
         <div className="">
@@ -18,6 +19,7 @@ const TextAreaField = ({
                 name={name}
                 value={value}
                 onChange={onChange}
+                rows={rows}
             />
             {info && <small className="">{info}</small>}
             {error && <div className="invalid">{error}</div>}

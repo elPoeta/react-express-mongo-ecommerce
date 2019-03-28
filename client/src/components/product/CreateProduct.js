@@ -53,8 +53,8 @@ class CreateProduct extends Component {
         const { name, category, price, discount, stock, description, image, isAvailable, errors } = this.state;
         let options = [];
         if (!loadingCategories) {
-            options =[ { label: '* Select Category', value: 0 }, ...categories.map(category => {
-                return{
+            options = [{ label: '* Select Category', value: 0 }, ...categories.map(category => {
+                return {
                     label: category.name,
                     value: category._id
                 }
@@ -62,21 +62,24 @@ class CreateProduct extends Component {
         }
         return (
             <div>
-                <h2>Add Product</h2>
-                <ProductForm
-                    name={name}
-                    category={category}
-                    price={price}
-                    discount={discount}
-                    stock={stock}
-                    image={image}
-                    description={description}
-                    isAvailable={isAvailable}
-                    onChange={this.onChange}
-                    onSubmit={this.onSubmit}
-                    errors={errors}
-                    options={options}
-                />
+
+                <section className="form-product">
+                    <h2>Add Product</h2>
+                    <ProductForm
+                        name={name}
+                        category={category}
+                        price={price}
+                        discount={discount}
+                        stock={stock}
+                        image={image}
+                        description={description}
+                        isAvailable={isAvailable}
+                        onChange={this.onChange}
+                        onSubmit={this.onSubmit}
+                        errors={errors}
+                        options={options}
+                    />
+                </section>
             </div>
         )
     }
