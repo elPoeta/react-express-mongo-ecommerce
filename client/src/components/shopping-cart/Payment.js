@@ -11,28 +11,28 @@ class Payment extends Component {
     async componentDidMount() {
         await this.props.getCustomer();
     }
-        componentWillReceiveProps(nextProps) {
-    if (nextProps.customer.customer === null && this.props.customer.loading) {
-      this.props.history.push('/createcustomer');
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.customer.customer === null && this.props.customer.loading) {
+            this.props.history.push('/createcustomer');
+        }
+        if (nextProps.customer.customer !== this.props.customer.customer) {
+            this.props.history.push('/payment');
+        }
     }
-    if (nextProps.customer.customer !==  this.props.customer.customer) {
-      this.props.history.push('/payment');
-    }
-  }
     render() {
         const { customer, loading } = this.props.customer;
         let displayContent = '';
-        if(localStorage.getItem('cartItems')===null){
-                return <Redirect to="/products/category/all" />;      
+        if (localStorage.getItem('cartItems') === null) {
+            return <Redirect to="/products/category/all" />;
         }
         else if (customer === null || loading) {
             return <Spinner classNames='spinner2' />
         } else if (isEmpty(customer)) {
             return <Redirect to="/createcustomer" />;
-        }else if(sessionStorage.getItem('address')===null){
+        } else if (sessionStorage.getItem('shipAddress') === null) {
             return <Redirect to="/checkout" />;
         }
-       else {
+        else {
             displayContent = (
                 <div>
                     <Link

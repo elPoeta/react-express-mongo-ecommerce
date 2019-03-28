@@ -7,29 +7,27 @@ import isEmpty from "../../utils/isEmpty";
 import Spinner from '../common/spinner/Spinner';
 
 class Checkout extends Component {
-state ={
-  address:''
-}
+  state = {
+    shipAddress: ''
+  }
   async componentDidMount() {
     await this.props.getCustomer();
   }
-     componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.customer.customer === null && this.props.customer.loading) {
       this.props.history.push('/createcustomer');
     }
-    if (nextProps.customer.customer !==  this.props.customer.customer) {
+    if (nextProps.customer.customer !== this.props.customer.customer) {
       this.props.history.push('/checkout');
     }
   }
- handleChange = e =>{
-   
-   console.log('n ',e.target.name, 'V ',e.target.value)
-   this.setState({
-     [e.target.name]: e.target.value
-   });
-   
-   sessionStorage.setItem('address',e.target.value);
- }
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+
+    sessionStorage.setItem('shipAddress', e.target.value);
+  }
   render() {
     const { customer, loading } = this.props.customer;
     let displayContent = '';
@@ -41,32 +39,32 @@ state ={
 
       return <Redirect to="/createcustomer" />;
     }
-   else{
-     const listAddress = customer.address.length ? 
-     customer.address.map(address =>(
-        
-       <li key={address._id}>
-         <input           
-                        type="radio" 
-                        name="address"
-                        value={address._id}
-                        checked={this.state.address === address._id}
-                        onChange={this.handleChange}
-                    />
-       {address.street} || {address.number} || {address.location}</li>
-     )): null; 
+    else {
+      const listAddress = customer.address.length ?
+        customer.address.map(address => (
+
+          <li key={address._id}>
+            <input
+              type="radio"
+              name="shipAddress"
+              value={address._id}
+              checked={this.state.shipAddress === address._id}
+              onChange={this.handleChange}
+            />
+            {address.street} || {address.number} || {address.location}</li>
+        )) : null;
       displayContent = (
         <div>
-        {listAddress}
+          {listAddress}
           <Link
             to="/products/category/all"
             className=""
           >
             Continue Shopping
             </Link>
-         { this.state.address && <Link to="/payment" className="">
+          {this.state.shipAddress && <Link to="/payment" className="">
             Pay with Paypal
-            </Link> }
+            </Link>}
         </div>
       )
     }

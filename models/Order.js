@@ -14,6 +14,14 @@ const orderSchema = new Schema({
   paymentId: {
     type: String,
     required: true
+  },
+  shipAddress: {
+    type: Schema.Types.ObjectId,
+    required: true
+  },
+  delivery: {
+    type: String,
+    default: "Pending"
   }
 });
 
@@ -22,7 +30,8 @@ const validateOrder = {
     _id: Joi.objectId(),
     customer: Joi.objectId(),
     items: Joi.object().required(),
-    paymentId: Joi.string().required()
+    paymentId: Joi.string().required(),
+    shipAddress: Joi.objectId().required()
   })
 };
 

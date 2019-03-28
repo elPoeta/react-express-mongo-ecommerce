@@ -4,7 +4,6 @@ const { Customer } = require('../models/Customer');
 const request = require("request");
 const JWT = require("jsonwebtoken");
 
-//const asyncMiddleware = require('../middlewares/async');
 const { PAYPAL, PAYPAL_API, JWT_SECRET_CART, JWT_SECRET } = require("../config/keys");
 
 const verifyUserAuth = async bearerToken => {
@@ -105,8 +104,7 @@ module.exports = {
     // request.post('/execute-payment', function (req, res) {
     // 2. Get the payment ID and the payer ID from the request body.
 
-    const paymentID = req.body.paymentID;
-    const payerID = req.body.payerID;
+    const { paymentID, payerID, shipAddress } = req.body;
 
     // 3. Call /v1/payments/payment/PAY-XXX/execute to finalize the payment.
     request.post(PAYPAL_API + '/v1/payments/payment/' + paymentID +
@@ -149,8 +147,9 @@ module.exports = {
 
         const order = new Order({
           customer: customer._id,
-          items: items,
-          paymentId: response.body.id
+          items,
+          paymentId: paymentID,
+          shipAddress
         });
 
         await order.save();

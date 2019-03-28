@@ -32,13 +32,13 @@ export const login = userData => async dispatch => {
 export const logout = () => dispatch => {
   localStorage.removeItem("token");
   localStorage.removeItem('cartItems');
-  sessionStorage.removeItem('address');
+  sessionStorage.removeItem('shipAddress');
 
   dispatch({
     type: GET_CART,
     payload: {}
   });
-   dispatch({
+  dispatch({
     type: CLEAR_CUSTOMER,
     payload: null
   });

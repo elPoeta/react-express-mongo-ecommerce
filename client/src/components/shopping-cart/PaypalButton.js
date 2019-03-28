@@ -75,6 +75,7 @@ class PaypalButton extends Component {
       actions.request.post(`/api/payment/execute-payment/${JSON.parse(localStorage.getItem('cartItems')).token}`, {
         paymentID: data.paymentID,
         payerID: data.payerID,
+        shipAddress: sessionStorage.getItem('shipAddress')
       }, {
           headers: {
             Authorization: localStorage.getItem("token")

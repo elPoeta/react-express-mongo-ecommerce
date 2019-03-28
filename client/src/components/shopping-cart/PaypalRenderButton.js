@@ -13,7 +13,7 @@ class PaypalButtonRender extends React.Component {
     const onSuccess = payment => {
       console.log("Successful payment!", payment);
       this.props.clearCart();
-      sessionStorage.removeItem('address');
+      sessionStorage.removeItem('shipAddress');
       this.setState({
         success: true
       })
