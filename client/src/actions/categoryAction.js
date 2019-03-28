@@ -12,12 +12,22 @@ export const getCategories = () => async dispatch => {
     dispatch({ type: GET_ERRORS, payload: err });
   }
 };
-
-export const addCategory = categoryData => async dispatch => {
+export const getCategoryById = id => async dispatch => {
+  try {
+    dispatch({ type: CATEGORY_LOADING, payload: true });
+    const category = await Http.get(`${URL_GET_CATEGORIES}/${id}`);
+    dispatch({ type: GET_CATEGORY, payload: category });
+  } catch (error) {
+    const err = JSON.parse(error.message);
+    dispatch({ type: GET_ERRORS, payload: err });
+  }
+};
+export const addCategory = (categoryData, history) => async dispatch => {
   try {
     dispatch({ type: CATEGORY_LOADING, payload: true });
     const category = await Http.post(URL_ADMIN_CATEGORY, categoryData);
-    dispatch({ type: GET_CATEGORY, payload: category })
+    dispatch({ type: GET_CATEGORY, payload: category });
+    history.push('/dashboard');
   } catch (error) {
     const err = JSON.parse(error.message);
     dispatch({ type: GET_ERRORS, payload: err });

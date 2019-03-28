@@ -3,7 +3,7 @@ import TextFieldInput from "../common/input/TextField";
 import CheckBox from "../common/input/CheckBox";
 import TextAreaField from "../common/input/TextAreaField";
 import './CategoryForm.css'
-const CategoryForm = ({ errors, name, description, isAvailable, onChange, onSubmit }) =>
+const CategoryForm = ({ errors, name, description, isAvailable, onChange, onSubmit, btnValue }) =>
     (
         <form className="category-form-container" onSubmit={onSubmit}>
             {errors.invalid && <div className="invalid">{errors.invalid}</div>}
@@ -44,7 +44,7 @@ const CategoryForm = ({ errors, name, description, isAvailable, onChange, onSubm
                     error={errors.isAvailable}
                 />
             </label>
-            <button>Add Category</button>
+            <button>{btnValue}</button>
 
         </form>
     )
