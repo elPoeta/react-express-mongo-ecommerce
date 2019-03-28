@@ -7,7 +7,9 @@ import isEmpty from "../../utils/isEmpty";
 import Spinner from '../common/spinner/Spinner';
 
 class Checkout extends Component {
-
+state ={
+  address:''
+}
   async componentDidMount() {
     await this.props.getCustomer();
   }
@@ -19,7 +21,15 @@ class Checkout extends Component {
       this.props.history.push('/checkout');
     }
   }
-
+ handleChange = e =>{
+   
+   console.log('n ',e.target.name, 'V ',e.target.value)
+   this.setState({
+     [e.target.name]: e.target.value
+   });
+   
+   sessionStorage.setItem('address',e.target.value);
+ }
   render() {
     const { customer, loading } = this.props.customer;
     let displayContent = '';
@@ -31,23 +41,32 @@ class Checkout extends Component {
 
       return <Redirect to="/createcustomer" />;
     }
-    else if (!isEmpty(customer) && isEmpty(customer.address)) {
-
-      return <Redirect to="/address" />;
-    } else {
-
-
+   else{
+     const listAddress = customer.address.length ? 
+     customer.address.map(address =>(
+        
+       <li key={address._id}>
+         <input           
+                        type="radio" 
+                        name="address"
+                        value={address._id}
+                        checked={this.state.address === address._id}
+                        onChange={this.handleChange}
+                    />
+       {address.street} || {address.number} || {address.location}</li>
+     )): null; 
       displayContent = (
         <div>
+        {listAddress}
           <Link
             to="/products/category/all"
             className=""
           >
             Continue Shopping
             </Link>
-          <Link to="/payment" className="">
+         { this.state.address && <Link to="/payment" className="">
             Pay with Paypal
-            </Link>
+            </Link> }
         </div>
       )
     }

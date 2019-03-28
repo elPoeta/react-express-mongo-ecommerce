@@ -22,14 +22,17 @@ class Payment extends Component {
     render() {
         const { customer, loading } = this.props.customer;
         let displayContent = '';
-        if (customer === null || loading) {
+        if(localStorage.getItem('cartItems')===null){
+                return <Redirect to="/products/category/all" />;      
+        }
+        else if (customer === null || loading) {
             return <Spinner classNames='spinner2' />
         } else if (isEmpty(customer)) {
             return <Redirect to="/createcustomer" />;
+        }else if(sessionStorage.getItem('address')===null){
+            return <Redirect to="/checkout" />;
         }
-        else if (!isEmpty(customer) && isEmpty(customer.address)) {
-            return <Redirect to="/address" />;
-        } else {
+       else {
             displayContent = (
                 <div>
                     <Link

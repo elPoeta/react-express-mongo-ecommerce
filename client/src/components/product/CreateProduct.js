@@ -51,15 +51,14 @@ class CreateProduct extends Component {
         const { categories } = this.props.category;
         const loadingCategories = this.props.category.loading;
         const { name, category, price, discount, stock, description, image, isAvailable, errors } = this.state;
-        let options = [{ label: '* Select Category', value: 0 }];
+        let options = [];
         if (!loadingCategories) {
-            categories.map(category => {
-                const fields = {
+            options =[ { label: '* Select Category', value: 0 }, ...categories.map(category => {
+                return{
                     label: category.name,
                     value: category._id
                 }
-                options.push(fields);
-            })
+            })]
         }
         return (
             <div>

@@ -32,6 +32,8 @@ export const login = userData => async dispatch => {
 export const logout = () => dispatch => {
   localStorage.removeItem("token");
   localStorage.removeItem('cartItems');
+  sessionStorage.removeItem('address');
+
   dispatch({
     type: GET_CART,
     payload: {}

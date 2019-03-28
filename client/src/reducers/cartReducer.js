@@ -1,4 +1,4 @@
-import { GET_CART, ADD_ITEM_CART, REMOVE_ITEM_CART, UPDATE_ITEM_CART, CART_LOADING } from "../actions/types";
+import { GET_CART, CART_LOADING } from "../actions/types";
 const initialState = {
     items: {},
     loading: false,
