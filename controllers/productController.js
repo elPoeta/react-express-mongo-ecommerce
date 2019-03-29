@@ -17,13 +17,12 @@ module.exports = {
       image
     } = req.body;
     const productFields = {};
-
     if (name) productFields.name = name;
     if (price) productFields.price = price;
     if (stock) productFields.stock = stock;
     if (description) productFields.description = description;
     if (image) productFields.image = image;
-    if (discount) productFields.discount = discount;
+    if (discount === 0 || discount) productFields.discount = discount;
     productFields.isAvailable = isAvailable !== undefined ? isAvailable : true;
 
     const categoryFound = await Category.findById({ _id: categoryId });

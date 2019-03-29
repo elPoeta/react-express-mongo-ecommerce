@@ -1,0 +1,20 @@
+.checkout-container{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: .5em;
+    justify-items: center;
+   
+}
+.grid-checkout-address{
+    display:grid;
+    grid-template-columns: 50px repeat(3, 1fr);
+    grid-gap: 5px;
+    padding: 3px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #444;
+}

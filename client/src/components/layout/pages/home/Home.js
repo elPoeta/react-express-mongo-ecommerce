@@ -1,10 +1,24 @@
-import React from 'react';
-import './Home.css';
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
 
-const Home = () => (
-    <div>
-        <h2>Home Page</h2>
-    </div>
-);
+class Home extends Component {
+    componentDidMount() {
+        if (this.props.auth.isAuthenticated &&
+            this.props.auth.user.isAdmin &&
+            this.props.auth.user.role === 'admin') {
+            this.props.history.push("/dashboard");
+        }
+    }
+    render() {
+        return (
+            <div>
+                Home Page
+      </div>
+        )
+    }
+}
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+export default connect(mapStateToProps)(Home);
 
-export default Home;

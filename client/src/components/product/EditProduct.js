@@ -71,10 +71,10 @@ class EditProduct extends Component {
       name: this.state.name,
       categoryId: this.state.category || value,
       price: this.state.price,
-      discount: this.state.discount || undefined,
       stock: this.state.stock,
       image: this.state.image,
-      description: this.state.description || undefined,
+      discount: this.state.discount ? this.state.discount : 0,
+      description: this.state.description,
       isAvailable: this.state.isAvailable
     };
 

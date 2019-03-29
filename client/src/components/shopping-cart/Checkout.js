@@ -4,14 +4,22 @@ import { Link, Redirect } from "react-router-dom";
 import UserRoute from "../../HOC/UserRoute";
 import { getCustomer } from "../../actions/customerAction";
 import isEmpty from "../../utils/isEmpty";
+import { checkCartItemsStorage } from "../../utils/checkCartItemsStorage";
 import Spinner from '../common/spinner/Spinner';
+import Ticket from './Ticket';
+import './Checkout.css';
 
 class Checkout extends Component {
   state = {
-    shipAddress: ''
+    shipAddress: '',
+    items: ''
   }
   async componentDidMount() {
     await this.props.getCustomer();
+    this.setState({
+      items: checkCartItemsStorage()
+    })
+    console.log(this.state.items.cart);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.customer.customer === null && this.props.customer.loading) {
@@ -23,6 +31,7 @@ class Checkout extends Component {
         shipAddress: sessionStorage.getItem("shipAddress") || ''
       })
     }
+
   }
   handleChange = e => {
     this.setState({
@@ -31,8 +40,17 @@ class Checkout extends Component {
 
     sessionStorage.setItem('shipAddress', e.target.value);
   }
+  findAddress = id => {
+    const { customer } = this.props.customer;
+    if (customer.address) {
+      return customer.address.filter(address => address._id === id);
+    }
+    return []
+  };
+
   render() {
     const { customer, loading } = this.props.customer;
+    const { items } = this.state;
     let displayContent = '';
     if (customer === null || loading) {
 
@@ -46,7 +64,7 @@ class Checkout extends Component {
       const listAddress = customer.address.length ?
         customer.address.map(address => (
 
-          <li key={address._id}>
+          <li key={address._id} className='grid-checkout-address'>
             <input
               type="radio"
               name="shipAddress"
@@ -54,25 +72,46 @@ class Checkout extends Component {
               checked={this.state.shipAddress === address._id}
               onChange={this.handleChange}
             />
-            {address.street} || {address.number} || {address.location}</li>
+            <span>{address.street}</span>
+            <span>{address.number}</span>
+            <span>{address.location}</span>
+          </li>
         )) : null;
       displayContent = (
         <div>
-          {listAddress}
+          <div className='checkout-container'>
+            <ul>
+              <li className='grid-checkout-address title-credentials'>
+                <span><i className="far fa-check-circle"></i></span>
+                <span>Street</span>
+                <span>Number</span>
+                <span>Location</span>
+
+              </li>
+              <div><hr /></div>
+              {listAddress}
+            </ul>
+            <Ticket
+              shipAddress={this.findAddress(this.state.shipAddress)}
+              totalPaid={items.totalAmount}
+              totalItems={items.totalQuantity}
+              cart={items.cart}
+            />
+          </div>
           <Link
             to="/products/category/all"
             className=""
           >
             Continue Shopping
             </Link>
-          {this.state.shipAddress && <Link to="/payment" className="">
-            Pay with Paypal
-            </Link>}
+          {this.state.shipAddress && <Link to="/payment" className=""><i className="fab fa-cc-paypal">Pay with Paypal</i>
+
+          </Link>}
         </div>
       )
     }
     return (
-      <div>
+      <div className='forms'>
         <h2>Checkout</h2>
         {displayContent}
       </div>
@@ -81,7 +120,8 @@ class Checkout extends Component {
 }
 const mapStateToProps = state => ({
   auth: state.auth,
-  customer: state.customer
+  customer: state.customer,
+  items: state.items
 });
 export default connect(
   mapStateToProps,

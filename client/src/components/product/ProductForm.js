@@ -97,7 +97,7 @@ const ProductForm = ({ name, category, price, discount, stock, description, imag
                         <TextAreaField
                             name="description"
                             rows="5"
-                            placeholder="Description"
+                            placeholder="*Description"
                             value={description}
                             onChange={onChange}
                             error={errors.description}
