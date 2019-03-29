@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_PRODUCT, PRODUCT_LOADING } from "../actions/types";
+import { GET_PRODUCTS, GET_PRODUCT, REMOVE_PRODUCT, PRODUCT_LOADING } from "../actions/types";
 const initialState = {
   products: [],
   product: {},
@@ -19,6 +19,12 @@ export default (state = initialState, action) => {
         product: action.payload,
         loading: false
       };
+    case REMOVE_PRODUCT:
+      return {
+        ...state,
+        products: [...state.products.filter(product => product._id !== action.payload)],
+        loading: false
+      }
     case PRODUCT_LOADING:
       return {
         ...state,

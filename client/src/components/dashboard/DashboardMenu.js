@@ -23,7 +23,7 @@ const DashboardMenu = () => (
         </Link>
       </li>
       <li>
-        <Link to="/admin/edit-product">
+        <Link to="/admin/edit-product/products">
           <i className="fas fa-edit" />
           Edit Product
         </Link>

@@ -59,7 +59,8 @@ module.exports = {
       "stock",
       "discount",
       "image",
-      "category.name"
+      "category.name",
+      "isAvailable"
     ]);
     //const products = await Product.find();
     if (!products) {

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const SelectListField = ({ name, value, error, info, onChange, options }) => {
   const selectOptions = options.map(option => (
-    <option key={option.label} value={option.value}>
+    <option key={option.label} value={option.value}  >
       {option.label}
     </option>
   ));

@@ -5,10 +5,12 @@ import AdminRoute from "../../HOC/AdminRoute";
 import ProductForm from "./ProductForm";
 import { editProduct, getProductByIdToEdit } from "../../actions/productAction";
 import { getCategories } from "../../actions/categoryAction";
+import isEmpty from '../../utils/isEmpty';
+import './EditProduct.css';
 
 class EditProduct extends Component {
   state = {
-      _id='',
+    _id: '',
     name: "",
     category: "",
     price: "",
@@ -17,10 +19,11 @@ class EditProduct extends Component {
     description: "",
     image: '',
     isAvailable: true,
+    defaultCategory: '',
     errors: {}
   };
   async componentDidMount() {
-      const id = this.props.match.params.id;
+    const id = this.props.match.params.id;
     await this.props.getCategories();
     await this.props.getProductByIdToEdit(id);
   }
@@ -28,6 +31,28 @@ class EditProduct extends Component {
     if (this.props.errors !== prevProps.errors) {
       this.setState({
         errors: this.props.errors
+      });
+    }
+    if (this.props.products !== prevProps.products) {
+      const {
+        _id,
+        name,
+        price,
+        discount,
+        stock,
+        description,
+        image,
+        isAvailable
+      } = this.props.products.product;
+      this.setState({
+        _id: _id,
+        name: name,
+        price: price,
+        stock: stock,
+        image: image,
+        discount: discount !== undefined ? discount : '',
+        description: description !== undefined ? description : "",
+        isAvailable: isAvailable
       });
     }
   }
@@ -39,12 +64,12 @@ class EditProduct extends Component {
       : this.setState({ [name]: value });
   };
 
-  onSubmit = async e => {
+  onSubmit = async (e, value) => {
     e.preventDefault();
     const product = {
-      _id: this.state._id,  
+      _id: this.state._id,
       name: this.state.name,
-      categoryId: this.state.category,
+      categoryId: this.state.category || value,
       price: this.state.price,
       discount: this.state.discount || undefined,
       stock: this.state.stock,
@@ -52,12 +77,15 @@ class EditProduct extends Component {
       description: this.state.description || undefined,
       isAvailable: this.state.isAvailable
     };
-    console.log(product);
-    await this.props.editProduct(product);
+
+    await this.props.editProduct(product, this.props.history);
   };
+
   render() {
     const { categories } = this.props.category;
     const loadingCategories = this.props.category.loading;
+    const { product } = this.props.products;
+
     const {
       name,
       category,
@@ -69,17 +97,29 @@ class EditProduct extends Component {
       isAvailable,
       errors
     } = this.state;
-    let options = [];
-    if (!loadingCategories) {
-      options = [
-        { label: "* Select Category", value: 0 },
-        ...categories.map(category => {
-          return {
-            label: category.name,
-            value: category._id
-          };
-        })
-      ];
+    let optionsAux = [];
+    let options;
+    let aux = { label: '* Select Category', value: 0 };
+    if (!loadingCategories && !isEmpty(product)) {
+      optionsAux = categories.map(category => {
+
+        return {
+          label: category.name,
+          value: category._id
+        };
+      }
+      );
+
+      const a = optionsAux.filter(o => {
+        if (o.label !== product.category.name) return o;
+        aux = {
+          label: o.label,
+          value: o.value
+        }
+
+      });
+
+      options = [{ label: aux.label, value: aux.value }, ...a];
     }
     return (
       <div>
@@ -89,18 +129,19 @@ class EditProduct extends Component {
             Back
           </Link>
           <ProductForm
-            name={name}
-            category={category}
-            price={price}
-            discount={discount}
-            stock={stock}
-            image={image}
-            description={description}
-            isAvailable={isAvailable}
+            name={name || ''}
+            category={category || ''}
+            price={price || ''}
+            discount={discount || ''}
+            stock={stock || ''}
+            image={image || ''}
+            description={description || ''}
+            isAvailable={isAvailable || true}
             onChange={this.onChange}
-            onSubmit={this.onSubmit}
-            errors={errors}
-            options={options}
+            onSubmit={(e) => this.onSubmit(e, aux.value)}
+            errors={errors || {}}
+            options={options || []}
+            btnFormText="Submit"
           />
         </section>
         {this.state.isAvailable}

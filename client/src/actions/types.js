@@ -11,6 +11,7 @@ export const CATEGORY_LOADING = "CATEGORY_LOADING";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCT = "GET_PRODUCT";
+export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const PRODUCT_LOADING = "PRODUCT_LOADING";
 
 export const GET_CART = "GET_CART";

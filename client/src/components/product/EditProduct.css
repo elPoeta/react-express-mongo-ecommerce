@@ -1,0 +1,4 @@
+.grid-credentials-product {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+  }

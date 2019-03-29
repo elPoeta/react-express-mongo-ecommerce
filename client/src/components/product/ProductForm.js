@@ -6,13 +6,13 @@ import TextAreaField from "../common/input/TextAreaField";
 import SelectListField from '../common/input/SelecListField';
 import './ProductForm.css';
 
-const ProductForm = ({ name, category, price, discount, stock, description, image, isAvailable, options, errors, onChange, onSubmit }) =>
+const ProductForm = ({ name, category, price, discount, stock, description, image, isAvailable, options, errors, onChange, onSubmit, btnFormText }) =>
     (
         <form className="form-container" onSubmit={onSubmit}>
             {errors.invalid && <div className="invalid">{errors.invalid}</div>}
             {errors.exist && <div className="invalid">{errors.exist}</div>}
             <div className="image-area">
-                <figure class="tumb">
+                <figure className="tumb">
                     <img src={image} alt='not found' />
                 </figure>
 
@@ -118,7 +118,7 @@ const ProductForm = ({ name, category, price, discount, stock, description, imag
                     />
 
                 </label>
-                <button >Add Product</button>
+                <button >{btnFormText}</button>
             </div>
         </form>
     )

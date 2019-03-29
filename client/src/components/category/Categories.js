@@ -37,18 +37,18 @@ class Categories extends Component {
     } else {
       displayContent = categories.map(category => (
         <li className="grid-credentials" key={category._id}>
+          <span>
+            <Link to={`/admin/edit-category/${category._id}`}>
+              <i className="fas fa-edit i-edit" />
+            </Link>
+          </span>
           <span>{category.name}</span>
           <span>
             {category.isAvailable ? (
               <i className="far fa-check-square i-true" />
             ) : (
-              <i className="fas fa-times i-del" />
-            )}
-          </span>
-          <span>
-            <Link to={`/admin/edit-category/${category._id}`}>
-              <i className="fas fa-edit i-edit" />
-            </Link>
+                <i className="fas fa-times i-del" />
+              )}
           </span>
           <span>
             <i
@@ -63,11 +63,14 @@ class Categories extends Component {
       <section className="forms">
         <div className="credentials">
           <h2>Categories</h2>
+          <Link to="/dashboard" className="btn-back">
+            Back
+          </Link>
           <ul>
             <li className="grid-credentials title-credentials" key={-1}>
+              <span>Edit</span>
               <span>Name</span>
               <span>Available</span>
-              <span>Edit</span>
               <span>Delete</span>
             </li>
             <hr />

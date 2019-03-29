@@ -2,7 +2,8 @@ import {
   GET_PRODUCTS,
   GET_PRODUCT,
   PRODUCT_LOADING,
-  GET_ERRORS
+  GET_ERRORS,
+  REMOVE_PRODUCT
 } from "./types";
 import {
   URL_GET_PRODUCTS,
@@ -78,3 +79,16 @@ export const editProduct = (productData, history) => async dispatch => {
     dispatch({ type: GET_ERRORS, payload: err });
   }
 };
+
+export const deleteProduct = id => async dispatch => {
+  try {
+    dispatch({ type: PRODUCT_LOADING, payload: true });
+    const product = await Http.delete(`${URL_ADMIN_PRODUCT}/${id}`);
+    if (product.success) {
+      dispatch({ type: REMOVE_PRODUCT, payload: id })
+    }
+  } catch (error) {
+    const err = JSON.parse(error.message);
+    dispatch({ type: GET_ERRORS, payload: err });
+  }
+}

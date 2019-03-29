@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AdminRoute from '../../HOC/AdminRoute';
 import ProductForm from './ProductForm';
@@ -66,6 +67,9 @@ class CreateProduct extends Component {
 
                 <section className="forms">
                     <h2>Add Product</h2>
+                    <Link to="/dashboard" className="btn-back">
+                        Back
+          </Link>
                     <ProductForm
                         name={name}
                         category={category}
@@ -79,6 +83,7 @@ class CreateProduct extends Component {
                         onSubmit={this.onSubmit}
                         errors={errors}
                         options={options}
+                        btnFormText="Add Product"
                     />
                 </section>
                 {this.state.isAvailable}

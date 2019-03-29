@@ -25,6 +25,8 @@ import CreateCategory from "./components/category/CreateCategory";
 import EditCategory from "./components/category/EditCategory";
 import Categories from "./components/category/Categories";
 import CreateProduct from "./components/product/CreateProduct";
+import EditAndDeleteProducts from "./components/product/EditAndDeleteProducts";
+import EditProduct from "./components/product/EditProduct";
 
 import store from "./store";
 
@@ -32,6 +34,8 @@ import { AUTH_USER } from "./actions/types";
 import { logout } from "./actions/authAction";
 
 import * as serviceWorker from "./serviceWorker";
+
+
 
 if (localStorage.token) {
   if (jwtDecode(localStorage.getItem("token")).exp < Date.now()) {
@@ -71,6 +75,8 @@ ReactDOM.render(
           />
           <Route path="/admin/edit-category/:id" component={EditCategory} />
           <Route path="/admin/add-product" component={CreateProduct} />
+          <Route path="/admin/edit-product/products" component={EditAndDeleteProducts} />
+          <Route path="/admin/edit-product/:id" component={EditProduct} />
           <Route path="/not-found" component={NotFound} />
           <Redirect to="not-found" />
         </Switch>
