@@ -33,7 +33,16 @@ export const getProductById = id => async dispatch => {
     dispatch({ type: GET_ERRORS, payload: err });
   }
 };
-
+export const getProductByIdToEdit = id => async dispatch => {
+  try {
+    dispatch({ type: PRODUCT_LOADING, payload: true });
+    const product = await Http.get(`${URL_ADMIN_PRODUCT}/${id}`);
+    dispatch({ type: GET_PRODUCT, payload: product });
+  } catch (error) {
+    const err = JSON.parse(error.message);
+    dispatch({ type: GET_ERRORS, payload: err });
+  }
+};
 export const getProductsByCategory = category => async dispatch => {
   try {
     dispatch({ type: PRODUCT_LOADING, payload: true });
@@ -51,9 +60,21 @@ export const addProduct = productData => async dispatch => {
   try {
     dispatch({ type: PRODUCT_LOADING, payload: true });
     const product = await Http.post(URL_ADMIN_PRODUCT, productData);
-    dispatch({ type: GET_PRODUCT, payload: product })
+    dispatch({ type: GET_PRODUCT, payload: product });
   } catch (error) {
     const err = JSON.parse(error.message);
     dispatch({ type: GET_ERRORS, payload: err });
   }
-}
+};
+
+export const editProduct = (productData, history) => async dispatch => {
+  try {
+    dispatch({ type: PRODUCT_LOADING, payload: true });
+    const product = await Http.post(URL_ADMIN_PRODUCT, productData);
+    dispatch({ type: GET_PRODUCT, payload: product });
+    history.push("/dashboard");
+  } catch (error) {
+    const err = JSON.parse(error.message);
+    dispatch({ type: GET_ERRORS, payload: err });
+  }
+};

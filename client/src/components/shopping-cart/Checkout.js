@@ -19,6 +19,9 @@ class Checkout extends Component {
     }
     if (nextProps.customer.customer !== this.props.customer.customer) {
       this.props.history.push('/checkout');
+      this.setState({
+        shipAddress: sessionStorage.getItem("shipAddress") || ''
+      })
     }
   }
   handleChange = e => {

@@ -61,6 +61,7 @@ module.exports = {
       "image",
       "category.name"
     ]);
+    //const products = await Product.find();
     if (!products) {
       errors.notFound = "Products not found";
       return res.status(404).json(errors);
@@ -88,6 +89,16 @@ module.exports = {
       isAvailable: true,
       stock: { $gt: 0 }
     }).select(["name", "price", "stock", "discount", "image", "description"]);
+    if (!product) {
+      errors.notFound = "Product not found";
+      return res.status(404).json(errors);
+    }
+    res.status(200).json(product);
+  }),
+  getProductByIdToEdit: asyncMiddleware(async (req, res) => {
+    const errors = {};
+    const _id = req.value.params;
+    const product = await Product.findById({ _id });
     if (!product) {
       errors.notFound = "Product not found";
       return res.status(404).json(errors);

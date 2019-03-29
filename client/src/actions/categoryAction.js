@@ -1,4 +1,10 @@
-import { GET_CATEGORIES, GET_CATEGORY, CATEGORY_LOADING, GET_ERRORS } from "./types";
+import {
+  GET_CATEGORIES,
+  GET_CATEGORY,
+  REMOVE_CATEGORY,
+  CATEGORY_LOADING,
+  GET_ERRORS
+} from "./types";
 import { URL_GET_CATEGORIES, URL_ADMIN_CATEGORY } from "../utils/api-url";
 import Http from "../utils/http";
 
@@ -22,14 +28,36 @@ export const getCategoryById = id => async dispatch => {
     dispatch({ type: GET_ERRORS, payload: err });
   }
 };
-export const addCategory = (categoryData, history) => async dispatch => {
+export const addCategory = categoryData => async dispatch => {
   try {
     dispatch({ type: CATEGORY_LOADING, payload: true });
     const category = await Http.post(URL_ADMIN_CATEGORY, categoryData);
     dispatch({ type: GET_CATEGORY, payload: category });
-    history.push('/dashboard');
   } catch (error) {
     const err = JSON.parse(error.message);
     dispatch({ type: GET_ERRORS, payload: err });
   }
-}
+};
+export const editCategory = (categoryData, history) => async dispatch => {
+  try {
+    dispatch({ type: CATEGORY_LOADING, payload: true });
+    const category = await Http.post(URL_ADMIN_CATEGORY, categoryData);
+    dispatch({ type: GET_CATEGORY, payload: category });
+    history.push("/dashboard");
+  } catch (error) {
+    const err = JSON.parse(error.message);
+    dispatch({ type: GET_ERRORS, payload: err });
+  }
+};
+export const deleteCategory = id => async dispatch => {
+  try {
+    dispatch({ type: CATEGORY_LOADING, payload: true });
+    const category = await Http.delete(`${URL_ADMIN_CATEGORY}/${id}`);
+    if (category.success) {
+      dispatch({ type: REMOVE_CATEGORY, payload: id });
+    }
+  } catch (error) {
+    const err = JSON.parse(error.message);
+    dispatch({ type: GET_ERRORS, payload: err });
+  }
+};

@@ -21,10 +21,10 @@ import Dashboard from "./components/dashboard/Dashboard";
 import MyAccount from "./components/myAccount/MyAccount";
 import CreateCustomer from "./components/customer/CreateCustomer";
 import AddAddress from "./components/customer/AddAddress";
-import CreateCategory from './components/category/CreateCategory';
-import EditCategory from './components/category/EditCategory';
+import CreateCategory from "./components/category/CreateCategory";
+import EditCategory from "./components/category/EditCategory";
+import Categories from "./components/category/Categories";
 import CreateProduct from "./components/product/CreateProduct";
-
 
 import store from "./store";
 
@@ -32,9 +32,6 @@ import { AUTH_USER } from "./actions/types";
 import { logout } from "./actions/authAction";
 
 import * as serviceWorker from "./serviceWorker";
-
-
-
 
 if (localStorage.token) {
   if (jwtDecode(localStorage.getItem("token")).exp < Date.now()) {
@@ -68,6 +65,10 @@ ReactDOM.render(
           <Route path="/checkout" component={Checkout} />
           <Route path="/payment" component={Payment} />
           <Route path="/admin/add-category" component={CreateCategory} />
+          <Route
+            path="/admin/edit-category/categories"
+            component={Categories}
+          />
           <Route path="/admin/edit-category/:id" component={EditCategory} />
           <Route path="/admin/add-product" component={CreateProduct} />
           <Route path="/not-found" component={NotFound} />

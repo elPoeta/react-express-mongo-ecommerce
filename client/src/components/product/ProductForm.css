@@ -1,88 +1,85 @@
-.forms{
-    display:grid;
-    grid-template-columns: 1fr;
-    margin:0 auto;
-    width: 80%;
-    
+.forms {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0 auto;
+  width: 80%;
 }
-.forms h2{
-    color: #444;
+.forms h2 {
+  color: #444;
 }
 .form-container {
-    margin:0 auto;
-    width: 90%;
-    border: 1px solid #ccc;
-    border-radius: .5em;
-    background-color: #fff;
-    padding: 5px;
-    height: 100%;
-    display: grid;
-    grid-gap: 3px;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: auto;
-    grid-template-areas: 
-        "i i c c c c c"
-        "i i c c c c c"
-        "b b c c c c c";
+  margin: 0 auto;
+  width: 90%;
+  border: 1px solid #341456;
+  border-radius: 0.5em;
+  background-color: #fff;
+  padding: 5px;
+  height: 100%;
+  display: grid;
+  grid-gap: 3px;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas:
+    "i i c c c c c"
+    "i i c c c c c"
+    "b b c c c c c";
 }
 
-
-
 .image-area {
-    grid-area: i;
-    align-items: center;
+  grid-area: i;
+  align-items: center;
 }
 
 .input-area {
-    grid-area: c;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 8px;
-    padding: 2px;
+  grid-area: c;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 8px;
+  padding: 2px;
 }
- fieldset{
-    margin: 5px;
-    padding: 15px;
-    border: 1px solid #ccc;
+fieldset {
+  margin: 5px;
+  padding: 15px;
+  border: 1px solid #341456;
 }
- fieldset legend{
-    color: #444;
-    font-size: .8em;
-    font-weight: 100;
-    padding: 5px;
-    margin: 5px;
-    border-radius: .5em;
+fieldset legend {
+  color: #444;
+  font-size: 0.8em;
+  font-weight: 100;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 0.5em;
 }
-.input-area input{
-    padding: 8px;
-    font-size: 1em;
+.input-area input {
+  padding: 8px;
+  font-size: 1em;
 }
 
 .button-area {
-    grid-area: b;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 10px;
-    padding: 2px;  
+  grid-area: b;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  padding: 2px;
 }
-.checkbox-container{
-    display: flex;
-    align-self: center;
-    justify-self: center;
+.checkbox-container {
+  display: flex;
+  align-self: center;
+  justify-self: center;
 }
 .button-area button {
-    padding: 2px;
-    border-radius: .5em;
-    border: none;
-    background-color: #341456;
-    color: #fff;
-    cursor: pointer;
-    margin: 0 auto;
-    width: 60%;
-    font-size: 1em;
+  padding: 2px;
+  border-radius: 0.5em;
+  border: none;
+  background-color: #341456;
+  color: #fff;
+  cursor: pointer;
+  margin: 0 auto;
+  width: 60%;
+  font-size: 1em;
 }
-.button-area button:hover{
-    background-color: #7d59a3;
+.button-area button:hover {
+  background-color: #7d59a3;
 }
 .tumb {
   display: flex;
@@ -100,60 +97,59 @@
   max-height: 100%;
 }
 
-.name-area{
-    display: grid;
-    grid-template-columns: 1fr;
+.name-area {
+  display: grid;
+  grid-template-columns: 1fr;
 }
-.name-area input{
-    width: 98%;
+.name-area input {
+  width: 98%;
 }
-.select-area{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.select-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
-.select-area a{
-    text-decoration: none;
-    background-color: #341456;
-    color: #fff;
-    border-radius: .5em;
-    padding: 5px;
-    text-align: center;
-    margin: 0 auto;
-    width: 30%;
-    justify-self: center;
-    align-self: center;
-    font-size: .8em
+.select-area a {
+  text-decoration: none;
+  background-color: #341456;
+  color: #fff;
+  border-radius: 0.5em;
+  padding: 5px;
+  text-align: center;
+  margin: 0 auto;
+  width: 30%;
+  justify-self: center;
+  align-self: center;
+  font-size: 0.8em;
 }
-.select-area a:hover{
-    cursor: pointer;
-    background-color: #7d59a3;
+.select-area a:hover {
+  cursor: pointer;
+  background-color: #7d59a3;
 }
-.select-area select{
-    padding: 10px;
-    justify-self: center;
-    align-self: center;
-    text-align: center;
-    width: 100%;
-    border-radius: .5em;
-}
-
-.number-area{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 5px;
+.select-area select {
+  padding: 10px;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+  width: 100%;
+  border-radius: 0.5em;
 }
 
-.description-area{
-    display: grid;
-    grid-template-columns: 1fr;
-     grid-gap: 5px;
-}
-.description-area textarea{
-    resize: none;
-    width: 98%;
-    padding: 8px;
-}
-.description-area input{
- width: 98%;
+.number-area {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;
 }
 
+.description-area {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 5px;
+}
+.description-area textarea {
+  resize: none;
+  width: 98%;
+  padding: 8px;
+}
+.description-area input {
+  width: 98%;
+}

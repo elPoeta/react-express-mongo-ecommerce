@@ -1,84 +1,89 @@
-
 .credentials ul li {
-    list-style: none;
-    padding: 5px;
-  }
-  .credentials i {
-    color: darkred;
-    padding: 5px;
-    cursor: pointer;
-  }
-  .grid-credentials {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
-  
-  .title-credentials {
-    color: #2a9af2;
-  }
-  
-  .myposts{
-    display: grid;
-    grid-template-columns: 1fr;
-    margin: 0 auto;
-    width: 80%;
-  }
-  .i-edit{
-    color: #358332;
-  }
-  .i-view{
-    color: #444;
-  }
-  .i-delete{
-    color: darkred;
-  }
-  .myposts i{
-    padding: 5px;
-    cursor: pointer;
-  }
-  .grid-myposts {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-  }
-  .myposts ul li {
-    list-style: none;
-    padding: 5px;
-  }
-  .btn-modal-container{
-    text-align: center;
-  }
-  .btn-modal-container ul li {
-    list-style: none;
-    display: inline;
-    padding: 10px;
-  }
-  .btn-modal-container button{
-    padding: 10px;
-    font-size: 1em;
-    border: none;
-    border-radius: 0.5em;
-    cursor: pointer;
-  }
-  .btn-modal-close{
-    background-color: #2a9af2;
-    color: #fff;
-  }
-  .btn-modal-confirm{
-    background-color: rgb(73, 14, 14);
-    color: #fff;
-  }
+  list-style: none;
+  padding: 5px;
+}
+.i-del {
+  color: darkred;
+  padding: 5px;
+  cursor: pointer;
+}
+.grid-credentials {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
 
-  .btn-back{
-    text-decoration: none;
-    padding: 10px;
-    border-radius: .5em;
-    color: #fff;
-    background-color: #444;
-    cursor: pointer;
-    width: 100px;
-    margin: 10px;
-    text-align: center;
-  }
-  .btn-back:hover{
-    background-color: rgb(105, 105, 105);
-  }
+.title-credentials {
+  color: #2a9af2;
+}
+
+.myposts {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0 auto;
+  width: 80%;
+}
+.i-edit {
+  color: #358332;
+}
+.i-view {
+  color: #444;
+}
+.i-delete {
+  color: darkred;
+}
+.myposts i {
+  padding: 5px;
+  cursor: pointer;
+}
+.grid-myposts {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.myposts ul li {
+  list-style: none;
+  padding: 5px;
+}
+.btn-modal-container {
+  text-align: center;
+}
+.btn-modal-container ul li {
+  list-style: none;
+  display: inline;
+  padding: 10px;
+}
+.btn-modal-container button {
+  padding: 10px;
+  font-size: 1em;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+.btn-modal-close {
+  background-color: #2a9af2;
+  color: #fff;
+}
+.btn-modal-confirm {
+  background-color: rgb(73, 14, 14);
+  color: #fff;
+}
+
+.btn-back {
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 0.5em;
+  color: #fff;
+  background-color: #444;
+  cursor: pointer;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+}
+.btn-back:hover {
+  background-color: rgb(105, 105, 105);
+}
+.isAddress {
+  color: #124211;
+  text-align: center;
+  font-size: 1.1em;
+  padding: 4px;
+}
