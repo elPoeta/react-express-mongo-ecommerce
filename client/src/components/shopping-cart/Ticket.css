@@ -7,7 +7,7 @@
 .ticket {
     display: grid;
     grid-template-rows: auto 1fr auto;
-    max-width: 90%;
+    max-width: 100%;
   }
   .ticket__header, .ticket__body, .ticket__footer {
     padding: 10px;

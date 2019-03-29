@@ -1,20 +1,47 @@
-.checkout-container{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 5px;
-    padding: 3px;
-    border: 1px solid #ccc;
-    border-radius: .5em;
-    justify-items: center;
-   
+.checkout-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+  padding: 3px;
+  justify-items: left;
 }
-.grid-checkout-address{
-    display:grid;
-    grid-template-columns: 50px repeat(3, 1fr);
-    grid-gap: 5px;
-    padding: 3px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.grid-checkout-address {
+  display: grid;
+  grid-template-columns: 50px repeat(3, 1fr);
+  grid-gap: 5px;
+  padding: 3px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #444;
+}
+
+.checkout-container ul{
+    padding:10px;
+    border : 1px solid #ccc;
+    border-radius: 0.5em;   
+    justify-self:end;
+    background-color:#fff;
+}
+
+.btn-checkout{
+    text-decoration:none;
+    padding: 8px;
+    border-radius: .5em;
+}
+.btn-checkout-color-grey{
+    background:#444;
+     color:#fff;
+}
+.btn-checkout-color-pay{
+    background:gold;
     color: #444;
+}
+.btn-checkout-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 5px auto;
+    width:80%;
+    justify-items:baseline;
+    padding:20px;
 }
