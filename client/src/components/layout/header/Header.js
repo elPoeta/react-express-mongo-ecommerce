@@ -7,8 +7,11 @@ import "./Header.css";
 const Header = () => (
   <div className="sticky">
     <header>
+      <figure>
+        <img src="https://www.freeiconspng.com/uploads/bike-icon-30.png" alt="not found" />
+      </figure>
       <h1>
-        <Link to="/">eCommerce</Link>
+        <Link to="/">eBike</Link>
       </h1>
       <NavCategories />
       <Navbar />

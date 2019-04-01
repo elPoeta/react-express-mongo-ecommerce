@@ -95,3 +95,8 @@
 .cart-continue-shopping:hover {
   background-color: #60378b;
 }
+
+.cart-items-container a{
+  text-decoration: none;
+  color: #444;
+}

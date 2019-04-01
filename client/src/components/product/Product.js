@@ -6,7 +6,7 @@ import { getProductById } from "../../actions/productAction";
 import { addItemCart, updateAndRemoveItemCart } from "../../actions/cartAction";
 import { checkCartItemsStorage } from "../../utils/checkCartItemsStorage";
 import "./ProductDetail.css";
-
+import Zoom from '../common/zoom/Zoom';
 class Product extends Component {
   state = {
     items: {},
@@ -65,7 +65,7 @@ class Product extends Component {
               {product.discount && product.discount > 0 ? (
                 <div className="badge-detail">{product.discount}% off</div>
               ) : null}
-              <img src={product.image} alt={product.name} />
+              <Zoom src={product.image} />
             </figure>
             <div className="product-detail-desc">
               <div>
@@ -80,45 +80,45 @@ class Product extends Component {
                 $
                 {product.discount && product.discount > 0
                   ? Number(
-                      product.price - product.discount * product.price * 0.01
-                    ).toFixed(2)
+                    product.price - product.discount * product.price * 0.01
+                  ).toFixed(2)
                   : product.price}
               </div>
               <div>
                 {Object.keys(items).length &&
-                Object.keys(this.inCart(product._id)).length ? (
-                  <ul className="product-detail-icons">
-                    {this.inCart(product._id).quantity < product.stock ? (
+                  Object.keys(this.inCart(product._id)).length ? (
+                    <ul className="product-detail-icons">
+                      {this.inCart(product._id).quantity < product.stock ? (
+                        <li>
+                          <i
+                            className="fas fa-plus-circle fa-2x i-add-color"
+                            onClick={() => this.handleAddOnClick(product._id)}
+                          />
+                        </li>
+                      ) : null}
+                      <li>
+                        <span className="product-detail-qty">
+                          {this.inCart(product._id).quantity}
+                        </span>
+                      </li>
                       <li>
                         <i
-                          className="fas fa-plus-circle fa-2x i-add-color"
+                          className="fas fa-minus-circle fa-2x i-minus-color"
+                          onClick={() => this.handleRemoveOnClick(product._id)}
+                        />
+                      </li>
+                    </ul>
+                  ) : (
+                    <ul className="product-detail-icons">
+                      <li>
+                        {" "}
+                        <i
+                          className="fas fa-cart-plus fa-2x i-add-color"
                           onClick={() => this.handleAddOnClick(product._id)}
                         />
                       </li>
-                    ) : null}
-                    <li>
-                      <span className="product-detail-qty">
-                        {this.inCart(product._id).quantity}
-                      </span>
-                    </li>
-                    <li>
-                      <i
-                        className="fas fa-minus-circle fa-2x i-minus-color"
-                        onClick={() => this.handleRemoveOnClick(product._id)}
-                      />
-                    </li>
-                  </ul>
-                ) : (
-                  <ul className="product-detail-icons">
-                    <li>
-                      {" "}
-                      <i
-                        className="fas fa-cart-plus fa-2x i-add-color"
-                        onClick={() => this.handleAddOnClick(product._id)}
-                      />
-                    </li>
-                  </ul>
-                )}
+                    </ul>
+                  )}
                 {items.totalQuantity ? (
                   <Link to="/cart">Go to Cart</Link>
                 ) : null}
@@ -144,3 +144,5 @@ export default connect(
   mapStateToProps,
   { getProductById, addItemCart, updateAndRemoveItemCart }
 )(Product);
+
+//  <img src={product.image} alt={product.name} />

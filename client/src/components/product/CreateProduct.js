@@ -16,12 +16,27 @@ class CreateProduct extends Component {
         description: '',
         image: 'https://www.freeiconspng.com/uploads/no-image-icon-4.png',
         isAvailable: true,
+        isAdd: false,
         errors: {}
     }
     async componentDidMount() {
         await this.props.getCategories();
     }
     componentDidUpdate(prevProps) {
+        if (this.props.products.product !== prevProps.products.product) {
+            this.setState({
+                name: '',
+                category: '',
+                price: '',
+                discount: '',
+                stock: '',
+                description: '',
+                image: 'https://www.freeiconspng.com/uploads/no-image-icon-4.png',
+                isAvailable: true,
+                errors: {},
+                isAdd: true
+            })
+        }
         if (this.props.errors !== prevProps.errors) {
             this.setState({
                 errors: this.props.errors
@@ -31,7 +46,7 @@ class CreateProduct extends Component {
 
     onChange = e => {
         const { name, value, type, checked } = e.target
-        type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value })
+        type === "checkbox" ? this.setState({ [name]: checked, isAdd: false }) : this.setState({ [name]: value, isAdd: false })
     }
 
     onSubmit = async e => {
@@ -52,7 +67,7 @@ class CreateProduct extends Component {
     render() {
         const { categories } = this.props.category;
         const loadingCategories = this.props.category.loading;
-        const { name, category, price, discount, stock, description, image, isAvailable, errors } = this.state;
+        const { name, category, price, discount, stock, description, image, isAvailable, isAdd, errors } = this.state;
         let options = [];
         if (!loadingCategories) {
             options = [{ label: '* Select Category', value: 0 }, ...categories.map(category => {
@@ -84,6 +99,7 @@ class CreateProduct extends Component {
                         errors={errors}
                         options={options}
                         btnFormText="Add Product"
+                        isAdd={isAdd}
                     />
                 </section>
                 {this.state.isAvailable}

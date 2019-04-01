@@ -1,6 +1,6 @@
 header {
     display: grid;
-    grid-template-columns: 200px 1fr 1fr;
+    grid-template-columns: 50px 200px 1fr 1fr;
     grid-template-rows: 60px;
     background-color: #341456;
     text-align: center;
@@ -20,3 +20,6 @@ header {
     color : #fff;
   }
  
+  .sticky img{
+    width: 50px;
+  }

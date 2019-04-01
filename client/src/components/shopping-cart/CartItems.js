@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const CartItems = ({
   product,
@@ -21,7 +22,7 @@ const CartItems = ({
         {product.discount && product.discount > 0 ? (
           <i className="fas fa-tags i-sale-color" />
         ) : null}{" "}
-        {product.name}
+        <Link to={`/product/${product._id}`}>{product.name}</Link>
       </h3>
       <p>
         ${" "}

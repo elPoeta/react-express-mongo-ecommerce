@@ -10,9 +10,19 @@ class CreateCategory extends Component {
     name: "",
     description: "",
     isAvailable: true,
+    isAdd: false,
     errors: {}
   };
   componentDidUpdate(prevProps) {
+    if (this.props.category.category !== prevProps.category.category) {
+      this.setState({
+        name: '',
+        description: '',
+        isAvailable: true,
+        errors: {},
+        isAdd: true
+      })
+    }
     if (this.props.errors !== prevProps.errors) {
       this.setState({
         errors: this.props.errors
@@ -22,8 +32,8 @@ class CreateCategory extends Component {
   onChange = e => {
     const { name, value, type, checked } = e.target;
     type === "checkbox"
-      ? this.setState({ [name]: checked })
-      : this.setState({ [name]: value });
+      ? this.setState({ [name]: checked, isAdd: false })
+      : this.setState({ [name]: value, isAdd: false });
   };
   onSubmit = async e => {
     e.preventDefault();
@@ -36,7 +46,7 @@ class CreateCategory extends Component {
     await this.props.addCategory(category);
   };
   render() {
-    const { name, description, isAvailable, errors } = this.state;
+    const { name, description, isAvailable, isAdd, errors } = this.state;
     return (
       <div>
         <section className="forms">
@@ -52,6 +62,7 @@ class CreateCategory extends Component {
             onSubmit={this.onSubmit}
             checked={isAvailable}
             errors={errors}
+            isAdd={isAdd}
             btnValue="Add Category"
           />
         </section>

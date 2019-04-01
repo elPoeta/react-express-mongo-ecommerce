@@ -6,11 +6,12 @@ import TextAreaField from "../common/input/TextAreaField";
 import SelectListField from '../common/input/SelecListField';
 import './ProductForm.css';
 
-const ProductForm = ({ name, category, price, discount, stock, description, image, isAvailable, options, errors, onChange, onSubmit, btnFormText }) =>
+const ProductForm = ({ name, category, price, discount, stock, description, image, isAvailable, options, isAdd, errors, onChange, onSubmit, btnFormText }) =>
     (
         <form className="form-container" onSubmit={onSubmit}>
             {errors.invalid && <div className="invalid">{errors.invalid}</div>}
             {errors.exist && <div className="invalid">{errors.exist}</div>}
+
             <div className="image-area">
                 <figure className="tumb">
                     <img src={image} alt='not found' />
@@ -18,6 +19,11 @@ const ProductForm = ({ name, category, price, discount, stock, description, imag
 
             </div>
             <div className="input-area">
+                {isAdd && (
+                    <div className="isAddress">
+                        Product Add <i className="fas fa-check-circle" />
+                    </div>
+                )}
                 <fieldset>
                     <legend>Product Name</legend>
                     <div className="name-area">
