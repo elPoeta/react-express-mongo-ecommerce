@@ -6,6 +6,7 @@ const CustomerMenu = () => (
         <ul>
             <li><Link to='/editcustomer'><i className='fas fa-user-edit' />Edit Profile</Link></li>
             <li><Link to='/addaddress'><i className='fas fa-map-marker-alt' />Add Address</Link></li>
+            <li><Link to='/myshopping'><i class="fas fa-shopping-bag" />My Shopping</Link></li>
         </ul>
     </div>
 );

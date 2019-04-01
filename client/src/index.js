@@ -20,6 +20,7 @@ import Customer from "./components/customer/Customer";
 import Dashboard from "./components/dashboard/Dashboard";
 import MyAccount from "./components/myAccount/MyAccount";
 import CreateCustomer from "./components/customer/CreateCustomer";
+import EditCustomer from "./components/customer/EditCustomer";
 import AddAddress from "./components/customer/AddAddress";
 import CreateCategory from "./components/category/CreateCategory";
 import EditCategory from "./components/category/EditCategory";
@@ -62,6 +63,7 @@ ReactDOM.render(
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/customer/:id" component={Customer} />
           <Route path="/createcustomer" component={CreateCustomer} />
+          <Route path="/editcustomer" component={EditCustomer} />
           <Route path="/addaddress" component={AddAddress} />
           <Route path="/product/:id" component={Product} />
           <Route path="/products/category/:category" component={Products} />

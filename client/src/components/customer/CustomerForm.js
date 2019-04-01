@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '../common/input/TextField';
 
-const CustomerForm = ({ name, phone, onChange, onSubmit, errors }) => (
+const CustomerForm = ({ name, phone, onChange, onSubmit, errors, btnValue }) => (
     <form className="category-form-container" onSubmit={onSubmit}>
         {errors.invalid && <div className="invalid">{errors.invalid}</div>}
         {errors.exist && <div className="invalid">{errors.exist}</div>}
@@ -27,7 +27,7 @@ const CustomerForm = ({ name, phone, onChange, onSubmit, errors }) => (
                 error={errors.phone}
             />
         </fieldset>
-        <button>Create</button>
+        <button>{btnValue}</button>
     </form>
 
 )

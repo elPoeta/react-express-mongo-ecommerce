@@ -48,6 +48,6 @@ export const deleteCustomerAddress = id => async dispatch => {
     }
 }
 
-export const clearCustomer = () =>dispatch=>{
-    dispatch({type:CLEAR_CUSTOMER, payload:null})
+export const clearCustomer = () => dispatch => {
+    dispatch({ type: CLEAR_CUSTOMER, payload: null })
 }

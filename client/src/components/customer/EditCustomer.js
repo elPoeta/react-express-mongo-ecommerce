@@ -1,19 +1,31 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { getCustomer, createCustomer } from '../../actions/customerAction';
 import UserRoute from '../../HOC/UserRoute';
 import CustomerForm from './CustomerForm';
 
-class CreateCustomer extends Component {
+class EditCustomer extends Component {
     state = {
+        _id: "",
         name: '',
         phone: '',
         errors: {}
     }
+    async componentDidMount() {
+        await this.props.getCustomer();
+    }
     componentDidUpdate(prevProps) {
         if (prevProps.errors !== this.props.errors) {
             this.setState({ errors: this.props.errors });
+        }
+        if (this.props.customer !== prevProps.customer) {
+            const { _id, name, phone } = this.props.customer.customer;
+            this.setState({
+                _id: _id,
+                name: name,
+                phone: phone
+            })
         }
     }
     onChange = e => {
@@ -24,6 +36,7 @@ class CreateCustomer extends Component {
     onSubmit = async e => {
         e.preventDefault();
         const customerData = {
+            _id: this.state._id,
             name: this.state.name,
             phone: this.state.phone
         }
@@ -31,17 +44,21 @@ class CreateCustomer extends Component {
     }
     render() {
         const { name, phone, errors } = this.state;
+        const { customer } = this.props;
         return (
             <div>
                 <section className="forms">
                     <h2>Create Customer</h2>
+                    <Link to="/my-account" className="btn-back">
+                        Back
+          </Link>
                     <CustomerForm
                         name={name}
                         phone={phone}
                         onChange={this.onChange}
                         onSubmit={this.onSubmit}
                         errors={errors}
-                        btnValue="Create"
+                        btnValue="Submit"
                     />
                 </section>
             </div>
@@ -53,4 +70,4 @@ const mapStateToProps = state => ({
     customer: state.customer,
     errors: state.errors.error
 })
-export default connect(mapStateToProps, { getCustomer, createCustomer })(UserRoute(withRouter(CreateCustomer)));
+export default connect(mapStateToProps, { getCustomer, createCustomer })(UserRoute(withRouter(EditCustomer)));
