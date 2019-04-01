@@ -23,14 +23,14 @@
   .badge-detail {
     position: relative;
     text-align: center;
-    left: -140px;
-    top: 1px;
-    font-size: 1.5em;
+    left: -30px;
+    top: 25px;
+    font-size: 1.2em;
     font-weight: 900;
     background: red;
     color: #fcfcfc;
     padding: 3px 10px;
-    width: 50%;
+    width: 15%;
     transform: rotate(-45deg);
     border-top-left-radius: 1em;
     border-top-right-radius: 0.9em;

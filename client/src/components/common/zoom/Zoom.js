@@ -4,7 +4,7 @@ import './Zoom.css';
 class Zoom extends Component {
     state = {
         backgroundImage: '',
-        backgroundPosition: '-100% -100%'
+        backgroundPosition: '-300% -300%'
     }
     componentDidMount() {
         this.setState({
@@ -21,7 +21,7 @@ class Zoom extends Component {
 
         this.setState({
             backgroundImage: '',
-            backgroundPosition: '-100% -100%'
+            backgroundPosition: '-300% -300%'
         })
         this.setState({
             backgroundImage: `url(${this.props.src})`,
@@ -31,18 +31,15 @@ class Zoom extends Component {
 
     render() {
         const { src } = this.props;
-        console.log('bk ', this.state.backgroundImage)
         return (
-            <div
-                className='zoom-img'
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-                style={this.state} >
-                <img
-                    src={src}
-                />
-            </div>
-
+          
+                 <figure 
+                 className="product-detail-tumb zoom-img"  
+                 onMouseMove={this.handleMouseMove}
+                 onMouseOut={this.handleMouseOut}
+                 style={this.state}>
+                    <img src={src} alt="not found"/>
+                </figure>
 
         )
     }

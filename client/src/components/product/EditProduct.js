@@ -116,7 +116,7 @@ class EditProduct extends Component {
           label: o.label,
           value: o.value
         }
-
+return;
       });
 
       options = [{ label: aux.label, value: aux.value }, ...a];

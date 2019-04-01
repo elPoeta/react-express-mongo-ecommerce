@@ -61,12 +61,12 @@ class Product extends Component {
       displayProduct = (
         <div className="product-detail-container">
           <section className="product-detail">
-            <figure className="product-detail-tumb">
+            <div>
               {product.discount && product.discount > 0 ? (
                 <div className="badge-detail">{product.discount}% off</div>
               ) : null}
               <Zoom src={product.image} />
-            </figure>
+            </div>
             <div className="product-detail-desc">
               <div>
                 <h2>{product.name}</h2>
