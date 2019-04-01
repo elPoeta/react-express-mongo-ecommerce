@@ -99,24 +99,23 @@ class Checkout extends Component {
             />
           </div>
           <div className="btn-checkout-container">
-          <div>
-          <Link
-            to="/products/category/all"
-            className="btn-checkout btn-checkout-color-grey"
-          >
-            Continue Shopping
+            <div>
+              <Link
+                to="/products/category/all"
+                className="btn-checkout btn-checkout-color-grey"
+              >
+                Continue Shopping
             </Link>
-                  <Link
-            to="/addaddress"
-            className="btn-checkout btn-checkout-color-grey"
-          >
-            New Address
+              <Link
+                to="/addaddress"
+                className="btn-checkout btn-checkout-color-grey"
+              >
+                New Address
             </Link>
-          {this.state.shipAddress && <Link to="/payment" className="btn-checkout btn-checkout-color-pay"><i className="fab fa-cc-paypal">Pay with Paypal</i>
-
+              {this.state.shipAddress && <Link to="/payment" className="btn-checkout btn-checkout-color-pay"><i className="fab fa-cc-paypal" />Go to Pay
           </Link>}
+            </div>
           </div>
-         </div> 
         </div>
       )
     }

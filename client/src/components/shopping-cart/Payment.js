@@ -6,10 +6,18 @@ import { getCustomer } from "../../actions/customerAction";
 import isEmpty from "../../utils/isEmpty";
 import PaypalRenderButton from "./PaypalRenderButton";
 import Spinner from '../common/spinner/Spinner';
+import Ticket from './Ticket';
+import { checkCartItemsStorage } from "../../utils/checkCartItemsStorage";
 
 class Payment extends Component {
+    state = {
+        items: {}
+    }
     async componentDidMount() {
         await this.props.getCustomer();
+        this.setState({
+            items: checkCartItemsStorage()
+        })
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.customer.customer === null && this.props.customer.loading) {
@@ -18,9 +26,19 @@ class Payment extends Component {
         if (nextProps.customer.customer !== this.props.customer.customer) {
             this.props.history.push('/payment');
         }
+
     }
+    findAddress = id => {
+        const { customer } = this.props.customer;
+        if (customer.address) {
+            return customer.address.filter(address => address._id === id);
+        }
+        return []
+    };
+
     render() {
         const { customer, loading } = this.props.customer;
+        const { items } = this.state;
         let displayContent = '';
         if (localStorage.getItem('cartItems') === null) {
             return <Redirect to="/products/category/all" />;
@@ -35,24 +53,39 @@ class Payment extends Component {
         else {
             displayContent = (
                 <div>
-                    <Link
-                        to="/products/category/all"
-                        className=""
-                    >
-                        Continue Shopping
+                    <div className="payment-btn">
+                        <Link
+                            to="/products/category/all"
+                            className="btn-checkout-color-grey payment-btn-links"
+                        >
+                            Continue Shopping
             </Link>
-                    <Link to="/cart" className="">
-                        Back to cart
+                        <Link to="/cart" className="btn-checkout-color-grey payment-btn-links">
+                            Back to cart
             </Link>
+                    </div>
+
+                    <Ticket
+                        shipAddress={this.findAddress(sessionStorage.getItem('shipAddress'))}
+                        totalPaid={items.totalAmount}
+                        totalItems={items.totalQuantity}
+                        cart={items.cart}
+                    />
                 </div>
             )
         }
         return (
             <div>
-                <h2>Pay with Paypal</h2>
-                <PaypalRenderButton />
-                {displayContent}
+                <div div className='forms'>
+                    <h2>Pay with Paypal</h2>
+                    {displayContent}
+                </div>
+                <div className="payment-btn-paypal-container">
+                    <PaypalRenderButton />
+                </div>
+
             </div>
+
         );
     }
 }

@@ -45,3 +45,18 @@
     justify-items:baseline;
     padding:20px;
 }
+
+.payment-btn-paypal-container{
+    text-align: center;
+    margin: 0 auto;
+    width: 80%;
+    padding: 15px;
+}
+.payment-btn{
+    padding: 12px;
+}
+.payment-btn-links{
+    text-decoration: none;
+    padding: 5px;
+    border-radius: .5em;
+}
