@@ -4,7 +4,7 @@ const { Customer } = require('../models/Customer');
 const request = require("request");
 const JWT = require("jsonwebtoken");
 
-const { PAYPAL, PAYPAL_API, JWT_SECRET_CART, JWT_SECRET } = require("../config/keys");
+const { PAYPAL, PAYPAL_API, JWT_SECRET_CART, JWT_SECRET, RETURN_URL, CANCEL_URL } = require("../config/keys");
 
 const verifyUserAuth = async bearerToken => {
   if (!bearerToken) {
@@ -72,8 +72,8 @@ module.exports = {
             }],
           redirect_urls:
           {
-            return_url: 'http://localhost:3000/payment',
-            cancel_url: 'http://localhost:3000'
+            return_url: RETURN_URL,
+            cancel_url: CANCEL_URL
           }
         },
         json: true
