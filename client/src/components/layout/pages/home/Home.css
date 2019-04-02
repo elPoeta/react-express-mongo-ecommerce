@@ -126,6 +126,12 @@
       display: grid;
       grid-template-columns: 1fr repeat(2, minmax(auto, 25em)) 1fr;
     }
+    #showcase {
+        min-height: 650px;}
+    #showcase .bg-image {
+        height: 650px;
+    }
+
     .content-wrap h1{
         font-size: 2em;
     }

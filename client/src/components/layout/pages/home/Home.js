@@ -39,7 +39,7 @@ class Home extends Component {
                                 <div className="card">
                                     <img className="img-home" src="https://images.unsplash.com/photo-1507150080056-79542bdb9c59?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="" />
                                     <div className="card-content">
-                                        <h3 className="card-title">Urban Bike's</h3>
+                                        <h3 className="card-title">Urban Bike</h3>
                                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum culpa neque quo eum et quasi velit voluptatum cum maiores exercitationem.</p>
                                     </div>
                                 </div>

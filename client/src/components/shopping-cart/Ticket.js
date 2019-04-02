@@ -36,6 +36,7 @@ const Ticket = ({ shipAddress, totalItems, totalPaid, cart }) => {
                     </section>
                     <section className="ticket__section">
                         <h3>Delivery Address</h3>
+                        <span>{!address && 'Please select an address to ship'}</span>
                         <p>{address && address.street} {' '} {address && address.number}</p>
                         <p>{address && address.location}</p>
                     </section>
