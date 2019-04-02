@@ -1,4 +1,4 @@
-img {
+.img-home {
     display: block;
     width: 100%;
     height: auto;
@@ -8,12 +8,12 @@ img {
   h2,
   h3 {
     margin: 0;
-    padding: 1em 0;
+    padding: .5em 0;
   }
   
   p {
     margin: 0;
-    padding: 1em 0;
+    padding: .5em 0;
   }
   
   .btn {
