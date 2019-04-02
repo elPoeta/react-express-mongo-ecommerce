@@ -4,7 +4,7 @@ const { Customer } = require('../models/Customer');
 const request = require("request");
 const JWT = require("jsonwebtoken");
 
-const { PAYPAL, PAYPAL_API, JWT_SECRET_CART, JWT_SECRET, RETURN_URL, CANCEL_URL } = require("../config/keys");
+const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PAYPAL_API, JWT_SECRET_CART, JWT_SECRET, RETURN_URL, CANCEL_URL } = require("../config/keys");
 
 const verifyUserAuth = async bearerToken => {
   if (!bearerToken) {
@@ -49,8 +49,8 @@ module.exports = {
       {
         auth:
         {
-          user: PAYPAL.client_id,
-          pass: PAYPAL.client_secret
+          user: PAYPAL_CLIENT_ID,
+          pass: PAYPAL.PAYPAL_CLIENT_SECRET
         },
         body:
         {
@@ -112,8 +112,8 @@ module.exports = {
       {
         auth:
         {
-          user: PAYPAL.client_id,
-          pass: PAYPAL.client_secret
+          user: PAYPAL_CLIENT_ID,
+          pass: PAYPAL_CLIENT_SECRET
         },
         body:
         {
