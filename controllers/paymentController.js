@@ -50,7 +50,7 @@ module.exports = {
         auth:
         {
           user: PAYPAL_CLIENT_ID,
-          pass: PAYPAL.PAYPAL_CLIENT_SECRET
+          pass: PAYPAL_CLIENT_SECRET
         },
         body:
         {
