@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5ca34c892b35c500175b2cc5"},"isAdmin":true,"role":"admin","email":"admin@ebike.com","password":"$2a$10$0SyG7qtNTUO9AMQ2B0DB2.SOAN4Wrtg.qtP9Ya8DJhObMslL.F5vW","date":{"$date":"2019-04-02T11:50:33.890Z"},"__v":0}
+{"_id":{"$oid":"5ca3587e2b35c500175b2ce1"},"isAdmin":false,"role":"user","email":"homer@gmail.com","password":"$2a$10$0M2TVmPDDKDcWcXVI/SZuewizLLniOON4jMNpbjRYYTRxfbh7qiVS","date":{"$date":"2019-04-02T12:41:34.315Z"},"__v":0}
