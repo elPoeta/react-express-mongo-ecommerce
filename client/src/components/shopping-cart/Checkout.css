@@ -60,3 +60,55 @@
     padding: 5px;
     border-radius: .5em;
 }
+
+@media (max-width:700px){
+    .checkout-container {
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        width: 95%;
+      }
+      .grid-checkout-address {
+        grid-template-columns: 20px repeat(3, 1fr);
+        grid-gap: 2px;
+        padding: 2px;
+        width: 95%;
+     
+      }
+      
+      .checkout-container ul{
+          padding:5px;
+          font-size: .7em;
+      }
+      
+      .btn-checkout-container-links{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 5px auto;
+        width:95%;
+        padding:8px;
+        font-size: .7em;
+        grid-gap: 8px;
+    }
+    
+    .btn-checkout-container-links a:last-child{ 
+        grid-column: 1 / -1;
+    }
+      .payment-btn-paypal-container{
+         
+          width: 90%;
+          padding: 10px;
+      }
+      .payment-btn{
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-gap: 5px;
+          padding: 8px;
+          font-size: .7em
+      }
+      .payment-btn-links{
+        
+          padding: 5px;
+          border-radius: .5em;
+      }
+      
+}

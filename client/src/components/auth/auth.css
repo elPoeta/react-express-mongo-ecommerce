@@ -72,7 +72,12 @@
   .auth-form > button:hover {
     background-color: #704C8F;
   }
-  
+  @media (max-width: 700px){
+    .auth-form {
+      width: 280px;
+    }
+  }
+
   @-webkit-keyframes wawes {
     from {
       -webkit-transform: rotate(0);

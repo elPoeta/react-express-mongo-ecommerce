@@ -61,7 +61,7 @@ class Product extends Component {
       displayProduct = (
         <div className="product-detail-container">
           <section className="product-detail">
-            <div>
+            <div className='product-detail-image-container'>
               {product.discount && product.discount > 0 ? (
                 <div className="badge-detail">{product.discount}% off</div>
               ) : null}

@@ -14,7 +14,12 @@ class FloatButton extends Component {
         });
     }
     handleOnclickLogout = () => {
-        if (this.props.auth.isAuthenticated) this.props.logout();
+        if (this.props.auth.isAuthenticated) {
+            this.props.logout();
+        }
+        this.setState({
+            toogle: !this.state.toogle
+        });
     };
 
     render() {
@@ -31,10 +36,10 @@ class FloatButton extends Component {
                         onClick={this.handleOnclickLogout}
                         className={`menu-item 
                     ${!isAuthenticated ? 'fas fa-sign-in-alt' : 'fas fa-sign-out-alt'}`
-                        }></Link>
-                    <Link to='/cart' className="menu-item fas fa-shopping-cart"></Link>
-                    <Link to='/my-account' className="menu-item fas fa-user"></Link>
-                    <Link to='/' className="menu-item fas fa-home"></Link>
+                        } ></Link>
+                    <Link to='/cart' className="menu-item fas fa-shopping-cart" onClick={this.onClick}></Link>
+                    <Link to='/my-account' className="menu-item fas fa-user" onClick={this.onClick}></Link>
+                    <Link to='/' className="menu-item fas fa-home" onClick={this.onClick}></Link>
                 </menu>
             </div>
         )

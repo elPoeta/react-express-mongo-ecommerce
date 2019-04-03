@@ -32,7 +32,7 @@ const CartItems = ({
           ).toFixed(2)
           : product.price}
       </p>
-      <ul className="product-detail-icons">
+      <ul className="product-detail-icons pdic">
         <li>
           <i
             className="fas fa-plus-circle  i-add-color"

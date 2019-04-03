@@ -99,7 +99,7 @@ class Checkout extends Component {
             />
           </div>
           <div className="btn-checkout-container">
-            <div>
+            <div className='btn-checkout-container-links'>
               <Link
                 to="/products/category/all"
                 className="btn-checkout btn-checkout-color-grey"
