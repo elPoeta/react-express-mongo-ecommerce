@@ -153,3 +153,9 @@ fieldset legend {
 .description-area input {
   width: 98%;
 }
+
+@media (max-width:700px){
+  .forms {
+    width: 95%;
+  }
+}

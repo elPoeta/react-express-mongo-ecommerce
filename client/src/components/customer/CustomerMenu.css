@@ -14,3 +14,10 @@
 .customer-menu ul li a i{
     padding: 3px;
 }
+
+@media (max-width:700px){
+    .customer-menu ul li {
+        display: block;
+        padding: 20px;
+    }
+}

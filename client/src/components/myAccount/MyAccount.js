@@ -40,7 +40,7 @@ class MyAccount extends Component {
                             Welcome <span className="dashboard-username">Customer</span>
                         </h3>
                         <p>You have not yet setup a profile, please add some info ;)</p>
-                        <div>
+                        <div className='create-customer-container'>
                             <Link to="/createcustomer" className="btn-create-customer">
                                 Create Customer
                   </Link>

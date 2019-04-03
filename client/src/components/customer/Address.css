@@ -87,3 +87,23 @@
   font-size: 1.1em;
   padding: 4px;
 }
+
+@media (max-width:700px){
+  .credentials ul li {
+    font-size: .8em;
+    padding: 3px;
+  }
+  .i-del {
+    color: darkred;
+    padding: 5px;
+    cursor: pointer;
+  }
+  .grid-credentials span{
+    font-size: .8em;
+  }
+  
+  .title-credentials {
+  font-size: .7em;
+  }
+  
+}

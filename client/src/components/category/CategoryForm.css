@@ -37,3 +37,12 @@
   font-size: 1em;
   width: 98%;
 }
+
+@media (max-width:700px){
+  .category-form-container {
+    width: 95%;
+  }
+  .category-form-container button {
+    width: 40%;
+  }
+}

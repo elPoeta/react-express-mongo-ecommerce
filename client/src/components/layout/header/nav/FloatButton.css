@@ -100,3 +100,15 @@
   .circular-menu.active .menu-item:nth-child(4) {
     transform: translate3d(-7em, 1em, 0);
   }
+
+  @media (min-width:700px){
+    .circular-menu .floating-btn {
+      display: none;
+    }
+    .circular-menu .menu-item {
+      display: none;
+    }
+    .circular-menu:after {
+      display: none;
+    }
+  }

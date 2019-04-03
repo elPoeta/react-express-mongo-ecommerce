@@ -38,3 +38,26 @@
   .myaccount-container h3 a {
     color: #444;
   }
+
+  @media (max-width:700){
+
+.myaccount-container {
+  width: 95%;
+
+}
+.myaccount-container p{
+  margin-bottom: 15px;
+}
+.myaccount-container a{
+  font-size: 1em;
+  padding: 5px;
+  margin-top: 30px;
+}
+.create-customer-container{
+  padding: 20px;
+  margin: 5px;
+}
+.btn-create-customer {
+  padding: 20px;
+}
+  }
