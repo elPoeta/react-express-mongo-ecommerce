@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import { login } from "../../actions/authAction";
 import "./auth.css";
@@ -41,16 +42,21 @@ class Login extends Component {
     const { email, password, errors } = this.state;
 
     return (
-      <div className="forms">
-        <h2>Login</h2>
-        <LoginForm
-          email={email}
-          password={password}
-          errors={errors}
-          onChange={this.onChange}
-          onSubmit={this.onSubmit}
-        />
+      <div>
+        <div className="forms">
+          <h2>Login</h2>
+          <LoginForm
+            email={email}
+            password={password}
+            errors={errors}
+            onChange={this.onChange}
+            onSubmit={this.onSubmit}
+          />
+        </div>
+        <p>Do you not have account ?</p>
+        <Link to='/signup' >Sign Up</Link>
       </div>
+
     );
   }
 }

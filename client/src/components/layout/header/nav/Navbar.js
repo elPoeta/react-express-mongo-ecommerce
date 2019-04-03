@@ -34,7 +34,7 @@ class Navbar extends Component {
     //const { items } = this.props.items
     const { totalQuantity } = this.state;
     const guestLinks = (
-      <ul>
+      <ul className='guestLinks'>
         <li>
           <Link to="/signup">Sign Up</Link>
         </li>
@@ -44,7 +44,7 @@ class Navbar extends Component {
       </ul>
     );
     const authLinks = (
-      <ul>
+      <ul className='authLinks'>
         <li>
           {user.role === 'user' ? <Link to="/my-account">My Account</Link> : null}
           {user.role === 'admin' ? <Link to="/dashboard">Dashboard</Link> : null}

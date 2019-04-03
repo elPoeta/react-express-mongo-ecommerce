@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './layout/header/Header';
 import Footer from './layout/footer/Footer';
-
+import FloatButton from '../components/layout/header/nav/FloatButton';
 import './App.css';
 
 const App = props => (
@@ -10,6 +10,7 @@ const App = props => (
       <Header />
       {props.children}
     </div>
+    <FloatButton />
     <Footer />
   </div>
 

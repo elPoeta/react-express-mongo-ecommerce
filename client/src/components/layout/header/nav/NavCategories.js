@@ -24,6 +24,7 @@ class NavCategories extends Component {
     ));
     return (
       <div className="dropdown nav-one">
+        <i className="fas fa-bars hamburger" onClick={this.toggleMenu}></i>
         <button className="dropbtn" onClick={this.toggleMenu}>
           Categories
           <i className="fa fa-caret-down" />

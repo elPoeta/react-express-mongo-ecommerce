@@ -24,3 +24,22 @@ header {
     width: 50px;
   }
 
+  @media (max-width: 700px){
+    header{
+      display: grid;
+      grid-template-columns: 50px 100px 1fr;
+    }
+    header figure{
+      display: none;
+    }
+    header h1 a {
+      font-size: 1em;
+      font-weight: 900;
+      
+    }
+    header h1{
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+      justify-self: left;
+    }
+  }

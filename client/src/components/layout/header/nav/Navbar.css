@@ -21,7 +21,9 @@ margin-right: 10px;
 .nav-one {
   justify-self: flex-start;
 }
-
+.hamburger{
+  display: none;
+}
 .dropdown {
   float: left;
   overflow: hidden;
@@ -75,3 +77,26 @@ margin-right: 10px;
   display: block;
 }
 
+@media  (max-width: 700px){
+  .dropdown{
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+  .dropbtn{
+    display: none;
+  }
+  .hamburger{
+    display: block;
+    color: #ff6905;
+    font-size: 1.5em;
+  }
+  .nav-one {
+    justify-self: center;
+  }
+  .authLinks{
+    display: none;
+  }
+  .guestLinks{
+    display: none;
+  }
+}
