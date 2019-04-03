@@ -11,7 +11,7 @@ class Home extends Component {
     }
     render() {
         return (
-            <div>
+            <div className='home-container'>
                 <section id="showcase" className="grid">
                     <div className="bg-image"></div>
                     <div className="content-wrap">
