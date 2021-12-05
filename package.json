@@ -1,6 +1,9 @@
 {
   "name": "react-express-mongo-ecommerce",
   "version": "1.0.0",
+   "engines": {
+    "node": "14.x"
+  },
   "description": "E-commerce react express mongo jwt",
   "main": "index.js",
   "scripts": {
