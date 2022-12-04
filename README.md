@@ -1,6 +1,6 @@
 # react-express-mongo-ecommerce
 e-commerce React js - express - mongodb - jwt - redux
 
-## Link to demo on Heroku
+ ### Update
 
-https://ebike-app.herokuapp.com
+Link to heroku is dead
