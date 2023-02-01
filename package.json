@@ -37,7 +37,7 @@
     "joi": "^14.3.1",
     "joi-objectid": "^2.0.0",
     "jsonwebtoken": "^8.5.0",
-    "mongoose": "^5.4.18",
+    "mongoose": "^5.13.15",
     "request": "^2.88.0"
   },
   "devDependencies": {
